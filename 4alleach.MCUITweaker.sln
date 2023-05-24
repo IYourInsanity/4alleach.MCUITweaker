@@ -12,12 +12,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "$repo", "$repo", "{F2E4C02B
 		.editorconfig = .editorconfig
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
+		LICENSE = LICENSE
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "$solution", "$solution", "{EE645CB9-CF49-4AFE-82C9-60814BDF3A8D}"
 	ProjectSection(SolutionItems) = preProject
 		Directory.Build.props = Directory.Build.props
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4alleach.MCUITweaker.Client.UIExtension", "src\4alleach.MCUITweaker.Client.UIExtension\4alleach.MCUITweaker.Client.UIExtension.csproj", "{D2F1C5B3-0720-4006-B6C1-551215A2ECBF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +32,10 @@ Global
 		{9DF93622-3F20-4130-9AFA-A42F42D9C661}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DF93622-3F20-4130-9AFA-A42F42D9C661}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DF93622-3F20-4130-9AFA-A42F42D9C661}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2F1C5B3-0720-4006-B6C1-551215A2ECBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2F1C5B3-0720-4006-B6C1-551215A2ECBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2F1C5B3-0720-4006-B6C1-551215A2ECBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2F1C5B3-0720-4006-B6C1-551215A2ECBF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

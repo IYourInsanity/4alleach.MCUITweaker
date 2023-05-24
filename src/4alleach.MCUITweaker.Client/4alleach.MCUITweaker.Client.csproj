@@ -12,4 +12,8 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\4alleach.MCUITweaker.Client.UIExtension\4alleach.MCUITweaker.Client.UIExtension.csproj" />
+  </ItemGroup>
+
 </Project>

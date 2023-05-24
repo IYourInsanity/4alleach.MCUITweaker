@@ -1,0 +1,12 @@
+<Project>
+
+	<!--<PropertyGroup>
+        <TestProject>1.0.11232</TestProject>
+    </PropertyGroup> -->
+
+    <!-- If a project uses a NuGet package, those packages' versions will be the following: -->
+    <ItemGroup>
+
+    </ItemGroup>
+
+</Project>

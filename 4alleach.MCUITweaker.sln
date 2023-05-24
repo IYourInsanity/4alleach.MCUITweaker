@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.33711.374
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4alleach.MCUITweaker.Client", "src\4alleach.MCUITweaker.Client\4alleach.MCUITweaker.Client.csproj", "{9DF93622-3F20-4130-9AFA-A42F42D9C661}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assets", "Assets", "{17FC3A8C-E666-4283-B9F6-003787012B42}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "$repo", "$repo", "{F2E4C02B-9145-40B0-8E28-3A54536A6D66}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "$solution", "$solution", "{EE645CB9-CF49-4AFE-82C9-60814BDF3A8D}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9DF93622-3F20-4130-9AFA-A42F42D9C661}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DF93622-3F20-4130-9AFA-A42F42D9C661}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DF93622-3F20-4130-9AFA-A42F42D9C661}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DF93622-3F20-4130-9AFA-A42F42D9C661}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EE645CB9-CF49-4AFE-82C9-60814BDF3A8D} = {F2E4C02B-9145-40B0-8E28-3A54536A6D66}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C7E08A10-ECFB-48BD-841B-74E925343077}
+	EndGlobalSection
+EndGlobal

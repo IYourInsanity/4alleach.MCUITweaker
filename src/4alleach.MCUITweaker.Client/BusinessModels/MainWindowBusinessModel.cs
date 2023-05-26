@@ -16,6 +16,8 @@ internal sealed class MainWindowBusinessModel : IDefaultBusinessModel
 
     internal void Initialize()
     {
+
+
         serviceHub.Register<IBusinessModelConstructService, BusinessModelConstructService>();
         serviceHub.Register<IProjectControllerService, ProjectControllerService>();
 

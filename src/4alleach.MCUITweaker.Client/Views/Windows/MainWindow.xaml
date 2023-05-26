@@ -11,11 +11,9 @@
                           Height="1000" 
                           Width="1200">
 
-    <Grid x:Name="Container"
+    <Grid x:Name="Root"
           Visibility="{Binding Path=IsVisible, Converter={StaticResource booleanToVisibilityConverter}}"
           Background="{StaticResource Dark0Brush}">
-
-        <extControls:PreviewControl/>
 
     </Grid>
 </extWindow:ExtendedWindow>

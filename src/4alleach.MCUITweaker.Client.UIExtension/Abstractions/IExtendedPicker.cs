@@ -5,6 +5,8 @@ namespace _4alleach.MCUITweaker.Client.UIExtension.Abstractions;
 
 public interface IExtendedPicker<TViewModel> where TViewModel : IBaseViewModel
 {
+    FrameworkElement GetHost();
+
     TViewModel? GetViewModel();
 
     TExtendedViewModel? GetViewModel<TExtendedViewModel>()

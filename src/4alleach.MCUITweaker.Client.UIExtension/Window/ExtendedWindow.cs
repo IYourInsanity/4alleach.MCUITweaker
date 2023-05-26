@@ -15,10 +15,9 @@ public class ExtendedWindow : System.Windows.Window, IExtendedWindow
 
     public IExtendedPicker<IWindowViewModel> Picker { get; }
 
-    protected ExtendedWindow(Type type, string name) : base()
+    protected ExtendedWindow(string name) : base()
     {
         Loaded += WindowLoaded;
-        DataContext = Activator.CreateInstance(type);
         Picker = new ExtendedPicker<IWindowViewModel>(this);
 
         VID = Guid.NewGuid();

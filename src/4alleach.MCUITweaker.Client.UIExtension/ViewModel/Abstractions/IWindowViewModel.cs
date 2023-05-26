@@ -12,9 +12,11 @@ public interface IWindowViewModel : IBaseViewModel
     TWindow? GetWindow<TWindow>() 
         where TWindow : class, IExtendedWindow;
 
-    void RegisterControl(IExtendedControl control);
+    void RegisterControl<VExtendedControl>() where VExtendedControl : IExtendedControl;
 
-    void UnregisterControl(IExtendedControl control);
+    void UnregisterControl<VExtendedControl>() where VExtendedControl : IExtendedControl;
+
+    void NavigateToControl<VExtendedControl>() where VExtendedControl : IExtendedControl;
 
     void KeyPress(Key key);
 }

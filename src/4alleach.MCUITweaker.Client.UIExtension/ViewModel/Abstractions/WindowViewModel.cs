@@ -1,5 +1,8 @@
-﻿using _4alleach.MCUITweaker.Client.UIExtension.UserControl.Abstractions;
+﻿using _4alleach.MCUITweaker.Client.UIExtension.Abstractions;
+using _4alleach.MCUITweaker.Client.UIExtension.Logic;
+using _4alleach.MCUITweaker.Client.UIExtension.UserControl.Abstractions;
 using _4alleach.MCUITweaker.Client.UIExtension.Window.Abstractions;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace _4alleach.MCUITweaker.Client.UIExtension.ViewModel.Abstractions;
@@ -8,11 +11,11 @@ public abstract partial class WindowViewModel : BaseViewModel, IWindowViewModel
 {
     protected IExtendedWindow? window;
 
-    protected IList<IExtendedControl> controls;
+    protected readonly IExtendedControlStorage<IExtendedControl> storage;
 
-    public WindowViewModel(): base()
+    public WindowViewModel(Panel root) : base()
     {
-        controls = new List<IExtendedControl>();
+        storage = new ExtendedControlStorage<IExtendedControl>(root);
     }
 
     public void SetWindow<TWindow>(TWindow window) where TWindow : IExtendedWindow
@@ -35,13 +38,18 @@ public abstract partial class WindowViewModel : BaseViewModel, IWindowViewModel
         throw new NotImplementedException();
     }
 
-    public void RegisterControl(IExtendedControl control)
+    public void RegisterControl<VExtendedControl>() where VExtendedControl : IExtendedControl
     {
-        controls.Add(control);
+        storage.Register<VExtendedControl>();
     }
 
-    public void UnregisterControl(IExtendedControl control)
+    public void NavigateToControl<VExtendedControl>() where VExtendedControl : IExtendedControl
     {
-        controls.Remove(control);
+        storage.Navigate<VExtendedControl>();
+    }
+
+    public void UnregisterControl<VExtendedControl>() where VExtendedControl : IExtendedControl
+    {
+        storage.Unregister<VExtendedControl>();
     }
 }

@@ -19,7 +19,7 @@ internal sealed class PreviewControlBusinessModel : IDefaultBusinessModel
 
     internal void LoadProject()
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
     public void Dispose()

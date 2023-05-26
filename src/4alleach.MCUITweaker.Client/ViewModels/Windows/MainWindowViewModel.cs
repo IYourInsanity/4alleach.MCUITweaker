@@ -2,6 +2,9 @@
 using _4alleach.MCUITweaker.Client.Abstractions.ViewModels;
 using _4alleach.MCUITweaker.Client.BusinessModels;
 using _4alleach.MCUITweaker.Client.UIExtension.ViewModel.Abstractions;
+using _4alleach.MCUITweaker.Client.Views.Control;
+using _4alleach.MCUITweaker.Client.Views.Controls;
+using System.Windows.Controls;
 
 namespace _4alleach.MCUITweaker.Client.ViewModels.Windows;
 
@@ -9,7 +12,7 @@ public sealed class MainWindowViewModel : WindowViewModel, IExtendedWindowViewMo
 {
     private readonly MainWindowBusinessModel mwBModel;
 
-    public MainWindowViewModel() : base()
+    public MainWindowViewModel(Panel root) : base(root)
     {
         mwBModel = new MainWindowBusinessModel();
     }
@@ -28,6 +31,11 @@ public sealed class MainWindowViewModel : WindowViewModel, IExtendedWindowViewMo
 
     public override void Initialize()
     {
-       mwBModel.Initialize();
+        RegisterControl<PreviewControl>();
+        RegisterControl<MenuControl>();
+
+        NavigateToControl<PreviewControl>();
+
+        mwBModel.Initialize();
     }
 }

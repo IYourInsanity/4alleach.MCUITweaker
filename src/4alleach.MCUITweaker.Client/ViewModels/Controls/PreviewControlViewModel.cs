@@ -3,6 +3,7 @@ using _4alleach.MCUITweaker.Client.Abstractions.ViewModels;
 using _4alleach.MCUITweaker.Client.BusinessModels;
 using _4alleach.MCUITweaker.Client.UIExtension.ViewModel.Abstractions;
 using _4alleach.MCUITweaker.Client.UIExtension.Window;
+using _4alleach.MCUITweaker.Client.Views.Controls;
 using _4alleach.MCUITweaker.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -13,6 +14,7 @@ namespace _4alleach.MCUITweaker.Client.ViewModels.Controls;
 public sealed partial class PreviewControlViewModel : ControlViewModel
 {
     private PreviewControlBusinessModel? previewControlBM;
+    private IExtendedWindowViewModel? windowViewModel;
 
     [ObservableProperty]
     private ObservableCollection<RecentProjectInfo> openRecentCollection;
@@ -41,16 +43,14 @@ public sealed partial class PreviewControlViewModel : ControlViewModel
             return;
         }
 
-        var rootModel = root.Picker.GetViewModel<IExtendedWindowViewModel>();
+        windowViewModel = root.Picker.GetViewModel<IExtendedWindowViewModel>();
 
-        if(rootModel == null)
+        if(windowViewModel == null)
         {
             return;
         }
 
-        rootModel.RegisterControl(control);
-
-        var generatorService = rootModel.GetService<IBusinessModelConstructService>();
+        var generatorService = windowViewModel.GetService<IBusinessModelConstructService>();
 
         if(generatorService == null)
         {
@@ -59,7 +59,7 @@ public sealed partial class PreviewControlViewModel : ControlViewModel
 
         generatorService.GenerateBusinessModelByName(control.Name);
 
-        previewControlBM = generatorService.GetModel<PreviewControlBusinessModel>(control.Name);
+        previewControlBM = generatorService.GetModel<PreviewControlBusinessModel>();
 
         OnPropertyChanged(nameof(CollectionIsVisible));
     }
@@ -74,6 +74,8 @@ public sealed partial class PreviewControlViewModel : ControlViewModel
     private void LoadProject()
     {
         previewControlBM?.LoadProject();
+
+        windowViewModel?.NavigateToControl<MenuControl>();
     }
 }
 

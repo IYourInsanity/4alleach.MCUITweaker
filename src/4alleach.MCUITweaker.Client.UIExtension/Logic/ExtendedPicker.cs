@@ -13,6 +13,8 @@ internal sealed class ExtendedPicker<TViewModel> : IExtendedPicker<TViewModel> w
         this.element = element;
     }
 
+    public FrameworkElement GetHost() => element;
+
     public TElement FindElement<TElement>(string name) where TElement : FrameworkElement
     {
         return (element!.FindName(name) as TElement)!;

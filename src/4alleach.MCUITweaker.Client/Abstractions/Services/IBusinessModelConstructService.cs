@@ -6,7 +6,7 @@ internal interface IBusinessModelConstructService : IService
 {
     void Register<TBusinessModel>(string name) where TBusinessModel : class, IDefaultBusinessModel;
 
-    TBusinessModel? GetModel<TBusinessModel>(string name) where TBusinessModel : class, IDefaultBusinessModel;
+    TBusinessModel? GetModel<TBusinessModel>() where TBusinessModel : class, IDefaultBusinessModel;
 
     void GenerateBusinessModelByName(string name);
 

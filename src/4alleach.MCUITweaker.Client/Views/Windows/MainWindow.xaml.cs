@@ -5,8 +5,10 @@ namespace _4alleach.MCUITweaker;
 
 public partial class MainWindow : ExtendedWindow
 {
-    public MainWindow() : base(typeof(MainWindowViewModel), nameof(MainWindow))
+    public MainWindow() : base(nameof(MainWindow))
     {
         InitializeComponent();
+
+        DataContext = new MainWindowViewModel(Root);
     }
 }

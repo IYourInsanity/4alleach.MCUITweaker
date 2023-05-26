@@ -1,21 +1,19 @@
 ﻿using _4alleach.MCUITweaker.Client.Abstractions.Services;
 using _4alleach.MCUITweaker.Client.UIExtension.Abstractions;
-using System;
-using System.Collections.Generic;
 
 namespace _4alleach.MCUITweaker.Client.Services;
 
 internal sealed class BusinessModelConstructService : IBusinessModelConstructService
 {
     private readonly Dictionary<string, Type> types;
-    private readonly Dictionary<string, IDefaultBusinessModel> stash;
+    private readonly Dictionary<Type, IDefaultBusinessModel> stash;
 
     private readonly IServiceHub serviceHub;
 
     public BusinessModelConstructService(IServiceHub serviceHub)
     {
         types = new Dictionary<string, Type>();
-        stash = new Dictionary<string, IDefaultBusinessModel>();
+        stash = new Dictionary<Type, IDefaultBusinessModel>();
 
         this.serviceHub = serviceHub;
     }
@@ -30,9 +28,9 @@ internal sealed class BusinessModelConstructService : IBusinessModelConstructSer
         types.Add(name, typeof(TBusinessModel));
     }
 
-    public TBusinessModel? GetModel<TBusinessModel>(string name) where TBusinessModel : class, IDefaultBusinessModel
+    public TBusinessModel? GetModel<TBusinessModel>() where TBusinessModel : class, IDefaultBusinessModel
     {
-        if (stash.TryGetValue(name, out var model))
+        if (stash.TryGetValue(typeof(TBusinessModel), out var model))
         {
             return model as TBusinessModel;
         }
@@ -48,16 +46,19 @@ internal sealed class BusinessModelConstructService : IBusinessModelConstructSer
 
             if(model != null)
             {
-                stash.Add(name, model);
+                stash.Add(type, model);
             }
         }
     }
 
     public void DisposeBusinessModelByName(string name)
     {
-        if(stash.Remove(name, out var model))
+        if (types.TryGetValue(name, out var type))
         {
-            model.Dispose();
+            if (stash.Remove(type, out var model))
+            {
+                model.Dispose();
+            }
         }
     }
 

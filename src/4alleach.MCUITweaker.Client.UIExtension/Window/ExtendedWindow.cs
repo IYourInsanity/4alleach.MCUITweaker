@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace _4alleach.MCUITweaker.Client.UIExtension.Window;
 
-public partial class ExtendedWindow : System.Windows.Window, IExtendedModalWindow
+public class ExtendedWindow : System.Windows.Window, IExtendedWindow
 {
     public Guid VID { get; }
 
@@ -15,9 +15,10 @@ public partial class ExtendedWindow : System.Windows.Window, IExtendedModalWindo
 
     public IExtendedPicker<IWindowViewModel> Picker { get; }
 
-    protected ExtendedWindow(IWindowViewModel viewModel, string name) : base()
+    protected ExtendedWindow(Type type, string name) : base()
     {
-        DataContext = viewModel;
+        Loaded += WindowLoaded;
+        DataContext = Activator.CreateInstance(type);
         Picker = new ExtendedPicker<IWindowViewModel>(this);
 
         VID = Guid.NewGuid();

@@ -1,0 +1,21 @@
+﻿<extWindow:ExtendedWindow x:Class="_4alleach.MCUITweaker.MainWindow"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                          xmlns:viewmodel="clr-namespace:_4alleach.MCUITweaker.Client.ViewModels.Windows"
+                          xmlns:extWindow="clr-namespace:_4alleach.MCUITweaker.Client.UIExtension.Window;assembly=4alleach.MCUITweaker.Client.UIExtension"
+                          xmlns:extControls="clr-namespace:_4alleach.MCUITweaker.Client.Views.Control"
+                          d:DataContext="{d:DesignInstance Type=viewmodel:MainWindowViewModel}"
+                          mc:Ignorable="d"
+                          Height="1000" 
+                          Width="1200">
+
+    <Grid x:Name="Container"
+          Visibility="{Binding Path=IsVisible, Converter={StaticResource booleanToVisibilityConverter}}"
+          Background="{StaticResource Dark0Brush}">
+
+        <extControls:PreviewControl/>
+
+    </Grid>
+</extWindow:ExtendedWindow>

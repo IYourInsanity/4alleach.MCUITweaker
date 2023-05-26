@@ -14,10 +14,10 @@ public class ExtendedControl : System.Windows.Controls.UserControl, IExtendedCon
 
     public IExtendedPicker<IControlViewModel> Picker { get; }
 
-    protected ExtendedControl(IControlViewModel viewModel, string name) : base()
+    public ExtendedControl(Type type, string name) : base()
     {
         Loaded += ControlLoaded;
-        DataContext = viewModel;
+        DataContext = Activator.CreateInstance(type);
         Picker = new ExtendedPicker<IControlViewModel>(this);
 
         VID = Guid.NewGuid();
@@ -26,13 +26,13 @@ public class ExtendedControl : System.Windows.Controls.UserControl, IExtendedCon
 
     protected void ControlLoaded(object sender, RoutedEventArgs e)
     {
-        if (sender is ExtendedControl control)
+        if (sender is IExtendedControl control)
         {
             var context = control.Picker.GetViewModel();
 
             if (context is IControlViewModel viewModel)
             {
-                viewModel.SetControl(this);
+                viewModel.SetControl(control);
                 viewModel.Initialize();
                 viewModel.UpdateVisibility(true);
             }

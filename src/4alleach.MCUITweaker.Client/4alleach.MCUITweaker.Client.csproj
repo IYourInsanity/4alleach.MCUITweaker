@@ -4,16 +4,13 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
     <RootNamespace>_4alleach.MCUITweaker.Client</RootNamespace>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>false</ImplicitUsings>
     <UseWPF>true</UseWPF>
-    <LangVersion>preview</LangVersion>
-    <NoWarn>1998;CA1416</NoWarn>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\4alleach.MCUITweaker.Client.UIExtension\4alleach.MCUITweaker.Client.UIExtension.csproj" />
+    <ProjectReference Include="..\4alleach.MCUITweaker.Models\4alleach.MCUITweaker.Models.csproj" />
   </ItemGroup>
+
 
 </Project>

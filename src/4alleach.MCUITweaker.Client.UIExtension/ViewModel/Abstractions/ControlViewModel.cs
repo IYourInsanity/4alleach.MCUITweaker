@@ -20,6 +20,11 @@ public abstract partial class ControlViewModel : BaseViewModel, IControlViewMode
         this.parent = parent;
     }
 
+    public void SetControl<TControl>(TControl control) where TControl : IExtendedControl
+    {
+        this.control = control;
+    }
+
     public TControl? GetControl<TControl>() where TControl : class, IExtendedControl
     {
         return control as TControl;
@@ -35,11 +40,6 @@ public abstract partial class ControlViewModel : BaseViewModel, IControlViewMode
         if (children == null) return default;
 
         return children.Where(child => child is TViewModel).FirstOrDefault() as TViewModel;
-    }
-
-    public void SetControl<TControl>(TControl control) where TControl : IExtendedControl
-    {
-        this.control = control;
     }
 
     public bool SetChildViewModel<TViewModel>(TViewModel model) where TViewModel : class, IControlViewModel

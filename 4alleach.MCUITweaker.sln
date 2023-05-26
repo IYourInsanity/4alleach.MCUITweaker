@@ -20,7 +20,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "$solution", "$solution", "{
 		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4alleach.MCUITweaker.Client.UIExtension", "src\4alleach.MCUITweaker.Client.UIExtension\4alleach.MCUITweaker.Client.UIExtension.csproj", "{D2F1C5B3-0720-4006-B6C1-551215A2ECBF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4alleach.MCUITweaker.Client.UIExtension", "src\4alleach.MCUITweaker.Client.UIExtension\4alleach.MCUITweaker.Client.UIExtension.csproj", "{D2F1C5B3-0720-4006-B6C1-551215A2ECBF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4alleach.MCUITweaker.Models", "src\4alleach.MCUITweaker.Models\4alleach.MCUITweaker.Models.csproj", "{199A10FA-00E9-4417-9779-4CE62E95E5A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +38,10 @@ Global
 		{D2F1C5B3-0720-4006-B6C1-551215A2ECBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2F1C5B3-0720-4006-B6C1-551215A2ECBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2F1C5B3-0720-4006-B6C1-551215A2ECBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{199A10FA-00E9-4417-9779-4CE62E95E5A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{199A10FA-00E9-4417-9779-4CE62E95E5A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{199A10FA-00E9-4417-9779-4CE62E95E5A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{199A10FA-00E9-4417-9779-4CE62E95E5A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

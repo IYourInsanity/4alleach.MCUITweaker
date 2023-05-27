@@ -6,14 +6,83 @@
                           xmlns:viewmodel="clr-namespace:_4alleach.MCUITweaker.Client.ViewModels.Windows"
                           xmlns:extWindow="clr-namespace:_4alleach.MCUITweaker.Client.UIExtension.Window;assembly=4alleach.MCUITweaker.Client.UIExtension"
                           xmlns:extControls="clr-namespace:_4alleach.MCUITweaker.Client.Views.Control"
+                          xmlns:customControls="clr-namespace:_4alleach.MCUITweaker.Client.UIExtension.CustomControls;assembly=4alleach.MCUITweaker.Client.UIExtension"
+                          WindowStyle="None"
+                          Background="{x:Null}"
+                          BorderBrush="{x:Null}"
+                          AllowsTransparency="True"
+                          WindowStartupLocation="CenterScreen"
                           d:DataContext="{d:DesignInstance Type=viewmodel:MainWindowViewModel}"
                           mc:Ignorable="d"
-                          Height="1000" 
-                          Width="1200">
+                          Height="800" 
+                          Width="1400">
 
-    <Grid x:Name="Root"
-          Visibility="{Binding Path=IsVisible, Converter={StaticResource booleanToVisibilityConverter}}"
-          Background="{StaticResource Dark0Brush}">
+    <Border BorderBrush="{StaticResource Dark1Brush}"
+            BorderThickness="1">
+        <Grid x:Name="Root"
+              Visibility="{Binding Path=IsVisible, Converter={StaticResource booleanToVisibilityConverter}}"
+              Background="{StaticResource Dark0Brush}">
 
-    </Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="32"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0"
+                  Background="{StaticResource Dark1Brush}"
+                  Mouse.MouseDown="DragWindow">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="32"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="96"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Grid.Column="0"
+                       Width="28"
+                       Height="28"
+                       Source="/UDBR.Client;component/Resources/Images/Icon.png"/>
+                
+                <Label Grid.Column="1"
+                       Content="{Binding Title}"
+                       Foreground="Gray"
+                       FontSize="14"
+                       VerticalAlignment="Center"/>
+
+                <StackPanel Grid.Column="3"
+                            Orientation="Horizontal"
+                            RenderOptions.EdgeMode="Aliased"
+                            RenderOptions.BitmapScalingMode="Fant">
+
+                    <customControls:ImageButton Style="{StaticResource DefaultTopMenuImageButtonStyle}" 
+                                                Mouse.MouseDown="MinimizeWindow"/>
+                    
+                    <customControls:ImageButton Style="{StaticResource DefaultTopMenuImageButtonStyle}" 
+                                                Mouse.MouseDown="ResizeWindow"/>
+                    
+                    <customControls:ImageButton Style="{StaticResource ExitTopMenuImageButtonStyle}" 
+                                                ImageSource="/Resources/Images/Cancel.png"
+                                                Mouse.MouseDown="CloseWindow"/>
+                    
+                </StackPanel>
+
+            </Grid>
+
+            <Grid x:Name="Container"
+                  Grid.Row="1">
+
+
+
+            </Grid>
+
+            <StackPanel Grid.Row="2"
+                        Background="{StaticResource Dark1Brush}">
+
+            </StackPanel>
+
+        </Grid>
+    </Border>
+   
 </extWindow:ExtendedWindow>

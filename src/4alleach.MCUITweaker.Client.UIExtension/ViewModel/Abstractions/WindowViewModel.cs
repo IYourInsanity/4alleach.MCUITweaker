@@ -13,9 +13,9 @@ public abstract partial class WindowViewModel : BaseViewModel, IWindowViewModel
 
     protected readonly IExtendedControlStorage<IExtendedControl> storage;
 
-    public WindowViewModel(Panel root) : base()
+    public WindowViewModel(Grid container) : base()
     {
-        storage = new ExtendedControlStorage<IExtendedControl>(root);
+        storage = new ExtendedControlStorage<IExtendedControl>(container);
     }
 
     public void SetWindow<TWindow>(TWindow window) where TWindow : IExtendedWindow

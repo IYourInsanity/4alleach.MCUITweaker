@@ -7,19 +7,19 @@ namespace _4alleach.MCUITweaker.Client.UIExtension.Logic;
 internal sealed class ExtendedControlStorage<TExtendedControl> : IExtendedControlStorage<TExtendedControl>
     where TExtendedControl : class, IExtendedControl
 {
-    private readonly Panel root;
+    private readonly Panel container;
 
     private readonly IList<TExtendedControl> controls;
     private readonly Dictionary<Type, TExtendedControl> storage;
 
     private TExtendedControl? current;
 
-    internal ExtendedControlStorage(Panel root)
+    internal ExtendedControlStorage(Grid container)
     {
         controls = new List<TExtendedControl>();
         storage = new Dictionary<Type, TExtendedControl>();
 
-        this.root = root;
+        this.container = container;
     }
 
     public void Register<VExtendedControl>() where VExtendedControl : TExtendedControl
@@ -33,12 +33,13 @@ internal sealed class ExtendedControlStorage<TExtendedControl> : IExtendedContro
     public void Navigate<VExtendedControl>() where VExtendedControl : TExtendedControl
     {
         var control = storage[typeof(VExtendedControl)];
+        var uiControl = control.Picker.GetHost();
 
-        root.Children.Add(control.Picker.GetHost());
-
+        container.Children.Add(uiControl);
+        
         if (current != null)
         {
-            root.Children.Remove(current.Picker.GetHost());
+            container.Children.Remove(current.Picker.GetHost());
         }
 
         current = control;
@@ -52,9 +53,9 @@ internal sealed class ExtendedControlStorage<TExtendedControl> : IExtendedContro
 
         var host = control.Picker.GetHost();
 
-        if (root.Children.Contains(host))
+        if (container.Children.Contains(host))
         {
-            root.Children.Remove(host);
+            container.Children.Remove(host);
         }
     }
 }

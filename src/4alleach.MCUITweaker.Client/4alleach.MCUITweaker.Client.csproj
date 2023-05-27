@@ -8,6 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Images\Cancel.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\Cancel.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\4alleach.MCUITweaker.Client.UIExtension\4alleach.MCUITweaker.Client.UIExtension.csproj" />
     <ProjectReference Include="..\4alleach.MCUITweaker.Models\4alleach.MCUITweaker.Models.csproj" />
   </ItemGroup>

@@ -12,7 +12,7 @@ public sealed class MainWindowViewModel : WindowViewModel, IExtendedWindowViewMo
 {
     private readonly MainWindowBusinessModel mwBModel;
 
-    public MainWindowViewModel(Panel root) : base(root)
+    public MainWindowViewModel(Grid container) : base(container)
     {
         mwBModel = new MainWindowBusinessModel();
     }

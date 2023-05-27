@@ -17,8 +17,6 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="280"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="32"/>
         </Grid.RowDefinitions>
 
         <Label Grid.Row="0"
@@ -36,11 +34,11 @@
 
             <Button Content="New Project"
                     Command="{Binding NewProjectCommand}"
-                    Style="{StaticResource HyperLinkButton}"/>
+                    Style="{StaticResource HyperLinkButtonStyle}"/>
 
             <Button Content="Load Project"
                     Command="{Binding LoadProjectCommand}"
-                    Style="{StaticResource HyperLinkButton}"/>
+                    Style="{StaticResource HyperLinkButtonStyle}"/>
 
         </StackPanel>
 
@@ -62,11 +60,6 @@
                      Margin="16,0,0,0"
                      Width="320">
             </ListBox>
-        </StackPanel>
-
-        <StackPanel Grid.Row="5"
-                    Background="{StaticResource Dark1Brush}">
-            
         </StackPanel>
 
     </Grid>

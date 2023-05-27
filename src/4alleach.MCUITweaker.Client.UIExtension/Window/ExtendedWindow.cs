@@ -37,22 +37,27 @@ public class ExtendedWindow : System.Windows.Window, IExtendedWindow
         }
     }
 
-    private void KeyPressed(object sender, KeyEventArgs e)
+    protected void KeyPressed(object sender, KeyEventArgs e)
     {
         Picker.GetViewModel()?.KeyPress(e.Key);
     }
 
-    private void DragWindow(object sender, MouseButtonEventArgs e)
+    protected void DragWindow(object sender, MouseButtonEventArgs e)
     {
         DragMove();
+
+        if(e.ClickCount > 1)
+        {
+            ResizeWindow(sender, e);
+        }
     }
 
-    private void MinimizeWindow(object sender, RoutedEventArgs e)
+    protected void MinimizeWindow(object sender, MouseButtonEventArgs e)
     {
         WindowState = WindowState.Minimized;
     }
 
-    private void ResizeWindow(object sender, RoutedEventArgs e)
+    protected void ResizeWindow(object sender, MouseButtonEventArgs e)
     {
         if (WindowState == WindowState.Normal)
         {
@@ -64,7 +69,7 @@ public class ExtendedWindow : System.Windows.Window, IExtendedWindow
         }
     }
 
-    private void CloseWindow(object sender, RoutedEventArgs e)
+    protected void CloseWindow(object sender, MouseButtonEventArgs e)
     {
         //TODO: Rework it
         Environment.Exit(0);

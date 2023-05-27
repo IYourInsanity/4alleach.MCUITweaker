@@ -3,14 +3,16 @@
                     xmlns:local="clr-namespace:MCUITweaker.Client.Resources.Styles">
 
     <Color x:Key="Dark0">#FF1E1E1E</Color>
-    <Color x:Key="Dark1">#FF2C2C36</Color>
-    <Color x:Key="Dark2">#FF3C3C48</Color>
-    <Color x:Key="Dark3">#FF50505C</Color>
+    <Color x:Key="Dark1">#FF2A2A2C</Color>
+    <Color x:Key="Dark2">#FF2C2C36</Color>
+    <Color x:Key="Dark3">#FF3C3C48</Color>
+    <Color x:Key="Dark4">#FF50505C</Color>
 
     <SolidColorBrush x:Key="Dark0Brush" Color="{StaticResource Dark0}"/>
-    <SolidColorBrush x:Key="Dark1Brush" Color="{StaticResource Dark1}" />
+    <SolidColorBrush x:Key="Dark1Brush" Color="{StaticResource Dark1}"/>
     <SolidColorBrush x:Key="Dark2Brush" Color="{StaticResource Dark2}" />
     <SolidColorBrush x:Key="Dark3Brush" Color="{StaticResource Dark3}" />
+    <SolidColorBrush x:Key="Dark4Brush" Color="{StaticResource Dark4}" />
 
     <Color x:Key="InitStateColor">#FFDEEB72</Color>
     <Color x:Key="ErrorStateColor">#FFF38B76</Color>

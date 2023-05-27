@@ -1,6 +1,6 @@
-﻿using _4alleach.MCUITweaker.Client.UIExtension.UserControl.Abstractions;
+﻿using _4alleach.MCRecipeEditor.Client.UIExtension.UserControl.Abstractions;
 
-namespace _4alleach.MCUITweaker.Client.UIExtension.ViewModel.Abstractions;
+namespace _4alleach.MCRecipeEditor.Client.UIExtension.ViewModel.Abstractions;
 
 public interface IControlViewModel : IBaseViewModel
 {

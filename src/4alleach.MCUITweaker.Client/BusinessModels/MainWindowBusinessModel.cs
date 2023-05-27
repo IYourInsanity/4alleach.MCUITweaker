@@ -1,9 +1,9 @@
-﻿using _4alleach.MCUITweaker.Client.Abstractions.Services;
-using _4alleach.MCUITweaker.Client.Services;
-using _4alleach.MCUITweaker.Client.UIExtension.Abstractions;
-using _4alleach.MCUITweaker.Client.Views.Control;
+﻿using _4alleach.MCRecipeEditor.Client.Abstractions.Services;
+using _4alleach.MCRecipeEditor.Client.Services;
+using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions;
+using _4alleach.MCRecipeEditor.Client.Views.Control;
 
-namespace _4alleach.MCUITweaker.Client.BusinessModels;
+namespace _4alleach.MCRecipeEditor.Client.BusinessModels;
 
 internal sealed class MainWindowBusinessModel : IDefaultBusinessModel
 {

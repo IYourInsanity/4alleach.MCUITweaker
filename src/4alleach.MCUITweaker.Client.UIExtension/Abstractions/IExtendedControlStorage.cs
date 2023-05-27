@@ -1,6 +1,6 @@
-﻿using _4alleach.MCUITweaker.Client.UIExtension.UserControl.Abstractions;
+﻿using _4alleach.MCRecipeEditor.Client.UIExtension.UserControl.Abstractions;
 
-namespace _4alleach.MCUITweaker.Client.UIExtension.Abstractions;
+namespace _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions;
 
 public interface IExtendedControlStorage<TExtendedControl> 
     where TExtendedControl : class, IExtendedControl

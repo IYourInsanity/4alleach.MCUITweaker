@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace _4alleach.MCUITweaker.Client;
+namespace _4alleach.MCRecipeEditor.Client;
 
 internal struct Constants
 {
@@ -11,6 +11,6 @@ internal struct Constants
 
     internal struct File
     {
-        internal static string ProjectFilter => "MCUITweaker Project (*.mcu)|*.mcu";
+        internal static string ProjectFilter => "MCRecipeEditor Project (*.mcu)|*.mcu";
     }
 }

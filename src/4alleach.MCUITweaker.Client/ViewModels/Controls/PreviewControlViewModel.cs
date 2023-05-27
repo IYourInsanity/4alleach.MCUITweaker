@@ -1,15 +1,15 @@
-﻿using _4alleach.MCUITweaker.Client.Abstractions.Services;
-using _4alleach.MCUITweaker.Client.Abstractions.ViewModels;
-using _4alleach.MCUITweaker.Client.BusinessModels;
-using _4alleach.MCUITweaker.Client.UIExtension.ViewModel.Abstractions;
-using _4alleach.MCUITweaker.Client.UIExtension.Window;
-using _4alleach.MCUITweaker.Client.Views.Controls;
-using _4alleach.MCUITweaker.Models;
+﻿using _4alleach.MCRecipeEditor.Client.Abstractions.Services;
+using _4alleach.MCRecipeEditor.Client.Abstractions.ViewModels;
+using _4alleach.MCRecipeEditor.Client.BusinessModels;
+using _4alleach.MCRecipeEditor.Client.UIExtension.ViewModel.Abstractions;
+using _4alleach.MCRecipeEditor.Client.UIExtension.Window;
+using _4alleach.MCRecipeEditor.Client.Views.Controls;
+using _4alleach.MCRecipeEditor.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 
-namespace _4alleach.MCUITweaker.Client.ViewModels.Controls;
+namespace _4alleach.MCRecipeEditor.Client.ViewModels.Controls;
 
 public sealed partial class PreviewControlViewModel : ControlViewModel
 {

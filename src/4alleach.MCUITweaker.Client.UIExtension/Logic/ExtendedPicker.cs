@@ -1,8 +1,8 @@
-﻿using _4alleach.MCUITweaker.Client.UIExtension.Abstractions;
-using _4alleach.MCUITweaker.Client.UIExtension.ViewModel.Abstractions;
+﻿using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions;
+using _4alleach.MCRecipeEditor.Client.UIExtension.ViewModel.Abstractions;
 using System.Windows;
 
-namespace _4alleach.MCUITweaker.Client.UIExtension.Logic;
+namespace _4alleach.MCRecipeEditor.Client.UIExtension.Logic;
 
 internal sealed class ExtendedPicker<TViewModel> : IExtendedPicker<TViewModel> where TViewModel : class, IBaseViewModel
 {

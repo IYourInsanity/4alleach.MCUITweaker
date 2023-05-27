@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>_4alleach.MCRecipeEditor.Client</RootNamespace>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Images\Cancel.png" />
+    <None Remove="Resources\Images\Minimize.png" />
+    <None Remove="Resources\Images\Resize.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\4alleach.MCUITweaker.Client.UIExtension\4alleach.MCRecipeEditor.Client.UIExtension.csproj" />
+    <ProjectReference Include="..\4alleach.MCUITweaker.Models\4alleach.MCRecipeEditor.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\Cancel.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Minimize.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Resize.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+
+</Project>

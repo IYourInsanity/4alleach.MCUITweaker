@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:customControl="clr-namespace:_4alleach.MCUITweaker.Client.UIExtension.CustomControls;assembly=4alleach.MCUITweaker.Client.UIExtension"
-                    xmlns:local="clr-namespace:MCUITweaker.Client.Resources.Styles">
+                    xmlns:customControl="clr-namespace:_4alleach.MCRecipeEditor.Client.UIExtension.CustomControls;assembly=4alleach.MCRecipeEditor.Client.UIExtension"
+                    xmlns:local="clr-namespace:MCRecipeEditor.Client.Resources.Styles">
 
     <Style x:Key="HyperLinkButtonStyle" TargetType="Button">
         

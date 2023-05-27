@@ -1,7 +1,7 @@
-﻿using _4alleach.MCUITweaker.Client.UIExtension.Window;
-using _4alleach.MCUITweaker.Client.ViewModels.Windows;
+﻿using _4alleach.MCRecipeEditor.Client.UIExtension.Window;
+using _4alleach.MCRecipeEditor.Client.ViewModels.Windows;
 
-namespace _4alleach.MCUITweaker;
+namespace _4alleach.MCRecipeEditor;
 
 public partial class MainWindow : ExtendedWindow
 {

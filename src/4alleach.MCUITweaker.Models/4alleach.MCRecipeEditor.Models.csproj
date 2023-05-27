@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <RootNamespace>_4alleach.MCUITweaker.Models</RootNamespace>
+    <RootNamespace>_4alleach.MCRecipeEditor.Models</RootNamespace>
   </PropertyGroup>
 
 </Project>

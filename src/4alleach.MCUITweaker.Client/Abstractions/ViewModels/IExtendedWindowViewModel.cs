@@ -1,7 +1,7 @@
-﻿using _4alleach.MCUITweaker.Client.Abstractions.Services;
-using _4alleach.MCUITweaker.Client.UIExtension.ViewModel.Abstractions;
+﻿using _4alleach.MCRecipeEditor.Client.Abstractions.Services;
+using _4alleach.MCRecipeEditor.Client.UIExtension.ViewModel.Abstractions;
 
-namespace _4alleach.MCUITweaker.Client.Abstractions.ViewModels;
+namespace _4alleach.MCRecipeEditor.Client.Abstractions.ViewModels;
 
 internal interface IExtendedWindowViewModel : IWindowViewModel
 {

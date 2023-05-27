@@ -1,12 +1,12 @@
-﻿<extWindow:ExtendedWindow x:Class="_4alleach.MCUITweaker.MainWindow"
+﻿<extWindow:ExtendedWindow x:Class="_4alleach.MCRecipeEditor.MainWindow"
                           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                          xmlns:viewmodel="clr-namespace:_4alleach.MCUITweaker.Client.ViewModels.Windows"
-                          xmlns:extWindow="clr-namespace:_4alleach.MCUITweaker.Client.UIExtension.Window;assembly=4alleach.MCUITweaker.Client.UIExtension"
-                          xmlns:extControls="clr-namespace:_4alleach.MCUITweaker.Client.Views.Control"
-                          xmlns:customControls="clr-namespace:_4alleach.MCUITweaker.Client.UIExtension.CustomControls;assembly=4alleach.MCUITweaker.Client.UIExtension"
+                          xmlns:viewmodel="clr-namespace:_4alleach.MCRecipeEditor.Client.ViewModels.Windows"
+                          xmlns:extWindow="clr-namespace:_4alleach.MCRecipeEditor.Client.UIExtension.Window;assembly=4alleach.MCRecipeEditor.Client.UIExtension"
+                          xmlns:extControls="clr-namespace:_4alleach.MCRecipeEditor.Client.Views.Control"
+                          xmlns:customControls="clr-namespace:_4alleach.MCRecipeEditor.Client.UIExtension.CustomControls;assembly=4alleach.MCRecipeEditor.Client.UIExtension"
                           WindowStyle="None"
                           Background="{x:Null}"
                           BorderBrush="{x:Null}"
@@ -42,8 +42,7 @@
 
                 <Image Grid.Column="0"
                        Width="28"
-                       Height="28"
-                       Source="/UDBR.Client;component/Resources/Images/Icon.png"/>
+                       Height="28"/>
                 
                 <Label Grid.Column="1"
                        Content="{Binding Title}"
@@ -56,10 +55,12 @@
                             RenderOptions.EdgeMode="Aliased"
                             RenderOptions.BitmapScalingMode="Fant">
 
-                    <customControls:ImageButton Style="{StaticResource DefaultTopMenuImageButtonStyle}" 
+                    <customControls:ImageButton Style="{StaticResource DefaultTopMenuImageButtonStyle}"
+                                                ImageSource="/Resources/Images/Minimize.png"
                                                 Mouse.MouseDown="MinimizeWindow"/>
                     
-                    <customControls:ImageButton Style="{StaticResource DefaultTopMenuImageButtonStyle}" 
+                    <customControls:ImageButton Style="{StaticResource DefaultTopMenuImageButtonStyle}"
+                                                ImageSource="/Resources/Images/Resize.png"
                                                 Mouse.MouseDown="ResizeWindow"/>
                     
                     <customControls:ImageButton Style="{StaticResource ExitTopMenuImageButtonStyle}" 

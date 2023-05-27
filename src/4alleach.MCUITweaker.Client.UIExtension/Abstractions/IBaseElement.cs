@@ -1,6 +1,6 @@
-﻿using _4alleach.MCUITweaker.Client.UIExtension.ViewModel.Abstractions;
+﻿using _4alleach.MCRecipeEditor.Client.UIExtension.ViewModel.Abstractions;
 
-namespace _4alleach.MCUITweaker.Client.UIExtension.Abstractions;
+namespace _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions;
 
 public interface IBaseElement<TViewModel> where TViewModel : class, IBaseViewModel
 {

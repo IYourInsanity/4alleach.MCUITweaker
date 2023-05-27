@@ -1,9 +1,9 @@
-﻿using _4alleach.MCUITweaker.Client.Abstractions.Services;
+﻿using _4alleach.MCRecipeEditor.Client.Abstractions.Services;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 
-namespace _4alleach.MCUITweaker.Client.Services;
+namespace _4alleach.MCRecipeEditor.Client.Services;
 
 internal sealed class ServiceHub : IServiceHub
 {

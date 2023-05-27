@@ -1,7 +1,7 @@
-﻿using _4alleach.MCUITweaker.Client.UIExtension.UserControl;
-using _4alleach.MCUITweaker.Client.ViewModels.Controls;
+﻿using _4alleach.MCRecipeEditor.Client.UIExtension.UserControl;
+using _4alleach.MCRecipeEditor.Client.ViewModels.Controls;
 
-namespace _4alleach.MCUITweaker.Client.Views.Controls;
+namespace _4alleach.MCRecipeEditor.Client.Views.Controls;
 
 public partial class MenuControl : ExtendedControl
 {

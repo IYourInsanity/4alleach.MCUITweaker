@@ -1,20 +1,25 @@
-﻿using _4alleach.MCUITweaker.Client.Abstractions.Services;
-using _4alleach.MCUITweaker.Client.Abstractions.ViewModels;
-using _4alleach.MCUITweaker.Client.BusinessModels;
-using _4alleach.MCUITweaker.Client.UIExtension.ViewModel.Abstractions;
-using _4alleach.MCUITweaker.Client.Views.Control;
-using _4alleach.MCUITweaker.Client.Views.Controls;
+﻿using _4alleach.MCRecipeEditor.Client.Abstractions.Services;
+using _4alleach.MCRecipeEditor.Client.Abstractions.ViewModels;
+using _4alleach.MCRecipeEditor.Client.BusinessModels;
+using _4alleach.MCRecipeEditor.Client.UIExtension.ViewModel.Abstractions;
+using _4alleach.MCRecipeEditor.Client.Views.Control;
+using _4alleach.MCRecipeEditor.Client.Views.Controls;
+using CommunityToolkit.Mvvm.ComponentModel;
 using System.Windows.Controls;
 
-namespace _4alleach.MCUITweaker.Client.ViewModels.Windows;
+namespace _4alleach.MCRecipeEditor.Client.ViewModels.Windows;
 
-public sealed class MainWindowViewModel : WindowViewModel, IExtendedWindowViewModel
+public sealed partial class MainWindowViewModel : WindowViewModel, IExtendedWindowViewModel
 {
     private readonly MainWindowBusinessModel mwBModel;
+
+    [ObservableProperty]
+    private string title;
 
     public MainWindowViewModel(Grid container) : base(container)
     {
         mwBModel = new MainWindowBusinessModel();
+        title = "Minecraft Recipe Tweaker";
     }
 
     public void RegisterService<TService, TServiceImplementation>()

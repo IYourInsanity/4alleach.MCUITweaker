@@ -1,11 +1,11 @@
-﻿using _4alleach.MCUITweaker.Client.UIExtension.Abstractions;
-using _4alleach.MCUITweaker.Client.UIExtension.Logic;
-using _4alleach.MCUITweaker.Client.UIExtension.ViewModel.Abstractions;
-using _4alleach.MCUITweaker.Client.UIExtension.Window.Abstractions;
+﻿using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions;
+using _4alleach.MCRecipeEditor.Client.UIExtension.Logic;
+using _4alleach.MCRecipeEditor.Client.UIExtension.ViewModel.Abstractions;
+using _4alleach.MCRecipeEditor.Client.UIExtension.Window.Abstractions;
 using System.Windows;
 using System.Windows.Input;
 
-namespace _4alleach.MCUITweaker.Client.UIExtension.Window;
+namespace _4alleach.MCRecipeEditor.Client.UIExtension.Window;
 
 public class ExtendedWindow : System.Windows.Window, IExtendedWindow
 {

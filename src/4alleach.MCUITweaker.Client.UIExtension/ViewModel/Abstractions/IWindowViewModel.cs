@@ -1,8 +1,8 @@
-﻿using _4alleach.MCUITweaker.Client.UIExtension.UserControl.Abstractions;
-using _4alleach.MCUITweaker.Client.UIExtension.Window.Abstractions;
+﻿using _4alleach.MCRecipeEditor.Client.UIExtension.UserControl.Abstractions;
+using _4alleach.MCRecipeEditor.Client.UIExtension.Window.Abstractions;
 using System.Windows.Input;
 
-namespace _4alleach.MCUITweaker.Client.UIExtension.ViewModel.Abstractions;
+namespace _4alleach.MCRecipeEditor.Client.UIExtension.ViewModel.Abstractions;
 
 public interface IWindowViewModel : IBaseViewModel
 {

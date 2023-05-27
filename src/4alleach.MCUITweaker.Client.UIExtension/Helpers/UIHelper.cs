@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace _4alleach.MCUITweaker.Client.UIExtension.Helpers;
+namespace _4alleach.MCRecipeEditor.Client.UIExtension.Helpers;
 
 public class UIHelper
 {

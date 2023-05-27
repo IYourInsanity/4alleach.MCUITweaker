@@ -1,8 +1,8 @@
-﻿using _4alleach.MCUITweaker.Client.UIExtension.Abstractions;
-using _4alleach.MCUITweaker.Client.UIExtension.UserControl.Abstractions;
+﻿using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions;
+using _4alleach.MCRecipeEditor.Client.UIExtension.UserControl.Abstractions;
 using System.Windows.Controls;
 
-namespace _4alleach.MCUITweaker.Client.UIExtension.Logic;
+namespace _4alleach.MCRecipeEditor.Client.UIExtension.Logic;
 
 internal sealed class ExtendedControlStorage<TExtendedControl> : IExtendedControlStorage<TExtendedControl>
     where TExtendedControl : class, IExtendedControl

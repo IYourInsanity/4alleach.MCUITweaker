@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace _4alleach.MCUITweaker;
+namespace _4alleach.MCRecipeEditor;
 
 /// <summary>
 /// Interaction logic for App.xaml

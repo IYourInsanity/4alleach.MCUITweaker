@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace _4alleach.MCUITweaker.Client.Converters;
+namespace _4alleach.MCRecipeEditor.Client.Converters;
 
 public sealed class BooleanToVisibilityConverter : IValueConverter
 {

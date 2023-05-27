@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Media;
 
-namespace _4alleach.MCUITweaker.Client.UIExtension.CustomControls;
+namespace _4alleach.MCRecipeEditor.Client.UIExtension.CustomControls;
 
 public partial class ImageButton : System.Windows.Controls.UserControl
 {

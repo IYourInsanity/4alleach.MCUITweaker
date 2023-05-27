@@ -1,6 +1,6 @@
-﻿using _4alleach.MCUITweaker.Client.UIExtension.ViewModel.Abstractions;
+﻿using _4alleach.MCRecipeEditor.Client.UIExtension.ViewModel.Abstractions;
 
-namespace _4alleach.MCUITweaker.Client.ViewModels.Controls;
+namespace _4alleach.MCRecipeEditor.Client.ViewModels.Controls;
 public sealed partial class MenuControlViewModel : ControlViewModel
 {
     public MenuControlViewModel() : base()

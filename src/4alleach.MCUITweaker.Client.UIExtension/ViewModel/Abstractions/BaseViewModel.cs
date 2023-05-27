@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System.Windows;
 
-namespace _4alleach.MCUITweaker.Client.UIExtension.ViewModel.Abstractions;
+namespace _4alleach.MCRecipeEditor.Client.UIExtension.ViewModel.Abstractions;
 
 public abstract partial class BaseViewModel : ObservableObject, IBaseViewModel
 {

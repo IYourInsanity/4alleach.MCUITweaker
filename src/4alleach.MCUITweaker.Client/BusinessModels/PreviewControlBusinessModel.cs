@@ -1,7 +1,7 @@
-﻿using _4alleach.MCUITweaker.Client.Abstractions.Services;
-using _4alleach.MCUITweaker.Client.UIExtension.Abstractions;
+﻿using _4alleach.MCRecipeEditor.Client.Abstractions.Services;
+using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions;
 
-namespace _4alleach.MCUITweaker.Client.BusinessModels;
+namespace _4alleach.MCRecipeEditor.Client.BusinessModels;
 
 internal sealed class PreviewControlBusinessModel : IDefaultBusinessModel
 {

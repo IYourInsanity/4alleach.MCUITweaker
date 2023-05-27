@@ -1,6 +1,6 @@
-﻿using _4alleach.MCUITweaker.Client.UIExtension.Abstractions;
+﻿using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions;
 
-namespace _4alleach.MCUITweaker.Client.Abstractions.Services;
+namespace _4alleach.MCRecipeEditor.Client.Abstractions.Services;
 
 internal interface IBusinessModelConstructService : IService
 {

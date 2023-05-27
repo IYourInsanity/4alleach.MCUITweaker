@@ -1,4 +1,4 @@
-﻿namespace _4alleach.MCUITweaker.Client.Abstractions.Services;
+﻿namespace _4alleach.MCRecipeEditor.Client.Abstractions.Services;
 
 internal interface IServiceHub : IService
 {

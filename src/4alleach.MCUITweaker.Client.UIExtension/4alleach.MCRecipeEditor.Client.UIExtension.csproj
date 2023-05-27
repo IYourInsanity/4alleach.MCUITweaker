@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0-windows</TargetFramework>
-    <RootNamespace>_4alleach.MCUITweaker.Client.UIExtension</RootNamespace>
+    <RootNamespace>_4alleach.MCRecipeEditor.Client.UIExtension</RootNamespace>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 

@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace _4alleach.MCUITweaker.Client.UIExtension.ViewModel.Abstractions;
+namespace _4alleach.MCRecipeEditor.Client.UIExtension.ViewModel.Abstractions;
 
 public interface IBaseViewModel
 {

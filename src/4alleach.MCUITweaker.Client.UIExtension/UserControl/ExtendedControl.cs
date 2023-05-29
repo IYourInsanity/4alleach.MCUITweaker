@@ -24,7 +24,7 @@ public class ExtendedControl : System.Windows.Controls.UserControl, IExtendedCon
         Name = name;
     }
 
-    protected void ControlLoaded(object sender, RoutedEventArgs e)
+    protected virtual void ControlLoaded(object sender, RoutedEventArgs e)
     {
         if (sender is IExtendedControl control)
         {

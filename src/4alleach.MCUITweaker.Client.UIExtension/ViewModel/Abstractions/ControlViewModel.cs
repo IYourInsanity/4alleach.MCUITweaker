@@ -1,14 +1,20 @@
 ﻿using _4alleach.MCRecipeEditor.Client.UIExtension.UserControl.Abstractions;
+using _4alleach.MCRecipeEditor.Client.UIExtension.Window;
 
 namespace _4alleach.MCRecipeEditor.Client.UIExtension.ViewModel.Abstractions;
 
-public abstract partial class ControlViewModel : BaseViewModel, IControlViewModel
+public abstract partial class ControlViewModel<TExtendedWindowViewModel> : BaseViewModel, IControlViewModel
+    where TExtendedWindowViewModel : class, IWindowViewModel
 {
+    protected TExtendedWindowViewModel? window;
+
     protected IExtendedControl? control;
 
     protected IControlViewModel parent;
 
     protected IEnumerable<IControlViewModel>? children;
+
+    protected string ControlName => control?.Name ?? string.Empty;
 
     protected ControlViewModel(): base()
     {
@@ -18,6 +24,28 @@ public abstract partial class ControlViewModel : BaseViewModel, IControlViewMode
     protected ControlViewModel(IControlViewModel parent): base()
     {
         this.parent = parent;
+    }
+
+    public override void Initialize()
+    {
+        if (control == null)
+        {
+            throw new NotImplementedException();
+        }
+
+        var root = control.Picker.GetParent<ExtendedWindow>();
+
+        if (root == null)
+        {
+            throw new NotImplementedException();
+        }
+
+        window = root.Picker.GetViewModel<TExtendedWindowViewModel>();
+
+        if (window == null)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public void SetControl<TControl>(TControl control) where TControl : IExtendedControl

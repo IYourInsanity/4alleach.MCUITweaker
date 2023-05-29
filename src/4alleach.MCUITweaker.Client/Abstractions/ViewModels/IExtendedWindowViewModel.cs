@@ -3,7 +3,7 @@ using _4alleach.MCRecipeEditor.Client.UIExtension.ViewModel.Abstractions;
 
 namespace _4alleach.MCRecipeEditor.Client.Abstractions.ViewModels;
 
-internal interface IExtendedWindowViewModel : IWindowViewModel
+public interface IExtendedWindowViewModel : IWindowViewModel
 {
     void RegisterService<TService, TServiceImplementation>()
         where TService : IService

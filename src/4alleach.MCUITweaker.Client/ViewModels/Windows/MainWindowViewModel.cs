@@ -2,7 +2,6 @@
 using _4alleach.MCRecipeEditor.Client.Abstractions.ViewModels;
 using _4alleach.MCRecipeEditor.Client.BusinessModels;
 using _4alleach.MCRecipeEditor.Client.UIExtension.ViewModel.Abstractions;
-using _4alleach.MCRecipeEditor.Client.Views.Control;
 using _4alleach.MCRecipeEditor.Client.Views.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Windows.Controls;
@@ -19,7 +18,7 @@ public sealed partial class MainWindowViewModel : WindowViewModel, IExtendedWind
     public MainWindowViewModel(Grid container) : base(container)
     {
         mwBModel = new MainWindowBusinessModel();
-        title = "Minecraft Recipe Tweaker";
+        title = "Minecraft Recipe Editor";
     }
 
     public void RegisterService<TService, TServiceImplementation>()

@@ -1,31 +1,27 @@
 ﻿using _4alleach.MCRecipeEditor.Client.Abstractions.Services;
-using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions;
+using _4alleach.MCRecipeEditor.Client.BusinessModels.Base;
 
 namespace _4alleach.MCRecipeEditor.Client.BusinessModels;
 
-internal sealed class PreviewControlBusinessModel : IDefaultBusinessModel
+internal sealed class PreviewControlBusinessModel : DefaultBusinessModel
 {
-    private readonly IServiceHub serviceHub;
-
-    public PreviewControlBusinessModel(IServiceHub serviceHub)
+    public PreviewControlBusinessModel(IServiceHub serviceHub) : base(serviceHub)
     {
-        this.serviceHub = serviceHub;
+        
     }
 
     internal void NewProject()
     {
-        throw new System.NotImplementedException();
+        serviceHub.Get<IProjectControllerService>()?.CreateProject("Test Project");
     }
 
     internal void LoadProject()
     {
-        //throw new System.NotImplementedException();
+        serviceHub.Get<IProjectControllerService>()?.CreateProject("Test Project");
     }
 
-    public void Dispose()
+    public override void Dispose()
     {
         throw new System.NotImplementedException();
     }
-
-
 }

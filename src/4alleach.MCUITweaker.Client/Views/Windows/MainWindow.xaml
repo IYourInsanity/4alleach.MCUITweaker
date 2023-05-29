@@ -5,7 +5,7 @@
                           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                           xmlns:viewmodel="clr-namespace:_4alleach.MCRecipeEditor.Client.ViewModels.Windows"
                           xmlns:extWindow="clr-namespace:_4alleach.MCRecipeEditor.Client.UIExtension.Window;assembly=4alleach.MCRecipeEditor.Client.UIExtension"
-                          xmlns:extControls="clr-namespace:_4alleach.MCRecipeEditor.Client.Views.Control"
+                          xmlns:extControls="clr-namespace:_4alleach.MCRecipeEditor.Client.Views.Controls"
                           xmlns:customControls="clr-namespace:_4alleach.MCRecipeEditor.Client.UIExtension.CustomControls;assembly=4alleach.MCRecipeEditor.Client.UIExtension"
                           WindowStyle="None"
                           Background="{x:Null}"
@@ -20,7 +20,7 @@
     <Border BorderBrush="{StaticResource Dark1Brush}"
             BorderThickness="1">
         <Grid x:Name="Root"
-              Visibility="{Binding Path=IsVisible, Converter={StaticResource booleanToVisibilityConverter}}"
+              Visibility="{Binding Path=IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
               Background="{StaticResource Dark0Brush}">
 
             <Grid.RowDefinitions>

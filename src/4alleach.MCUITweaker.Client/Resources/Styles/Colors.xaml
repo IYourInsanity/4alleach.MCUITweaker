@@ -2,17 +2,37 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:MCRecipeEditor.Client.Resources.Styles">
 
+    <Color x:Key="White">White</Color>
+    <Color x:Key="Black">Black</Color>
+
+    <SolidColorBrush x:Key="WhiteBrush" Color="{StaticResource White}"/>
+    <SolidColorBrush x:Key="BlackBrush" Color="{StaticResource Black}"/>
+
+    <Color x:Key="Light0">#c9c9c9</Color>
+    
+    <SolidColorBrush x:Key="Light0Brush" Color="{StaticResource Light0}"/>
+
+    <Color x:Key="BlueTransparent30">#803c88fa</Color>
+    <Color x:Key="BlueTransparent80">#cc3c88fa</Color>
+
+    <SolidColorBrush x:Key="BlueTransparent30Brush" Color="{StaticResource BlueTransparent30}"/>
+    <SolidColorBrush x:Key="BlueTransparent80Brush" Color="{StaticResource BlueTransparent80}"/>
+
     <Color x:Key="Dark0">#FF1E1E1E</Color>
     <Color x:Key="Dark1">#FF2A2A2C</Color>
     <Color x:Key="Dark2">#FF2C2C36</Color>
     <Color x:Key="Dark3">#FF3C3C48</Color>
     <Color x:Key="Dark4">#FF50505C</Color>
+    <Color x:Key="Dark5">#62626C</Color>
+    <Color x:Key="Dark6">#72727b</Color>
 
     <SolidColorBrush x:Key="Dark0Brush" Color="{StaticResource Dark0}"/>
     <SolidColorBrush x:Key="Dark1Brush" Color="{StaticResource Dark1}"/>
     <SolidColorBrush x:Key="Dark2Brush" Color="{StaticResource Dark2}" />
     <SolidColorBrush x:Key="Dark3Brush" Color="{StaticResource Dark3}" />
     <SolidColorBrush x:Key="Dark4Brush" Color="{StaticResource Dark4}" />
+    <SolidColorBrush x:Key="Dark5Brush" Color="{StaticResource Dark5}" />
+    <SolidColorBrush x:Key="Dark6Brush" Color="{StaticResource Dark6}" />
 
     <Color x:Key="InitStateColor">#FFDEEB72</Color>
     <Color x:Key="ErrorStateColor">#FFF38B76</Color>

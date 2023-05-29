@@ -10,9 +10,11 @@
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/Buttons.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/ListBox.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/ScrollViewer.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
-            <conv:BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter"/>
+            <conv:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <conv:InverseVisibilityConverter x:Key="InverseVisibilityConverter"/>
 
         </ResourceDictionary>
     </Application.Resources>

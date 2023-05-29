@@ -2,7 +2,6 @@
 using _4alleach.MCRecipeEditor.Client.Abstractions.ViewModels;
 using _4alleach.MCRecipeEditor.Client.BusinessModels;
 using _4alleach.MCRecipeEditor.Client.UIExtension.ViewModel.Abstractions;
-using _4alleach.MCRecipeEditor.Client.UIExtension.Window;
 using _4alleach.MCRecipeEditor.Client.Views.Controls;
 using _4alleach.MCRecipeEditor.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -11,10 +10,9 @@ using System.Collections.ObjectModel;
 
 namespace _4alleach.MCRecipeEditor.Client.ViewModels.Controls;
 
-public sealed partial class PreviewControlViewModel : ControlViewModel
+public sealed partial class PreviewControlViewModel : ControlViewModel<IExtendedWindowViewModel>
 {
-    private PreviewControlBusinessModel? previewControlBM;
-    private IExtendedWindowViewModel? windowViewModel;
+    private PreviewControlBusinessModel? businessModel;
 
     [ObservableProperty]
     private ObservableCollection<RecentProjectInfo> openRecentCollection;
@@ -31,35 +29,21 @@ public sealed partial class PreviewControlViewModel : ControlViewModel
 
     public override void Initialize()
     {
-        if(control == null)
-        {
-            return;
-        }
+        base.Initialize();
 
-        var root = control.Picker.GetParent<ExtendedWindow>();
-
-        if(root == null)
-        {
-            return;
-        }
-
-        windowViewModel = root.Picker.GetViewModel<IExtendedWindowViewModel>();
-
-        if(windowViewModel == null)
-        {
-            return;
-        }
-
-        var generatorService = windowViewModel.GetService<IBusinessModelConstructService>();
+        var generatorService = window?.GetService<IBusinessModelConstructService>();
 
         if(generatorService == null)
         {
             return;
         }
 
-        generatorService.GenerateBusinessModelByName(control.Name);
+        generatorService.GenerateBusinessModelByName(ControlName);
 
-        previewControlBM = generatorService.GetModel<PreviewControlBusinessModel>();
+        businessModel = generatorService.GetModel<PreviewControlBusinessModel>();
+
+        OpenRecentCollection.Add(new RecentProjectInfo("Test1", "Test Path"));
+        OpenRecentCollection.Add(new RecentProjectInfo("Test2", "Test Path"));
 
         OnPropertyChanged(nameof(CollectionIsVisible));
     }
@@ -67,15 +51,17 @@ public sealed partial class PreviewControlViewModel : ControlViewModel
     [RelayCommand]
     private void NewProject()
     {
-        previewControlBM?.NewProject();
+        businessModel?.NewProject();
+
+        window?.NavigateToControl<MenuControl>();
     }
 
     [RelayCommand]
     private void LoadProject()
     {
-        previewControlBM?.LoadProject();
+        businessModel?.LoadProject();
 
-        windowViewModel?.NavigateToControl<MenuControl>();
+        window?.NavigateToControl<MenuControl>();
     }
 }
 

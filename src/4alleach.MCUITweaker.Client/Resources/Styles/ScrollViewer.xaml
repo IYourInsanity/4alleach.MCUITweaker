@@ -1,0 +1,160 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="ScrollViewerDarkStyle" TargetType="{x:Type ScrollViewer}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                    <Grid Background="{TemplateBinding Background}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <ScrollContentPresenter Grid.Column="0" 
+                                                Grid.Row="0" 
+                                                Margin="{TemplateBinding Padding}" 
+                                                Content="{TemplateBinding Content}" 
+                                                ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                                CanContentScroll="{TemplateBinding CanContentScroll}"/>
+
+                        <!-- The visibility of the ScrollBars is controlled by the implementation fo the control -->
+                        <ScrollBar Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" 
+                                   Grid.Column="0" 
+                                   Grid.Row="1" 
+                                   x:Name="PART_HorizontalScrollBar" 
+                                   Style="{DynamicResource ScrollBarDarkStyle}" 
+                                   Orientation="Horizontal" 
+                                   Value="{Binding Path=HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                   ViewportSize="{TemplateBinding ViewportWidth}" 
+                                   Minimum="0" 
+                                   Maximum="{TemplateBinding ScrollableWidth}"/>
+
+                        <ScrollBar Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" 
+                                   Grid.Column="1" 
+                                   Grid.Row="0" 
+                                   x:Name="PART_VerticalScrollBar" 
+                                   Style="{DynamicResource ScrollBarDarkStyle}" 
+                                   Orientation="Vertical" 
+                                   Value="{Binding Path=VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                   ViewportSize="{TemplateBinding ViewportHeight}" 
+                                   Minimum="0" 
+                                   Maximum="{TemplateBinding ScrollableHeight}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ThumbDarkStyle" TargetType="{x:Type Thumb}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Thumb}">
+                    <Rectangle x:Name="Rectangle" 
+                               VerticalAlignment="Stretch"
+                               HorizontalAlignment="Stretch" 
+                               Width="Auto" 
+                               Height="Auto"
+                               RadiusX="8"
+                               RadiusY="8"
+                               Cursor="Hand"
+                               Fill="{StaticResource Dark3Brush}" 
+                               Stroke="{StaticResource Dark2Brush}"/>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True"/>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+                                                        Storyboard.TargetName="Rectangle"
+                                                        To="{StaticResource Dark6}"
+                                                        Duration="0:0:0.4">
+
+                                        </ColorAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+                                                        Storyboard.TargetName="Rectangle"
+                                                        To="{StaticResource Dark3}"
+                                                        Duration="0:0:0.4">
+
+                                        </ColorAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False"/>
+                        <Trigger Property="IsDragging" Value="True"/>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ScrollBarDarkStyle" TargetType="{x:Type ScrollBar}">
+        <Setter Property="Stylus.IsFlicksEnabled" Value="false"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ScrollBar}">
+                    <Grid x:Name="GridRoot" 
+                          Opacity="0"
+                          Width="{DynamicResource {x:Static ScrollBar.WidthProperty}}"
+                          Background="{StaticResource Dark2Brush}">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.00001*"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Track is a special layout container which sizes the thumb and the repeat button which do jump scrolling either side of it -->
+                        <Track Grid.Row="0"
+                               x:Name="PART_Track" 
+                               Orientation="Vertical" 
+                               IsDirectionReversed="true">
+                            <Track.Thumb>
+                                <Thumb Style="{DynamicResource ThumbDarkStyle}"/>
+                            </Track.Thumb>
+                        </Track>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="(Control.Opacity)"
+                                                         Storyboard.TargetName="GridRoot"
+                                                         To="1"
+                                                         Duration="0:0:0.3">
+
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="(Control.Opacity)"
+                                                         Storyboard.TargetName="GridRoot"
+                                                         To="0"
+                                                         Duration="0:0:0.3">
+
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

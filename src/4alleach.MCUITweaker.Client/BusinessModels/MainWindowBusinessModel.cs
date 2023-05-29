@@ -1,23 +1,19 @@
 ﻿using _4alleach.MCRecipeEditor.Client.Abstractions.Services;
+using _4alleach.MCRecipeEditor.Client.BusinessModels.Base;
 using _4alleach.MCRecipeEditor.Client.Services;
-using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions;
-using _4alleach.MCRecipeEditor.Client.Views.Control;
+using _4alleach.MCRecipeEditor.Client.Views.Controls;
 
 namespace _4alleach.MCRecipeEditor.Client.BusinessModels;
 
-internal sealed class MainWindowBusinessModel : IDefaultBusinessModel
+internal sealed class MainWindowBusinessModel : DefaultBusinessModel
 {
-    private readonly IServiceHub serviceHub;
-
-    internal MainWindowBusinessModel()
+    internal MainWindowBusinessModel() : base(new ServiceHub())
     {
-        serviceHub = new ServiceHub();
+
     }
 
     internal void Initialize()
     {
-
-
         serviceHub.Register<IBusinessModelConstructService, BusinessModelConstructService>();
         serviceHub.Register<IProjectControllerService, ProjectControllerService>();
 
@@ -26,6 +22,7 @@ internal sealed class MainWindowBusinessModel : IDefaultBusinessModel
         var bmConstructService = serviceHub.Get<IBusinessModelConstructService>();
 
         bmConstructService?.Register<PreviewControlBusinessModel>(nameof(PreviewControl));
+        bmConstructService?.Register<MenuControlBusinessModel>(nameof(MenuControl));
     }
 
     internal void RegisterService<TService, TServiceImplementation>() 
@@ -40,7 +37,7 @@ internal sealed class MainWindowBusinessModel : IDefaultBusinessModel
         return serviceHub.Get<TService>();
     }
 
-    public void Dispose()
+    public override void Dispose()
     {
         throw new System.NotImplementedException();
     }

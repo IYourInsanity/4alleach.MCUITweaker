@@ -5,15 +5,155 @@
                             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
                             xmlns:local="clr-namespace:_4alleach.MCRecipeEditor.Client.Views.Controls"
                             xmlns:viewmodel="clr-namespace:_4alleach.MCRecipeEditor.Client.ViewModels.Controls"
-                            xmlns:extControl="clr-namespace:_4alleach.MCRecipeEditor.Client.UIExtension.UserControl;assembly=4alleach.MCRecipeEditor.Client.UIExtension" 
+                            xmlns:extControl="clr-namespace:_4alleach.MCRecipeEditor.Client.UIExtension.UserControl;assembly=4alleach.MCRecipeEditor.Client.UIExtension"
+                            xmlns:customControl="clr-namespace:_4alleach.MCRecipeEditor.Client.UIExtension.CustomControls;assembly=4alleach.MCRecipeEditor.Client.UIExtension"
                             mc:Ignorable="d" 
-                            d:DesignHeight="450" d:DesignWidth="800"
+                            d:DesignHeight="800" d:DesignWidth="1400"
                             d:DataContext="{d:DesignInstance Type=viewmodel:MenuControlViewModel}">
     
-    <Grid Visibility="{Binding Path=IsVisible, Converter={StaticResource booleanToVisibilityConverter}}"
+    <Grid Visibility="{Binding Path=IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
           HorizontalAlignment="Stretch"
-          VerticalAlignment="Stretch"
-          Background="AntiqueWhite">
+          VerticalAlignment="Stretch">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="64"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <WrapPanel Orientation="Horizontal"
+                   VerticalAlignment="Center"
+                   ItemWidth="36"
+                   Margin="16,0,16,0">
             
+            <Button Style="{StaticResource DefaultButtonStyle}"/>
+            <Button Style="{StaticResource DefaultButtonStyle}"/>
+            <Button Style="{StaticResource DefaultButtonStyle}"/>
+            <Button Style="{StaticResource DefaultButtonStyle}"/>
+            
+        </WrapPanel>
+
+        <Grid Grid.Row="1">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="240"/>
+                <ColumnDefinition Width="240"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+
+            <Rectangle Grid.Column="0"
+                       Margin="4,4,0,4"
+                       Fill="{StaticResource Dark2Brush}"/>
+
+            <Rectangle Grid.Column="1"
+                       Margin="0,4,0,4"
+                       Fill="{StaticResource Dark2Brush}"/>
+
+            <ScrollViewer Grid.Column="0"
+                          Margin="12"
+                          Style="{StaticResource ScrollViewerDarkStyle}">
+                <StackPanel Orientation="Vertical">
+
+                    <ListBox Grid.Column="0"
+                             BorderBrush="{StaticResource Dark1Brush}"
+                             BorderThickness="0,1,1,0"
+                             ItemsSource="{Binding FileCollection}"
+                             SelectedItem="{Binding SelectedFileProject, Mode=TwoWay}"
+                             Style="{StaticResource MenuListBoxStyle}"
+                             ItemContainerStyle="{StaticResource MenuListBoxItemStyle}">
+
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid VerticalAlignment="Stretch"
+                                      HorizontalAlignment="Stretch"
+                                      Background="Transparent"
+                                      Mouse.MouseDown="GridMouseDoubleClick">
+                                    
+                                    <TextBox Width="Auto"
+                                             Height="Auto"
+                                             Foreground="{StaticResource WhiteBrush}"
+                                             BorderBrush="{x:Null}"
+                                             Background="{x:Null}"
+                                             VerticalContentAlignment="Center"
+                                             CaretBrush="{StaticResource WhiteBrush}"
+                                             Text="{Binding Path=Name, Mode=TwoWay}" 
+                                             IsHitTestVisible="False"
+                                             KeyDown="TextBoxKeyDown"
+                                             LostFocus="TextBoxLostFocus"/>
+
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+
+                    </ListBox>
+
+                    <Button Content="New file"
+                            Command="{Binding AddNewFileCommand}"
+                            Style="{StaticResource HyperLinkButtonStyle}"/>
+
+                </StackPanel>
+            </ScrollViewer>
+
+            <ScrollViewer Grid.Column="1"
+                          Margin="12"
+                          Visibility="{Binding IsFileSelected, Converter={StaticResource BooleanToVisibilityConverter}}"
+                          Style="{StaticResource ScrollViewerDarkStyle}">
+                <StackPanel Orientation="Vertical">
+
+                    <ListBox Grid.Column="0"
+                             BorderBrush="{StaticResource Dark1Brush}"
+                             BorderThickness="0,1,1,0"
+                             ItemsSource="{Binding RecipeCollection}"
+                             Style="{StaticResource MenuListBoxStyle}"
+                             ItemContainerStyle="{StaticResource MenuListBoxItemStyle}">
+
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid VerticalAlignment="Stretch"
+                                      HorizontalAlignment="Stretch"
+                                      Background="Transparent"
+                                      Mouse.MouseDown="GridMouseDoubleClick">
+
+                                    <TextBox Width="Auto"
+                                             Height="Auto"
+                                             Foreground="{StaticResource WhiteBrush}"
+                                             BorderBrush="{x:Null}"
+                                             Background="{x:Null}"
+                                             VerticalContentAlignment="Center"
+                                             CaretBrush="{StaticResource WhiteBrush}"
+                                             Text="{Binding Path=Name, Mode=TwoWay}" 
+                                             IsHitTestVisible="False"
+                                             KeyDown="TextBoxKeyDown"
+                                             LostFocus="TextBoxLostFocus"/>
+
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+
+                    </ListBox>
+
+                    <Button Content="New recipe"
+                            Command="{Binding AddNewRecipeCommand}"
+                            Style="{StaticResource HyperLinkButtonStyle}"/>
+
+                </StackPanel>
+            </ScrollViewer>
+
+            <Grid x:Name="Container"
+                  Grid.Column="2"
+                  Background="{StaticResource Dark2Brush}"
+                  Margin="0,4,0,4">
+
+            </Grid>
+
+            <StackPanel Grid.Column="3"
+                        Orientation="Vertical"
+                        Background="{StaticResource Dark2Brush}"
+                        Margin="0,4,4,4">
+
+            </StackPanel>
+
+        </Grid>
+        
     </Grid>
 </extControl:ExtendedControl>

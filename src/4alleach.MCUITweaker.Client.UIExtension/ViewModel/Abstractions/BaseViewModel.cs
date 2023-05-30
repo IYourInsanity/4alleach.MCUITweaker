@@ -19,6 +19,8 @@ public abstract partial class BaseViewModel : ObservableObject, IBaseViewModel
 
     public abstract void Initialize();
 
+    public virtual void SetParentViewModel<TViewModel>(TViewModel? parent) where TViewModel : class, IBaseViewModel { }
+
     public abstract TFrameworkElement FindElement<TFrameworkElement>(string name) where TFrameworkElement : FrameworkElement;
 
     public void UpdateVisibility(bool state)

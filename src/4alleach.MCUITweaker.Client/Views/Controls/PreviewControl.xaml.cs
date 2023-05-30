@@ -5,8 +5,10 @@ namespace _4alleach.MCRecipeEditor.Client.Views.Controls;
 
 public partial class PreviewControl : ExtendedControl
 {
-    public PreviewControl() : base(typeof(PreviewControlViewModel), nameof(PreviewControl))
+    public PreviewControl() : base(nameof(PreviewControl))
     {
         InitializeComponent();
+
+        DataContext = new PreviewControlViewModel();
     }
 }

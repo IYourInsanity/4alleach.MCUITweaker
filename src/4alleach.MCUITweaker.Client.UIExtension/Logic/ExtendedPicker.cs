@@ -20,15 +20,21 @@ internal sealed class ExtendedPicker<TViewModel> : IExtendedPicker<TViewModel> w
         return (element!.FindName(name) as TElement)!;
     }
 
-    public TParent? GetParent<TParent>() where TParent : FrameworkElement
+    public void SetParentViewModel<TExtendedViewModel>(TExtendedViewModel? parent)
+        where TExtendedViewModel : class, TViewModel
+    {
+        GetViewModel<TViewModel>()?.SetParentViewModel(parent);
+    }
+
+    public TElement? GetParentElement<TElement>() where TElement : FrameworkElement
     {
         var parent = element.Parent;
 
         while (parent != null)
         {
-            if(parent is TParent)
+            if(parent is TElement)
             {
-                return parent as TParent;
+                return parent as TElement;
             }
 
             if(parent is FrameworkElement elementParent)

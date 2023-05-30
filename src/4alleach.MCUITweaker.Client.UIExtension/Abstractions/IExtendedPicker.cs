@@ -3,7 +3,7 @@ using System.Windows;
 
 namespace _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions;
 
-public interface IExtendedPicker<TViewModel> where TViewModel : IBaseViewModel
+public interface IExtendedPicker<TViewModel> where TViewModel : class, IBaseViewModel
 {
     FrameworkElement GetHost();
 
@@ -12,7 +12,10 @@ public interface IExtendedPicker<TViewModel> where TViewModel : IBaseViewModel
     TExtendedViewModel? GetViewModel<TExtendedViewModel>()
         where TExtendedViewModel : class, TViewModel;
 
-    TParent? GetParent<TParent>() where TParent : FrameworkElement;
+    void SetParentViewModel<TExtendedViewModel>(TExtendedViewModel? parent) 
+        where TExtendedViewModel : class, TViewModel;
+
+    TElement? GetParentElement<TElement>() where TElement : FrameworkElement;
 
     TElement FindElement<TElement>(string name) where TElement : FrameworkElement;
 

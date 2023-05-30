@@ -14,10 +14,10 @@ public class ExtendedControl : System.Windows.Controls.UserControl, IExtendedCon
 
     public IExtendedPicker<IControlViewModel> Picker { get; }
 
-    public ExtendedControl(Type type, string name) : base()
+    public ExtendedControl(string name) : base()
     {
         Loaded += ControlLoaded;
-        DataContext = Activator.CreateInstance(type);
+
         Picker = new ExtendedPicker<IControlViewModel>(this);
 
         VID = Guid.NewGuid();

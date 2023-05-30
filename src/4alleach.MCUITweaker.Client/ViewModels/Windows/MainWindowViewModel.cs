@@ -38,7 +38,7 @@ public sealed partial class MainWindowViewModel : WindowViewModel, IExtendedWind
         RegisterControl<PreviewControl>();
         RegisterControl<MenuControl>();
 
-        NavigateToControl<PreviewControl>();
+        ShowControl<PreviewControl>();
 
         mwBModel.Initialize();
     }

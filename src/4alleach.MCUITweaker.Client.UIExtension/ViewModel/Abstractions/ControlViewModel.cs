@@ -1,5 +1,8 @@
-﻿using _4alleach.MCRecipeEditor.Client.UIExtension.UserControl.Abstractions;
+﻿using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions;
+using _4alleach.MCRecipeEditor.Client.UIExtension.Logic;
+using _4alleach.MCRecipeEditor.Client.UIExtension.UserControl.Abstractions;
 using _4alleach.MCRecipeEditor.Client.UIExtension.Window;
+using System.Windows.Controls;
 
 namespace _4alleach.MCRecipeEditor.Client.UIExtension.ViewModel.Abstractions;
 
@@ -10,9 +13,11 @@ public abstract partial class ControlViewModel<TExtendedWindowViewModel> : BaseV
 
     protected IExtendedControl? control;
 
-    protected IControlViewModel parent;
+    protected IControlViewModel? parent;
 
     protected IEnumerable<IControlViewModel>? children;
+
+    protected IExtendedControlStorage<IExtendedControl>? storage;
 
     protected string ControlName => control?.Name ?? string.Empty;
 
@@ -21,9 +26,10 @@ public abstract partial class ControlViewModel<TExtendedWindowViewModel> : BaseV
         parent = this;
     }
 
-    protected ControlViewModel(IControlViewModel parent): base()
+    protected ControlViewModel(Grid container): base()
     {
-        this.parent = parent;
+        parent = this;
+        storage = new ExtendedControlStorage<IExtendedControl>(container);
     }
 
     public override void Initialize()
@@ -33,7 +39,7 @@ public abstract partial class ControlViewModel<TExtendedWindowViewModel> : BaseV
             throw new NotImplementedException();
         }
 
-        var root = control.Picker.GetParent<ExtendedWindow>();
+        var root = control.Picker.GetParentElement<ExtendedWindow>();
 
         if (root == null)
         {
@@ -58,9 +64,9 @@ public abstract partial class ControlViewModel<TExtendedWindowViewModel> : BaseV
         return control as TControl;
     }
 
-    public TViewModel? GetParentViewModel<TViewModel>() where TViewModel : class, IControlViewModel
+    public override void SetParentViewModel<TViewModel>(TViewModel? parent) where TViewModel : class
     {
-        return parent as TViewModel;
+        this.parent = parent as IControlViewModel;
     }
 
     public TViewModel? GetChildViewModel<TViewModel>() where TViewModel : class, IControlViewModel
@@ -81,5 +87,25 @@ public abstract partial class ControlViewModel<TExtendedWindowViewModel> : BaseV
     public override TFrameworkElement FindElement<TFrameworkElement>(string name)
     {
         return control!.Picker.FindElement<TFrameworkElement>(name);
+    }
+
+    public void RegisterControl<VExtendedControl>(VExtendedControl? parent = default) where VExtendedControl : IExtendedControl
+    {
+        storage?.Register<VExtendedControl>(parent);
+    }
+
+    public void UnregisterControl<VExtendedControl>() where VExtendedControl : IExtendedControl
+    {
+        storage?.Unregister<VExtendedControl>();
+    }
+
+    public void ShowControl<VExtendedControl>() where VExtendedControl : IExtendedControl
+    {
+        storage?.Show<VExtendedControl>();
+    }
+
+    public void HideControl<VExtendedControl>() where VExtendedControl : IExtendedControl
+    {
+        storage?.Hide<VExtendedControl>();
     }
 }

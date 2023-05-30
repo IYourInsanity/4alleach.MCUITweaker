@@ -3,10 +3,12 @@ using _4alleach.MCRecipeEditor.Client.Abstractions.ViewModels;
 using _4alleach.MCRecipeEditor.Client.BusinessModels;
 using _4alleach.MCRecipeEditor.Client.Extensions;
 using _4alleach.MCRecipeEditor.Client.UIExtension.ViewModel.Abstractions;
+using _4alleach.MCRecipeEditor.Client.Views.Controls.CraftTweakerMechanics;
 using _4alleach.MCRecipeEditor.Models.Services.Project;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using System.Windows.Controls;
 
 namespace _4alleach.MCRecipeEditor.Client.ViewModels.Controls;
 public sealed partial class MenuControlViewModel : ControlViewModel<IExtendedWindowViewModel>
@@ -50,6 +52,15 @@ public sealed partial class MenuControlViewModel : ControlViewModel<IExtendedWin
             IsRecipeSelected = value != null;
 
             businessModel.selectedRecipeProject = value;
+
+            if(value == null)
+            {
+                storage?.Hide<ShapedCraftControl>();
+            }
+            else
+            {
+                storage?.Show<ShapedCraftControl>();
+            }
         }
     }
 
@@ -77,7 +88,7 @@ public sealed partial class MenuControlViewModel : ControlViewModel<IExtendedWin
         OnPropertyChanged(nameof(SelectedRecipeProject));
     }
 
-    public MenuControlViewModel() : base()
+    public MenuControlViewModel(Grid container) : base(container)
     {
         fileCollection = new ObservableCollection<FileProject>();
         recipeCollection = new ObservableCollection<RecipeProject>();
@@ -98,5 +109,7 @@ public sealed partial class MenuControlViewModel : ControlViewModel<IExtendedWin
         businessModel = generatorService.GetModel<MenuControlBusinessModel>();
 
         businessModel?.Initialize();
+
+        storage?.Register<ShapedCraftControl>(control!);
     }
 }

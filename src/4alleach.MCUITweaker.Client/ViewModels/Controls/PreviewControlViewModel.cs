@@ -53,7 +53,7 @@ public sealed partial class PreviewControlViewModel : ControlViewModel<IExtended
     {
         businessModel?.NewProject();
 
-        window?.NavigateToControl<MenuControl>();
+        window?.ShowControl<MenuControl>();
     }
 
     [RelayCommand]
@@ -61,7 +61,7 @@ public sealed partial class PreviewControlViewModel : ControlViewModel<IExtended
     {
         businessModel?.LoadProject();
 
-        window?.NavigateToControl<MenuControl>();
+        window?.ShowControl<MenuControl>();
     }
 }
 

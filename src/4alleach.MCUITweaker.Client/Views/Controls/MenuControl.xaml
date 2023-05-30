@@ -104,6 +104,7 @@
                              BorderBrush="{StaticResource Dark1Brush}"
                              BorderThickness="0,1,1,0"
                              ItemsSource="{Binding RecipeCollection}"
+                             SelectedItem="{Binding SelectedRecipeProject, Mode=TwoWay}"
                              Style="{StaticResource MenuListBoxStyle}"
                              ItemContainerStyle="{StaticResource MenuListBoxItemStyle}">
 

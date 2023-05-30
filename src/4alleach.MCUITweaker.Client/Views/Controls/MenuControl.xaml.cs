@@ -6,9 +6,11 @@ namespace _4alleach.MCRecipeEditor.Client.Views.Controls;
 
 public partial class MenuControl : ExtendedControl
 {
-    public MenuControl() : base(typeof(MenuControlViewModel), nameof(MenuControl))
+    public MenuControl() : base(nameof(MenuControl))
     {
         InitializeComponent();
+
+        DataContext = new MenuControlViewModel(Container);
     }
 
     private void GridMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)

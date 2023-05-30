@@ -22,27 +22,51 @@ internal sealed class ExtendedControlStorage<TExtendedControl> : IExtendedContro
         this.container = container;
     }
 
-    public void Register<VExtendedControl>() where VExtendedControl : TExtendedControl
+    public void Register<VExtendedControl>(TExtendedControl? parent) where VExtendedControl : TExtendedControl
     {
         var control = Activator.CreateInstance<VExtendedControl>();
 
         controls.Add(control);
         storage.Add(control.GetType(), control);
+
+        if (parent != null)
+        {
+            var viewModel = parent.Picker.GetViewModel();
+
+            control.Picker.SetParentViewModel(viewModel);
+        }
     }
 
-    public void Navigate<VExtendedControl>() where VExtendedControl : TExtendedControl
+    public void Show<VExtendedControl>() where VExtendedControl : TExtendedControl
     {
         var control = storage[typeof(VExtendedControl)];
         var uiControl = control.Picker.GetHost();
 
+        var children = container.Children;
+
+        if(children.Contains(uiControl) == true)
+        {
+            return;
+        }
+
         container.Children.Add(uiControl);
-        
+
         if (current != null)
         {
             container.Children.Remove(current.Picker.GetHost());
         }
 
         current = control;
+    }
+
+    public void Hide<VExtendedControl>() where VExtendedControl : TExtendedControl
+    {
+        var control = storage[typeof(VExtendedControl)];
+        var uiControl = control.Picker.GetHost();
+
+        container.Children.Remove(uiControl);
+
+        current = null;
     }
 
     public void Unregister<VExtendedControl>() where VExtendedControl : TExtendedControl

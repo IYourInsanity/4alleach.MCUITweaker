@@ -2,11 +2,13 @@
 
 namespace _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions;
 
-public interface IExtendedControlStorage<TExtendedControl> 
+public interface IExtendedControlStorage<TExtendedControl>
     where TExtendedControl : class, IExtendedControl
 {
-    void Register<VExtendedControl>() where VExtendedControl : TExtendedControl;
+    void Register<VExtendedControl>(TExtendedControl? parent) where VExtendedControl : TExtendedControl;
     void Unregister<VExtendedControl>() where VExtendedControl : TExtendedControl;
 
-    void Navigate<VExtendedControl>() where VExtendedControl : TExtendedControl;
+    void Show<VExtendedControl>() where VExtendedControl : TExtendedControl;
+
+    void Hide<VExtendedControl>() where VExtendedControl : TExtendedControl;
 }

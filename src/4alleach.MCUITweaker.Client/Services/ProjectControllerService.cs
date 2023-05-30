@@ -50,7 +50,7 @@ internal sealed class ProjectControllerService : IProjectControllerService
             throw new NotImplementedException();
         }
 
-        var file = project.Files.Where(_ => _.ID.Equals(fileId)).FirstOrDefault();
+        var file = project.Files.Where(_ => _.Id.Equals(fileId)).FirstOrDefault();
 
         if (file == null)
         {
@@ -72,7 +72,7 @@ internal sealed class ProjectControllerService : IProjectControllerService
             throw new NotImplementedException();
         }
 
-        return project.Files.Where(_ => _.ID.Equals(id)).FirstOrDefault();
+        return project.Files.Where(_ => _.Id.Equals(id)).FirstOrDefault();
     }
 
     public RecipeProject? FindRecipeProject(Guid id)
@@ -91,7 +91,7 @@ internal sealed class ProjectControllerService : IProjectControllerService
                 throw new NotImplementedException();
             }
 
-            return file.Recipes.Where(_ => _.ID.Equals(id)).FirstOrDefault();
+            return file.Recipes.Where(_ => _.Id.Equals(id)).FirstOrDefault();
         }
 
         throw new NotImplementedException();

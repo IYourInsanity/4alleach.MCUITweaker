@@ -1,3 +1,18 @@
-﻿namespace _4alleach.MCRecipeEditor.Models.Services.Project;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-public record AppProject(string Name, IList<FileProject> Files) : IdentityObject;
+namespace _4alleach.MCRecipeEditor.Models.Services.Project;
+
+public sealed partial class AppProject : IdentityObject
+{
+    [ObservableProperty]
+    string name;
+
+    [ObservableProperty]
+    IList<FileProject> files;
+
+    public AppProject(string name, IList<FileProject> files) : base()
+    {
+        Name = name;
+        Files = files;
+    }
+}

@@ -26,6 +26,11 @@ internal sealed class ExtendedPicker<TViewModel> : IExtendedPicker<TViewModel> w
         GetViewModel<TViewModel>()?.SetParentViewModel(parent);
     }
 
+    public void SetArguments(params object[]? args)
+    {
+        GetViewModel<TViewModel>()?.SetArguments(args);
+    }
+
     public TElement? GetParentElement<TElement>() where TElement : FrameworkElement
     {
         var parent = element.Parent;

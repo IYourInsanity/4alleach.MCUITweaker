@@ -4,4 +4,8 @@
     <RootNamespace>_4alleach.MCRecipeEditor.Models</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
+  </ItemGroup>
+
 </Project>

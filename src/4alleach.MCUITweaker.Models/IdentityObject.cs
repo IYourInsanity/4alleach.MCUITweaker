@@ -1,14 +1,14 @@
-﻿namespace _4alleach.MCRecipeEditor.Models;
-public record IdentityObject
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+
+namespace _4alleach.MCRecipeEditor.Models;
+
+public abstract partial class IdentityObject : ObservableObject
 {
-    public Guid ID
-    {
-        get;
-        init;
-    }
+    [ObservableProperty]
+    private Guid id; 
 
     protected IdentityObject()
     {
-        ID = Guid.NewGuid();
+        Id = Guid.NewGuid();
     }
 }

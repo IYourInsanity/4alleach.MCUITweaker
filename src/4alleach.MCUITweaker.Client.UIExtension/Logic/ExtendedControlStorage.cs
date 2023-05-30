@@ -37,21 +37,23 @@ internal sealed class ExtendedControlStorage<TExtendedControl> : IExtendedContro
         }
     }
 
-    public void Show<VExtendedControl>() where VExtendedControl : TExtendedControl
+    public void Show<VExtendedControl>(params object[]? args) where VExtendedControl : TExtendedControl
     {
         var control = storage[typeof(VExtendedControl)];
         var uiControl = control.Picker.GetHost();
 
         var children = container.Children;
 
-        if(children.Contains(uiControl) == true)
+        control.Picker.SetArguments(args);
+
+        if (children.Contains(uiControl) == true)
         {
             return;
         }
 
         container.Children.Add(uiControl);
 
-        if (current != null)
+        if (current != null && current != control)
         {
             container.Children.Remove(current.Picker.GetHost());
         }

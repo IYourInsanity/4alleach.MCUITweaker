@@ -41,7 +41,7 @@ internal sealed class MenuControlBusinessModel : DefaultBusinessModel
             return;
         }
 
-        projectService?.CreateRecipeProject(selectedFileProject.ID, NEW_RECIPE);
+        projectService?.CreateRecipeProject(selectedFileProject.Id, NEW_RECIPE);
     }
 
     public override void Dispose()

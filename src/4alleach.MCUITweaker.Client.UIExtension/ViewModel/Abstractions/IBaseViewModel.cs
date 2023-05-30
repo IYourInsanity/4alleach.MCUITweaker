@@ -10,5 +10,7 @@ public interface IBaseViewModel
 
     void SetParentViewModel<TViewModel>(TViewModel? parent) where TViewModel : class, IBaseViewModel;
 
+    void SetArguments(params object[]? args);
+
     TFrameworkElement FindElement<TFrameworkElement>(string name) where TFrameworkElement : FrameworkElement;
 }

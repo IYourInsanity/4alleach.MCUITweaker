@@ -15,6 +15,8 @@ public interface IExtendedPicker<TViewModel> where TViewModel : class, IBaseView
     void SetParentViewModel<TExtendedViewModel>(TExtendedViewModel? parent) 
         where TExtendedViewModel : class, TViewModel;
 
+    void SetArguments(params object[]? args);
+
     TElement? GetParentElement<TElement>() where TElement : FrameworkElement;
 
     TElement FindElement<TElement>(string name) where TElement : FrameworkElement;

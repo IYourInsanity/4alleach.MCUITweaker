@@ -59,7 +59,7 @@ public sealed partial class MenuControlViewModel : ControlViewModel<IExtendedWin
             }
             else
             {
-                storage?.Show<ShapedCraftControl>();
+                storage?.Show<ShapedCraftControl>(value);
             }
         }
     }

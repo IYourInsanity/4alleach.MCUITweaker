@@ -1,6 +1,7 @@
 ﻿using _4alleach.MCRecipeEditor.Client.UIExtension.UserControl;
 using _4alleach.MCRecipeEditor.Client.ViewModels.Controls;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace _4alleach.MCRecipeEditor.Client.Views.Controls;
 
@@ -46,6 +47,7 @@ public partial class MenuControl : ExtendedControl
     {
         if (sender is TextBox textBox)
         {
+            Keyboard.ClearFocus();
             textBox.IsHitTestVisible = false;
         }
     }

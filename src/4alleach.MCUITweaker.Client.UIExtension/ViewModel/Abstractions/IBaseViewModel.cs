@@ -4,6 +4,8 @@ namespace _4alleach.MCRecipeEditor.Client.UIExtension.ViewModel.Abstractions;
 
 public interface IBaseViewModel
 {
+    bool IsInitialized { get; }
+
     void Initialize();
 
     void UpdateVisibility(bool state);

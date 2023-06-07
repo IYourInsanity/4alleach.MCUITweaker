@@ -30,7 +30,8 @@ public class ExtendedControl : System.Windows.Controls.UserControl, IExtendedCon
         {
             var context = control.Picker.GetViewModel();
 
-            if (context is IControlViewModel viewModel)
+            if (context is IControlViewModel viewModel && 
+                viewModel.IsInitialized == false)
             {
                 viewModel.SetControl(control);
                 viewModel.Initialize();

@@ -38,7 +38,6 @@
                 <ColumnDefinition Width="240"/>
                 <ColumnDefinition Width="240"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="200"/>
             </Grid.ColumnDefinitions>
 
             <Rectangle Grid.Column="0"
@@ -146,14 +145,7 @@
                   Margin="0,4,0,4">
 
             </Grid>
-
-            <StackPanel Grid.Column="3"
-                        Orientation="Vertical"
-                        Background="{StaticResource Dark2Brush}"
-                        Margin="0,4,4,4">
-
-            </StackPanel>
-
+            
         </Grid>
         
     </Grid>

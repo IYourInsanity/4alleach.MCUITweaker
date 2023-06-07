@@ -3,7 +3,7 @@ using _4alleach.MCRecipeEditor.Client.Abstractions.ViewModels;
 using _4alleach.MCRecipeEditor.Client.BusinessModels;
 using _4alleach.MCRecipeEditor.Client.Extensions;
 using _4alleach.MCRecipeEditor.Client.UIExtension.ViewModel.Abstractions;
-using _4alleach.MCRecipeEditor.Client.Views.Controls.CraftTweakerMechanics;
+using _4alleach.MCRecipeEditor.Client.Views.Controls.CraftTweakMechanics;
 using _4alleach.MCRecipeEditor.Models.Services.Project;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -55,11 +55,11 @@ public sealed partial class MenuControlViewModel : ControlViewModel<IExtendedWin
 
             if(value == null)
             {
-                storage?.Hide<ShapedCraftControl>();
+                HideLatestControl();
             }
             else
             {
-                storage?.Show<ShapedCraftControl>(value);
+                ShowControl<MainCraftControl>(value);
             }
         }
     }
@@ -110,6 +110,6 @@ public sealed partial class MenuControlViewModel : ControlViewModel<IExtendedWin
 
         businessModel?.Initialize();
 
-        storage?.Register<ShapedCraftControl>(control!);
+        RegisterControl<MainCraftControl>(control!);
     }
 }

@@ -11,6 +11,9 @@ public abstract partial class BaseViewModel : ObservableObject, IBaseViewModel
     [ObservableProperty]
     protected bool isVisible;
 
+    [ObservableProperty]
+    protected bool isInitialized;
+
     protected BaseViewModel()
     {
         Id = Guid.NewGuid();

@@ -9,6 +9,8 @@ namespace _4alleach.MCRecipeEditor.Client.UIExtension.ViewModel.Abstractions;
 public abstract partial class ControlViewModel<TExtendedWindowViewModel> : BaseViewModel, IControlViewModel
     where TExtendedWindowViewModel : class, IWindowViewModel
 {
+    private readonly IExtendedControlStorage<IExtendedControl>? storage;
+
     protected TExtendedWindowViewModel? window;
 
     protected IExtendedControl? control;
@@ -16,8 +18,6 @@ public abstract partial class ControlViewModel<TExtendedWindowViewModel> : BaseV
     protected IControlViewModel? parent;
 
     protected IEnumerable<IControlViewModel>? children;
-
-    protected IExtendedControlStorage<IExtendedControl>? storage;
 
     protected string ControlName => control?.Name ?? string.Empty;
 
@@ -52,6 +52,8 @@ public abstract partial class ControlViewModel<TExtendedWindowViewModel> : BaseV
         {
             throw new NotImplementedException();
         }
+
+        IsInitialized = true;
     }
 
     public void SetControl<TControl>(TControl control) where TControl : IExtendedControl
@@ -89,7 +91,7 @@ public abstract partial class ControlViewModel<TExtendedWindowViewModel> : BaseV
         return control!.Picker.FindElement<TFrameworkElement>(name);
     }
 
-    public void RegisterControl<VExtendedControl>(VExtendedControl? parent = default) where VExtendedControl : IExtendedControl
+    public void RegisterControl<VExtendedControl>(IExtendedControl? parent = default) where VExtendedControl : IExtendedControl
     {
         storage?.Register<VExtendedControl>(parent);
     }
@@ -99,13 +101,18 @@ public abstract partial class ControlViewModel<TExtendedWindowViewModel> : BaseV
         storage?.Unregister<VExtendedControl>();
     }
 
-    public void ShowControl<VExtendedControl>() where VExtendedControl : IExtendedControl
+    public void ShowControl<VExtendedControl>(params object[]? args) where VExtendedControl : IExtendedControl
     {
-        storage?.Show<VExtendedControl>();
+        storage?.Show<VExtendedControl>(args);
     }
 
     public void HideControl<VExtendedControl>() where VExtendedControl : IExtendedControl
     {
         storage?.Hide<VExtendedControl>();
+    }
+
+    public void HideLatestControl()
+    {
+        storage?.HideLatest();
     }
 }

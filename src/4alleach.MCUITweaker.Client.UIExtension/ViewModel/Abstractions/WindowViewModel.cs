@@ -38,19 +38,24 @@ public abstract partial class WindowViewModel : BaseViewModel, IWindowViewModel
         throw new NotImplementedException();
     }
 
-    public void RegisterControl<VExtendedControl>(VExtendedControl? parent = default) where VExtendedControl : IExtendedControl
+    public void RegisterControl<VExtendedControl>(IExtendedControl? parent = default) where VExtendedControl : IExtendedControl
     {
         storage.Register<VExtendedControl>(parent);
     }
 
-    public void ShowControl<VExtendedControl>() where VExtendedControl : IExtendedControl
+    public void ShowControl<VExtendedControl>(params object[]? args) where VExtendedControl : IExtendedControl
     {
-        storage.Show<VExtendedControl>();
+        storage.Show<VExtendedControl>(args);
     }
 
     public void HideControl<VExtendedControl>() where VExtendedControl : IExtendedControl
     {
         storage.Hide<VExtendedControl>();
+    }
+
+    public void HideLatestControl()
+    {
+        storage.HideLatest();
     }
 
     public void UnregisterControl<VExtendedControl>() where VExtendedControl : IExtendedControl

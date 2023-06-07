@@ -11,4 +11,6 @@ public interface IExtendedControlStorage<TExtendedControl>
     void Show<VExtendedControl>(params object[]? args) where VExtendedControl : TExtendedControl;
 
     void Hide<VExtendedControl>() where VExtendedControl : TExtendedControl;
+
+    void HideLatest();
 }

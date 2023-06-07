@@ -71,6 +71,20 @@ internal sealed class ExtendedControlStorage<TExtendedControl> : IExtendedContro
         current = null;
     }
 
+    public void HideLatest()
+    {
+        if(current == null)
+        {
+            return;
+        }
+
+        var uiControl = current.Picker.GetHost();
+
+        container.Children.Remove(uiControl);
+
+        current = null;
+    }
+
     public void Unregister<VExtendedControl>() where VExtendedControl : TExtendedControl
     {
         var control = storage[typeof(VExtendedControl)];

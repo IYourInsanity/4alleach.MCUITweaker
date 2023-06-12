@@ -1,14 +1,14 @@
-﻿using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.Logic;
+﻿using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions;
+using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.Logic;
 using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.ViewModel;
 using _4alleach.MCRecipeEditor.Client.UIExtension.Logic;
-using _4alleach.MCRecipeEditor.Client.UIExtension.Window.Abstractions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace _4alleach.MCRecipeEditor.Client.UIExtension.Window;
 
-public class ExtendedWindow : System.Windows.Window, IExtendedWindow
+public class ExtendedWindow : System.Windows.Window, IExtendedFrameworkElement
 {
     public Guid VID { get; }
 
@@ -16,14 +16,14 @@ public class ExtendedWindow : System.Windows.Window, IExtendedWindow
 
     public FrameworkElement Value => this;
 
-    public IElementProvider<IExtendedWindow, IWindowViewModel> Provider { get; }
+    public IElementProvider<IExtendedFrameworkElement, IExtendedFrameworkElementViewModel> Provider { get; }
 
     public UIElementCollection Children => throw new NotImplementedException();
 
     protected ExtendedWindow(string name) : base()
     {
         Loaded += WindowLoaded;
-        Provider = new ElementProvider<IExtendedWindow, IWindowViewModel>(this);
+        Provider = new ElementProvider<IExtendedFrameworkElement, IExtendedFrameworkElementViewModel>(this);
 
         VID = Guid.NewGuid();
         Name = name;
@@ -33,9 +33,9 @@ public class ExtendedWindow : System.Windows.Window, IExtendedWindow
     {
         if (sender is ExtendedWindow control)
         {
-            if (control.Provider.ViewModel is IWindowViewModel viewModel)
+            if (control.Provider.ViewModel is IExtendedFrameworkElementViewModel viewModel)
             {
-                viewModel.SetWindow(this);
+                viewModel.SetElement(this);
                 viewModel.Initialize();
                 viewModel.UpdateVisibility(true);
             }

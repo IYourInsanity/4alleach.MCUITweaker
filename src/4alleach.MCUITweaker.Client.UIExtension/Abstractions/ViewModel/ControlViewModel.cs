@@ -1,20 +1,19 @@
-﻿using _4alleach.MCRecipeEditor.Client.UIExtension.UserControl.Abstractions;
-using _4alleach.MCRecipeEditor.Client.UIExtension.ViewModel.Abstractions;
+﻿using _4alleach.MCRecipeEditor.Client.UIExtension.ViewModel.Abstractions;
 using _4alleach.MCRecipeEditor.Client.UIExtension.Window;
-using _4alleach.MCRecipeEditor.Client.UIExtension.Window.Abstractions;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.ViewModel;
 
-public abstract partial class ControlViewModel : BaseViewModel, IControlViewModel
+public abstract partial class ControlViewModel : BaseViewModel, IExtendedFrameworkElementViewModel
 {
-    protected IExtendedWindow? root;
+    protected IExtendedFrameworkElement? root;
 
-    protected IExtendedControl? control;
+    protected IExtendedFrameworkElement? control;
 
-    protected IExtendedControl? parent;
+    protected IExtendedFrameworkElement? parent;
 
-    protected IEnumerable<IControlViewModel>? children;
+    protected IEnumerable<IExtendedFrameworkElementViewModel>? children;
 
     protected string ControlName => control?.Name ?? string.Empty;
 
@@ -45,22 +44,10 @@ public abstract partial class ControlViewModel : BaseViewModel, IControlViewMode
         IsInitialized = true;
     }
 
-    public void SetControl<TControl>(TControl control)
-        where TControl : IExtendedControl
-    {
-        this.control = control;
-    }
-
-    public TControl? GetControl<TControl>()
-        where TControl : class, IExtendedControl
-    {
-        return control as TControl;
-    }
-
     public override void SetParent<TParentElement>(TParentElement? parent)
         where TParentElement : class
     {
-        if (parent is IExtendedControl validParent)
+        if (parent is IExtendedFrameworkElement validParent)
         {
             this.parent = validParent;
         }
@@ -69,7 +56,7 @@ public abstract partial class ControlViewModel : BaseViewModel, IControlViewMode
     }
 
     public TViewModel? GetChildViewModel<TViewModel>()
-        where TViewModel : class, IControlViewModel
+        where TViewModel : class, IExtendedFrameworkElementViewModel
     {
         if (children == null) return default;
 
@@ -77,9 +64,9 @@ public abstract partial class ControlViewModel : BaseViewModel, IControlViewMode
     }
 
     public bool SetChildViewModel<TViewModel>(TViewModel model)
-        where TViewModel : class, IControlViewModel
+        where TViewModel : class, IExtendedFrameworkElementViewModel
     {
-        children ??= new List<IControlViewModel>();
+        children ??= new List<IExtendedFrameworkElementViewModel>();
         children = children.Append(model);
 
         return true;
@@ -94,5 +81,22 @@ public abstract partial class ControlViewModel : BaseViewModel, IControlViewMode
         }
 
         return control.Provider.FindElement<TFrameworkElement>(name);
+    }
+
+    public void SetElement<TExtendedElement>(TExtendedElement control)
+        where TExtendedElement : class, IExtendedFrameworkElement
+    {
+        this.control = control;
+    }
+
+    public TExtendedElement? GetElement<TExtendedElement>()
+        where TExtendedElement : class, IExtendedFrameworkElement
+    {
+        return this.control as TExtendedElement;
+    }
+
+    public void KeyPress(Key key)
+    {
+        throw new NotImplementedException();
     }
 }

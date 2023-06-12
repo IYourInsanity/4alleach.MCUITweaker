@@ -1,29 +1,16 @@
 ﻿using _4alleach.MCRecipeEditor.Client.UIExtension.ViewModel.Abstractions;
-using _4alleach.MCRecipeEditor.Client.UIExtension.Window.Abstractions;
 using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.ViewModel;
 
-public abstract partial class WindowViewModel : BaseViewModel, IWindowViewModel
+public abstract partial class WindowViewModel : BaseViewModel, IExtendedFrameworkElementViewModel
 {
-    protected IExtendedWindow? window;
+    protected IExtendedFrameworkElement? window;
 
     public WindowViewModel(Grid container) : base()
     {
 
-    }
-
-    public void SetWindow<TExtendedWindow>(TExtendedWindow window)
-        where TExtendedWindow : IExtendedWindow
-    {
-        this.window = window;
-    }
-
-    public TExtendedWindow? GetWindow<TExtendedWindow>()
-        where TExtendedWindow : class, IExtendedWindow
-    {
-        return window as TExtendedWindow;
     }
 
     public override TFrameworkElement? FindElement<TFrameworkElement>(string name)
@@ -38,6 +25,30 @@ public abstract partial class WindowViewModel : BaseViewModel, IWindowViewModel
     }
 
     public void KeyPress(Key key)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SetElement<TExtendedElement>(TExtendedElement window)
+        where TExtendedElement : class, IExtendedFrameworkElement
+    {
+        this.window = window;
+    }
+
+    public TExtendedElement? GetElement<TExtendedElement>()
+        where TExtendedElement : class, IExtendedFrameworkElement
+    {
+        return window as TExtendedElement;
+    }
+
+    public bool SetChildViewModel<TViewModel>(TViewModel model)
+        where TViewModel : class, IExtendedFrameworkElementViewModel
+    {
+        throw new NotImplementedException();
+    }
+
+    public TViewModel? GetChildViewModel<TViewModel>()
+        where TViewModel : class, IExtendedFrameworkElementViewModel
     {
         throw new NotImplementedException();
     }

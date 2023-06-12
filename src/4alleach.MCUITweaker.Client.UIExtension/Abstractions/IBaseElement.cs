@@ -4,7 +4,7 @@ using System.Windows;
 
 namespace _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions;
 
-public interface IBaseElement<TElement, TViewModel> : IHostControl
+public interface IBaseElement<TElement, TViewModel>
     where TElement : class, IBaseElement<TElement, TViewModel>
     where TViewModel : class, IBaseViewModel
 {

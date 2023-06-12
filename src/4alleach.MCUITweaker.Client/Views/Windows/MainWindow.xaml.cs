@@ -9,6 +9,6 @@ public partial class MainWindow : ExtendedWindow
     {
         InitializeComponent();
 
-        DataContext = new MainWindowViewModel(Container);
+        DataContext = new MainWindowViewModel(Container, Provider);
     }
 }

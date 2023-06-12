@@ -1,17 +1,19 @@
 ﻿using _4alleach.MCRecipeEditor.Client.Abstractions.Services;
-using _4alleach.MCRecipeEditor.Client.Abstractions.ViewModels;
 using _4alleach.MCRecipeEditor.Client.BusinessModels;
 using _4alleach.MCRecipeEditor.Client.Extensions;
-using _4alleach.MCRecipeEditor.Client.UIExtension.ViewModel.Abstractions;
+using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.Logic;
+using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions;
+using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.ViewModel;
 using _4alleach.MCRecipeEditor.Client.Views.Controls.CraftTweakMechanics;
 using _4alleach.MCRecipeEditor.Models.Services.Project;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
+using _4alleach.MCRecipeEditor.Client.ViewModels.Windows;
 
 namespace _4alleach.MCRecipeEditor.Client.ViewModels.Controls;
-public sealed partial class MenuControlViewModel : ControlViewModel<IExtendedWindowViewModel>
+public sealed partial class MenuControlViewModel : ControlViewModel
 {
     private MenuControlBusinessModel? businessModel;
 
@@ -55,11 +57,11 @@ public sealed partial class MenuControlViewModel : ControlViewModel<IExtendedWin
 
             if(value == null)
             {
-                HideLatestControl();
+                provider.HideLast();
             }
             else
             {
-                ShowControl<MainCraftControl>(value);
+                provider.Show<MainCraftControl>(value);
             }
         }
     }
@@ -88,7 +90,7 @@ public sealed partial class MenuControlViewModel : ControlViewModel<IExtendedWin
         OnPropertyChanged(nameof(SelectedRecipeProject));
     }
 
-    public MenuControlViewModel(Grid container) : base(container)
+    public MenuControlViewModel(Grid container, IElementProvider<IExtendedFrameworkElement, IExtendedFrameworkElementViewModel> provider) : base(container, provider)
     {
         fileCollection = new ObservableCollection<FileProject>();
         recipeCollection = new ObservableCollection<RecipeProject>();
@@ -98,7 +100,8 @@ public sealed partial class MenuControlViewModel : ControlViewModel<IExtendedWin
     {
         base.Initialize();
 
-        var generatorService = window?.GetService<IBusinessModelConstructService>();
+        var generatorService = root?.Provider?.GetViewModel<MainWindowViewModel>()?
+                                              .GetService<IBusinessModelConstructService>();
 
         if (generatorService == null)
         {
@@ -110,6 +113,6 @@ public sealed partial class MenuControlViewModel : ControlViewModel<IExtendedWin
 
         businessModel?.Initialize();
 
-        RegisterControl<MainCraftControl>(control!);
+        provider.Register<MainCraftControl>(control);
     }
 }

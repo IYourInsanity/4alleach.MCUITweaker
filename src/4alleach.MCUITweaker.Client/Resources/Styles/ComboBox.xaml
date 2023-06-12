@@ -36,13 +36,13 @@
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="true">
-                <Setter Property="Stroke" Value="{StaticResource ActiveBorder0Color}" TargetName="_RIGHTRECT"/>
-                <Setter Property="Stroke" Value="{StaticResource ActiveBorder0Color}" TargetName="_LEFTRECT"/>
-                <Setter Property="Fill" Value="{StaticResource ActiveBorder0Color}" TargetName="Arrow"/>
+                <Setter Property="Stroke" Value="{DynamicResource ActiveBorder0Brush}" TargetName="_RIGHTRECT"/>
+                <Setter Property="Stroke" Value="{DynamicResource ActiveBorder0Brush}" TargetName="_LEFTRECT"/>
+                <Setter Property="Fill" Value="{DynamicResource BlueTransparent30Brush}" TargetName="Arrow"/>
             </Trigger>
             <Trigger Property="IsChecked" Value="true">
-                <Setter Property="Stroke" Value="{StaticResource ActiveBorder0Color}" TargetName="_RIGHTRECT"/>
-                <Setter Property="Stroke" Value="{StaticResource ActiveBorder0Color}" TargetName="_LEFTRECT"/>
+                <Setter Property="Stroke" Value="{DynamicResource ActiveBorder0Brush}" TargetName="_RIGHTRECT"/>
+                <Setter Property="Stroke" Value="{DynamicResource ActiveBorder0Brush}" TargetName="_LEFTRECT"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -54,7 +54,7 @@
         </Border>
     </ControlTemplate>
 
-    <Style x:Key="ComboBoxStyle_Dark_0" TargetType="{x:Type ComboBox}">
+    <Style x:Key="ExtendedComboBox" TargetType="{x:Type ComboBox}">
         <Setter Property="SnapsToDevicePixels" Value="true"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -70,7 +70,7 @@
                         <ContentPresenter HorizontalAlignment="Left" 
                                           Margin="3,3,23,3" 
                                           x:Name="ContentSite" 
-                                          VerticalAlignment="Center" 
+                                          VerticalAlignment="Center"
                                           Content="{TemplateBinding SelectionBoxItem}" 
                                           ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" 
                                           ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" 
@@ -104,16 +104,19 @@
                                         Background="{StaticResource Dark0Brush}" 
                                         BorderBrush="{StaticResource Dark2Brush}" 
                                         BorderThickness="1"/>
-
+                                
                                 <ScrollViewer Margin="4,6,4,6" 
                                               SnapsToDevicePixels="True" 
                                               HorizontalScrollBarVisibility="Auto" 
                                               VerticalScrollBarVisibility="Auto" 
                                               CanContentScroll="True"
-                                              Style="{StaticResource ScrollViewerDarkStyle}">
+                                              Style="{DynamicResource ScrollViewerDarkStyle}">
 
                                     <StackPanel IsItemsHost="True"
-                                                KeyboardNavigation.DirectionalNavigation="Contained"/>
+                                                OverridesDefaultStyle="True"
+                                                KeyboardNavigation.DirectionalNavigation="Contained">
+                                        
+                                    </StackPanel>
 
                                 </ScrollViewer>
                             </Grid>

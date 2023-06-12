@@ -33,8 +33,10 @@
                       ItemsSource="{Binding RecipeTypeList}"
                       DisplayMemberPath="Item2" 
                       SelectedValuePath="Item1"
+                      Foreground="{StaticResource WhiteBrush}"
+                      IsReadOnly="True"
                       SelectedValue="{Binding Path=RecipeType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                      Style="{StaticResource }"/>
+                      Style="{StaticResource ExtendedComboBox}"/>
 
             <Grid Grid.Row="1"
                   Name="Container"

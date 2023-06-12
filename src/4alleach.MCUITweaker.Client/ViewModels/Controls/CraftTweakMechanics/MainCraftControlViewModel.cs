@@ -1,6 +1,7 @@
-﻿using _4alleach.MCRecipeEditor.Client.Abstractions.ViewModels;
+﻿using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.Logic;
+using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions;
+using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.ViewModel;
 using _4alleach.MCRecipeEditor.Client.UIExtension.Extensions;
-using _4alleach.MCRecipeEditor.Client.UIExtension.ViewModel.Abstractions;
 using _4alleach.MCRecipeEditor.Client.Views.Controls.CraftTweakMechanics.Recipes;
 using _4alleach.MCRecipeEditor.Models.CraftTweak.Enumerable;
 using _4alleach.MCRecipeEditor.Models.Services.Project;
@@ -10,7 +11,7 @@ using System.Windows.Controls;
 
 namespace _4alleach.MCRecipeEditor.Client.ViewModels.Controls.CraftTweakMechanics;
 
-internal sealed partial class MainCraftControlViewModel : ControlViewModel<IExtendedWindowViewModel>
+internal sealed partial class MainCraftControlViewModel : ControlViewModel
 {
     [ObservableProperty]
     private RecipeProject? recipe;
@@ -36,7 +37,7 @@ internal sealed partial class MainCraftControlViewModel : ControlViewModel<IExte
         }
     }
 
-    public MainCraftControlViewModel(Grid container) : base(container)
+    public MainCraftControlViewModel(Grid container, IElementProvider<IExtendedFrameworkElement, IExtendedFrameworkElementViewModel> provider) : base(container, provider)
     {
         recipeType = RecipeType.None;
     }
@@ -56,8 +57,8 @@ internal sealed partial class MainCraftControlViewModel : ControlViewModel<IExte
 
         RecipeTypeList = new ObservableCollection<Tuple<RecipeType, string>>(recipeTypeList);
 
-        RegisterControl<AddShapedCraftControl>();
-        RegisterControl<RemoveShapedCraftControl>();
+        provider.Register<AddShapedCraftControl>(control);
+        provider.Register<RemoveShapedCraftControl>(control);
     }
 
     public override void SetArguments(params object[]? args)
@@ -74,11 +75,11 @@ internal sealed partial class MainCraftControlViewModel : ControlViewModel<IExte
     {
         switch(type)
         {
-            case RecipeType.None: HideLatestControl();
+            case RecipeType.None: provider.HideLast();
                 break;
-            case RecipeType.AddShaped: ShowControl<AddShapedCraftControl>();
+            case RecipeType.AddShaped: provider.Show<AddShapedCraftControl>();
                 break;
-            case RecipeType.RemoveShaped: ShowControl<RemoveShapedCraftControl>();
+            case RecipeType.RemoveShaped: provider.Show<RemoveShapedCraftControl>();
                break;
         }
     }

@@ -1,4 +1,6 @@
-﻿using _4alleach.MCRecipeEditor.Client.UIExtension.ViewModel.Abstractions;
+﻿using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.Logic;
+using _4alleach.MCRecipeEditor.Client.UIExtension.Logic;
+using _4alleach.MCRecipeEditor.Client.UIExtension.ViewModel.Abstractions;
 using _4alleach.MCRecipeEditor.Client.UIExtension.Window;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -17,14 +19,16 @@ public abstract partial class ControlViewModel : BaseViewModel, IExtendedFramewo
 
     protected string ControlName => control?.Name ?? string.Empty;
 
-    protected ControlViewModel() : base()
+    protected ControlViewModel(IElementProvider<IExtendedFrameworkElement, IExtendedFrameworkElementViewModel> provider) : base(provider)
     {
         parent = control;
     }
 
-    protected ControlViewModel(Grid container) : base()
+    protected ControlViewModel(Panel container, IElementProvider<IExtendedFrameworkElement, IExtendedFrameworkElementViewModel> provider) : base(provider)
     {
         parent = control;
+
+        provider.Container = new ElementContainer(container);
     }
 
     public override void Initialize()
@@ -50,6 +54,7 @@ public abstract partial class ControlViewModel : BaseViewModel, IExtendedFramewo
         if (parent is IExtendedFrameworkElement validParent)
         {
             this.parent = validParent;
+            return;
         }
 
         throw new NotImplementedException();

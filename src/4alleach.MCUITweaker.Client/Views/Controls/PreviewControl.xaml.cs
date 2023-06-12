@@ -9,6 +9,6 @@ public partial class PreviewControl : ExtendedControl
     {
         InitializeComponent();
 
-        DataContext = new PreviewControlViewModel();
+        DataContext = new PreviewControlViewModel(Provider);
     }
 }

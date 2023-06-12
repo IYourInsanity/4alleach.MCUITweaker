@@ -9,6 +9,8 @@ public interface IElementProvider<TElement, TViewModel> : IElementController<TEl
 {
     FrameworkElement Host { get; }
 
+    IElementContainer? Container { get; internal set; }
+
     Type HostType { get; }
 
     TViewModel? ViewModel { get; }

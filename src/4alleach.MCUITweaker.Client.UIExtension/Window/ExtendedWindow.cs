@@ -3,7 +3,6 @@ using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.Logic;
 using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.ViewModel;
 using _4alleach.MCRecipeEditor.Client.UIExtension.Logic;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace _4alleach.MCRecipeEditor.Client.UIExtension.Window;
@@ -18,8 +17,6 @@ public class ExtendedWindow : System.Windows.Window, IExtendedFrameworkElement
 
     public IElementProvider<IExtendedFrameworkElement, IExtendedFrameworkElementViewModel> Provider { get; }
 
-    public UIElementCollection Children => throw new NotImplementedException();
-
     protected ExtendedWindow(string name) : base()
     {
         Loaded += WindowLoaded;
@@ -33,6 +30,8 @@ public class ExtendedWindow : System.Windows.Window, IExtendedFrameworkElement
     {
         if (sender is ExtendedWindow control)
         {
+            control.Provider.Initialize();
+
             if (control.Provider.ViewModel is IExtendedFrameworkElementViewModel viewModel)
             {
                 viewModel.SetElement(this);

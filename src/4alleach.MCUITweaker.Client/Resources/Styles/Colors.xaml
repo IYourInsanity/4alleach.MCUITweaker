@@ -20,7 +20,7 @@
 
     <Color x:Key="ActiveBorder0Color">#FF7AC0FF</Color>
 
-    <SolidColorBrush x:Key="ActiveBorder0Brush"/>
+    <SolidColorBrush x:Key="ActiveBorder0Brush" Color="{StaticResource ActiveBorder0Color}"/>
 
     <Color x:Key="Dark0">#FF1E1E1E</Color>
     <Color x:Key="Dark1">#FF2A2A2C</Color>

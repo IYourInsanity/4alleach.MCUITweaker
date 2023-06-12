@@ -1,5 +1,6 @@
 ﻿using _4alleach.MCRecipeEditor.Client.UIExtension.UserControl;
 using _4alleach.MCRecipeEditor.Client.ViewModels.Controls;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -11,10 +12,10 @@ public partial class MenuControl : ExtendedControl
     {
         InitializeComponent();
 
-        DataContext = new MenuControlViewModel(Container);
+        DataContext = new MenuControlViewModel(Container, Provider);
     }
 
-    private void GridMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    private void GridMouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
         if(e.ClickCount > 1)
         {
@@ -30,14 +31,14 @@ public partial class MenuControl : ExtendedControl
         }
     }
 
-    private void TextBoxLostFocus(object sender, System.Windows.RoutedEventArgs e)
+    private void TextBoxLostFocus(object sender, RoutedEventArgs e)
     {
         DisableTextBox(sender);
     }
 
-    private void TextBoxKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+    private void TextBoxKeyDown(object sender, KeyEventArgs e)
     {
-        if(e.Key == System.Windows.Input.Key.Enter)
+        if(e.Key == Key.Enter)
         {
             DisableTextBox(sender);
         }

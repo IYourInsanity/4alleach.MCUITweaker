@@ -15,7 +15,7 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <ScrollContentPresenter Grid.Column="0" 
-                                                Grid.Row="0" 
+                                                Grid.Row="0"
                                                 Margin="{TemplateBinding Padding}" 
                                                 Content="{TemplateBinding Content}" 
                                                 ContentTemplate="{TemplateBinding ContentTemplate}" 

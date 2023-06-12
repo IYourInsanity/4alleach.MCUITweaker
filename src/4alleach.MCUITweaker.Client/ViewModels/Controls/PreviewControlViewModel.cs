@@ -1,16 +1,18 @@
 ﻿using _4alleach.MCRecipeEditor.Client.Abstractions.Services;
-using _4alleach.MCRecipeEditor.Client.Abstractions.ViewModels;
 using _4alleach.MCRecipeEditor.Client.BusinessModels;
-using _4alleach.MCRecipeEditor.Client.UIExtension.ViewModel.Abstractions;
+using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.Logic;
+using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions;
+using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.ViewModel;
 using _4alleach.MCRecipeEditor.Client.Views.Controls;
 using _4alleach.MCRecipeEditor.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using _4alleach.MCRecipeEditor.Client.ViewModels.Windows;
 
 namespace _4alleach.MCRecipeEditor.Client.ViewModels.Controls;
 
-public sealed partial class PreviewControlViewModel : ControlViewModel<IExtendedWindowViewModel>
+public sealed partial class PreviewControlViewModel : ControlViewModel
 {
     private PreviewControlBusinessModel? businessModel;
 
@@ -22,7 +24,7 @@ public sealed partial class PreviewControlViewModel : ControlViewModel<IExtended
         get => OpenRecentCollection.Count > 0;
     }
 
-    public PreviewControlViewModel() : base()
+    public PreviewControlViewModel(IElementProvider<IExtendedFrameworkElement, IExtendedFrameworkElementViewModel> provider) : base(provider)
     {
         openRecentCollection = new ObservableCollection<RecentProjectInfo>();
     }
@@ -31,7 +33,8 @@ public sealed partial class PreviewControlViewModel : ControlViewModel<IExtended
     {
         base.Initialize();
 
-        var generatorService = window?.GetService<IBusinessModelConstructService>();
+        var generatorService = root?.Provider.GetViewModel<MainWindowViewModel>()?
+                                             .GetService<IBusinessModelConstructService>();
 
         if(generatorService == null)
         {
@@ -53,7 +56,7 @@ public sealed partial class PreviewControlViewModel : ControlViewModel<IExtended
     {
         businessModel?.NewProject();
 
-        window?.ShowControl<MenuControl>();
+        root?.Provider?.Show<MenuControl>();
     }
 
     [RelayCommand]
@@ -61,7 +64,7 @@ public sealed partial class PreviewControlViewModel : ControlViewModel<IExtended
     {
         businessModel?.LoadProject();
 
-        window?.ShowControl<MenuControl>();
+        root?.Provider?.Show<MenuControl>();
     }
 }
 

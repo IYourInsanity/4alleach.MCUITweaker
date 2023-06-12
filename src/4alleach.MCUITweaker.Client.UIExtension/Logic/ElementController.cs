@@ -12,12 +12,20 @@ internal sealed class ElementController<TElement, TViewModel> : IElementControll
 
     private readonly IElementStorage<TElement, TViewModel> storage;
 
+    private IElementContainer? container;
+
     private TElement? visibleControl;
 
     internal ElementController(TElement host)
     {
         this.host = host;
+
         storage = new ElementStorage<TElement, TViewModel>();
+    }
+
+    public void Initialize()
+    {
+        container = host.Provider.Container;
     }
 
     public void Show<TExtendedElement>(params object[]? args) 
@@ -32,22 +40,21 @@ internal sealed class ElementController<TElement, TViewModel> : IElementControll
         }
 
         var controlHost = control.Provider.Host;
-        var children = host.Children;
 
         control.Provider.SetArguments(args);
 
-        if (children.Contains(controlHost) == true)
+        if (container?.Contains(controlHost) == true)
         {
             return;
         }
 
-        host.Children.Add(controlHost);
+        container?.TryAdd(controlHost);
 
         if (visibleControl != null && 
             visibleControl.GetType() != control.GetType())
         {
             var currentControlHost = visibleControl?.Provider.Host;
-            children.Remove(currentControlHost);
+            container?.TryRemove(currentControlHost);
         }
 
         visibleControl = control;
@@ -66,7 +73,19 @@ internal sealed class ElementController<TElement, TViewModel> : IElementControll
 
         var controlHost = control.Provider.Host;
 
-        host.Children.Remove(controlHost);
+        container?.TryRemove(controlHost);
+
+        visibleControl = null;
+    }
+
+    public void HideLast()
+    {
+        if(visibleControl == null)
+        {
+            return;
+        }
+
+        container?.TryRemove(visibleControl.Provider.Host);
 
         visibleControl = null;
     }
@@ -74,6 +93,8 @@ internal sealed class ElementController<TElement, TViewModel> : IElementControll
     public void Register<TExtendedElement>(TElement? parent)
         where TExtendedElement : TElement
     {
+        container ??= host.Provider.Container;
+
         storage.Register<TExtendedElement>(parent);
     }
 

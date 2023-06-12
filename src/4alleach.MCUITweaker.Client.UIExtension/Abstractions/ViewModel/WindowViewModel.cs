@@ -1,4 +1,6 @@
-﻿using _4alleach.MCRecipeEditor.Client.UIExtension.ViewModel.Abstractions;
+﻿using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.Logic;
+using _4alleach.MCRecipeEditor.Client.UIExtension.Logic;
+using _4alleach.MCRecipeEditor.Client.UIExtension.ViewModel.Abstractions;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -8,9 +10,9 @@ public abstract partial class WindowViewModel : BaseViewModel, IExtendedFramewor
 {
     protected IExtendedFrameworkElement? window;
 
-    public WindowViewModel(Grid container) : base()
+    public WindowViewModel(Panel container, IElementProvider<IExtendedFrameworkElement, IExtendedFrameworkElementViewModel> provider) : base(provider)
     {
-
+        provider.Container = new ElementContainer(container);
     }
 
     public override TFrameworkElement? FindElement<TFrameworkElement>(string name)

@@ -19,11 +19,18 @@ internal sealed class ElementProvider<TElement, TViewModel> : IElementProvider<T
 
     public TViewModel? ViewModel => host?.DataContext as TViewModel;
 
+    public IElementContainer? Container { get; set; }
+
     internal ElementProvider(TElement host)
     {
         this.host = host.Value;
 
         controller = new ElementController<TElement, TViewModel>(host);
+    }
+
+    public void Initialize()
+    {
+        controller.Initialize();
     }
 
     public TFrameworkElement? FindElement<TFrameworkElement>(string name) 
@@ -96,6 +103,11 @@ internal sealed class ElementProvider<TElement, TViewModel> : IElementProvider<T
         where TExtendedElement : TElement
     {
         controller.Hide<TExtendedElement>();
+    }
+
+    public void HideLast()
+    {
+        controller.HideLast();
     }
 
     public void Register<TExtendedElement>(TElement? parent) 

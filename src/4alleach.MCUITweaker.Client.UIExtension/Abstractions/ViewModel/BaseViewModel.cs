@@ -1,4 +1,6 @@
-﻿using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.ViewModel;
+﻿using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.Logic;
+using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions;
+using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.ViewModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Windows;
 
@@ -15,8 +17,12 @@ public abstract partial class BaseViewModel : ObservableObject, IBaseViewModel
     [ObservableProperty]
     protected bool isInitialized;
 
-    protected BaseViewModel()
+    protected IElementProvider<IExtendedFrameworkElement, IExtendedFrameworkElementViewModel> provider;
+
+    protected BaseViewModel(IElementProvider<IExtendedFrameworkElement, IExtendedFrameworkElementViewModel> provider)
     {
+        this.provider = provider;
+
         Id = Guid.NewGuid();
         IsVisible = false;
     }
@@ -29,12 +35,12 @@ public abstract partial class BaseViewModel : ObservableObject, IBaseViewModel
     public virtual void SetParent<TParentElement>(TParentElement? parent)
         where TParentElement : FrameworkElement
     {
-        throw new NotImplementedException();
+        
     }
 
     public virtual void SetArguments(params object[]? args) 
     { 
-        throw new NotImplementedException();
+        
     }
 
     public void UpdateVisibility(bool state)

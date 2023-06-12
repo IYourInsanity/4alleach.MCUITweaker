@@ -1,5 +1,4 @@
-﻿using _4alleach.MCRecipeEditor.Client.Abstractions.Services;
-using _4alleach.MCRecipeEditor.Client.BusinessModels;
+﻿using _4alleach.MCRecipeEditor.Client.BusinessModels;
 using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.Logic;
 using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions;
 using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.ViewModel;
@@ -9,6 +8,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using _4alleach.MCRecipeEditor.Client.ViewModels.Windows;
+using _4alleach.MCRecipeEditor.Services.Abstractions;
 
 namespace _4alleach.MCRecipeEditor.Client.ViewModels.Controls;
 

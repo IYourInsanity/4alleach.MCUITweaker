@@ -1,20 +1,32 @@
-﻿using _4alleach.MCRecipeEditor.Client.Abstractions.Services;
-using System;
+﻿using _4alleach.MCRecipeEditor.Services.Abstractions;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 
-namespace _4alleach.MCRecipeEditor.Client.Services;
+namespace _4alleach.MCRecipeEditor.Services;
 
-internal sealed class ServiceHub : IServiceHub
+public sealed class ServiceHub : IServiceHub
 {
     private readonly ConcurrentDictionary<Type, IService> storage;
 
-    internal ServiceHub()
+    public static readonly IServiceHub Instance;
+
+    static ServiceHub()
+    {
+        var serviceHub = new ServiceHub();
+
+        serviceHub.Register<IBusinessModelConstructService, BusinessModelConstructService>();
+        serviceHub.Register<IProjectControllerService, ProjectControllerService>();
+
+        serviceHub.Initialize();
+
+        Instance = serviceHub;
+    }
+
+    private ServiceHub()
     {
         storage = new ConcurrentDictionary<Type, IService>();
     }
 
-    public void Initialize()
+    private void Initialize()
     {
         foreach (var service in storage.Values)
         {
@@ -22,7 +34,7 @@ internal sealed class ServiceHub : IServiceHub
         }
     }
 
-    public void Register<TService, TServiceImplementation>() 
+    private void Register<TService, TServiceImplementation>() 
         where TService : IService
         where TServiceImplementation : class, IService
     {
@@ -42,4 +54,6 @@ internal sealed class ServiceHub : IServiceHub
 
         return default;
     }
+
+
 }

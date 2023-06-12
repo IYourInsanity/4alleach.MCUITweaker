@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.33711.374
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4alleach.MCRecipeEditor.Client", "src\4alleach.MCUITweaker.Client\4alleach.MCRecipeEditor.Client.csproj", "{9DF93622-3F20-4130-9AFA-A42F42D9C661}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4alleach.MCRecipeEditor.Client", "src\4alleach.MCRecipeEditor.Client\4alleach.MCRecipeEditor.Client.csproj", "{9DF93622-3F20-4130-9AFA-A42F42D9C661}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assets", "Assets", "{17FC3A8C-E666-4283-B9F6-003787012B42}"
 EndProject
@@ -20,9 +20,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "$solution", "$solution", "{
 		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4alleach.MCRecipeEditor.Client.UIExtension", "src\4alleach.MCUITweaker.Client.UIExtension\4alleach.MCRecipeEditor.Client.UIExtension.csproj", "{D2F1C5B3-0720-4006-B6C1-551215A2ECBF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4alleach.MCRecipeEditor.Client.UIExtension", "src\4alleach.MCRecipeEditor.Client.UIExtension\4alleach.MCRecipeEditor.Client.UIExtension.csproj", "{D2F1C5B3-0720-4006-B6C1-551215A2ECBF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4alleach.MCRecipeEditor.Models", "src\4alleach.MCUITweaker.Models\4alleach.MCRecipeEditor.Models.csproj", "{199A10FA-00E9-4417-9779-4CE62E95E5A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4alleach.MCRecipeEditor.Models", "src\4alleach.MCRecipeEditor.Models\4alleach.MCRecipeEditor.Models.csproj", "{199A10FA-00E9-4417-9779-4CE62E95E5A7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4alleach.MCRecipeEditor.Services", "src\4alleach.MCRecipeEditor.Services\4alleach.MCRecipeEditor.Services.csproj", "{80871950-BF9D-4063-AAB1-438A3CF99422}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +44,10 @@ Global
 		{199A10FA-00E9-4417-9779-4CE62E95E5A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{199A10FA-00E9-4417-9779-4CE62E95E5A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{199A10FA-00E9-4417-9779-4CE62E95E5A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80871950-BF9D-4063-AAB1-438A3CF99422}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80871950-BF9D-4063-AAB1-438A3CF99422}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80871950-BF9D-4063-AAB1-438A3CF99422}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80871950-BF9D-4063-AAB1-438A3CF99422}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

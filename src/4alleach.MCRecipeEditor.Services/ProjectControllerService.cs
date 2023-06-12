@@ -1,7 +1,7 @@
-﻿using _4alleach.MCRecipeEditor.Client.Abstractions.Services;
-using _4alleach.MCRecipeEditor.Models.Services.Project;
+﻿using _4alleach.MCRecipeEditor.Models.Services.Project;
+using _4alleach.MCRecipeEditor.Services.Abstractions;
 
-namespace _4alleach.MCRecipeEditor.Client.Services;
+namespace _4alleach.MCRecipeEditor.Services;
 
 internal sealed class ProjectControllerService : IProjectControllerService
 {

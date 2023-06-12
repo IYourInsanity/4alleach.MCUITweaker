@@ -14,8 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\4alleach.MCUITweaker.Client.UIExtension\4alleach.MCRecipeEditor.Client.UIExtension.csproj" />
-    <ProjectReference Include="..\4alleach.MCUITweaker.Models\4alleach.MCRecipeEditor.Models.csproj" />
+    <ProjectReference Include="..\4alleach.MCRecipeEditor.Client.UIExtension\4alleach.MCRecipeEditor.Client.UIExtension.csproj" />
+    <ProjectReference Include="..\4alleach.MCRecipeEditor.Services\4alleach.MCRecipeEditor.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,8 +1,8 @@
 ﻿using _4alleach.MCRecipeEditor.Models.Services.Project;
 
-namespace _4alleach.MCRecipeEditor.Client.Abstractions.Services;
+namespace _4alleach.MCRecipeEditor.Services.Abstractions;
 
-internal interface IProjectControllerService : IService
+public interface IProjectControllerService : IService
 {
     void CreateProject(string name);
     void SaveProject();

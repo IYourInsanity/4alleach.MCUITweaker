@@ -1,19 +1,18 @@
-﻿using _4alleach.MCRecipeEditor.Client.Abstractions.Services;
-using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions;
+﻿using _4alleach.MCRecipeEditor.Services.Abstractions;
 
-namespace _4alleach.MCRecipeEditor.Client.Services;
+namespace _4alleach.MCRecipeEditor.Services;
 
 internal sealed class BusinessModelConstructService : IBusinessModelConstructService
 {
     private readonly Dictionary<string, Type> types;
-    private readonly Dictionary<Type, IDefaultBusinessModel> stash;
+    private readonly Dictionary<Type, DefaultBusinessModel> stash;
 
     private readonly IServiceHub serviceHub;
 
     public BusinessModelConstructService(IServiceHub serviceHub)
     {
         types = new Dictionary<string, Type>();
-        stash = new Dictionary<Type, IDefaultBusinessModel>();
+        stash = new Dictionary<Type, DefaultBusinessModel>();
 
         this.serviceHub = serviceHub;
     }
@@ -23,12 +22,14 @@ internal sealed class BusinessModelConstructService : IBusinessModelConstructSer
         
     }
 
-    public void Register<TBusinessModel>(string name) where TBusinessModel : class, IDefaultBusinessModel
+    public void Register<TBusinessModel>(string name) 
+        where TBusinessModel : DefaultBusinessModel
     {
         types.Add(name, typeof(TBusinessModel));
     }
 
-    public TBusinessModel? GetModel<TBusinessModel>() where TBusinessModel : class, IDefaultBusinessModel
+    public TBusinessModel? GetModel<TBusinessModel>() 
+        where TBusinessModel : DefaultBusinessModel
     {
         if (stash.TryGetValue(typeof(TBusinessModel), out var model))
         {
@@ -42,7 +43,7 @@ internal sealed class BusinessModelConstructService : IBusinessModelConstructSer
     {
         if(types.TryGetValue(name, out var type))
         {
-            var model = Activator.CreateInstance(type, serviceHub) as IDefaultBusinessModel;
+            var model = Activator.CreateInstance(type, serviceHub) as DefaultBusinessModel;
 
             if(model != null)
             {
@@ -50,16 +51,4 @@ internal sealed class BusinessModelConstructService : IBusinessModelConstructSer
             }
         }
     }
-
-    public void DisposeBusinessModelByName(string name)
-    {
-        if (types.TryGetValue(name, out var type))
-        {
-            if (stash.Remove(type, out var model))
-            {
-                model.Dispose();
-            }
-        }
-    }
-
 }

@@ -1,6 +1,5 @@
-﻿using _4alleach.MCRecipeEditor.Client.Abstractions.Services;
-using _4alleach.MCRecipeEditor.Client.BusinessModels.Base;
-using _4alleach.MCRecipeEditor.Models.Services.Project;
+﻿using _4alleach.MCRecipeEditor.Models.Services.Project;
+using _4alleach.MCRecipeEditor.Services.Abstractions;
 
 namespace _4alleach.MCRecipeEditor.Client.BusinessModels;
 
@@ -42,10 +41,5 @@ internal sealed class MenuControlBusinessModel : DefaultBusinessModel
         }
 
         projectService?.CreateRecipeProject(selectedFileProject.Id, NEW_RECIPE);
-    }
-
-    public override void Dispose()
-    {
-        throw new NotImplementedException();
     }
 }

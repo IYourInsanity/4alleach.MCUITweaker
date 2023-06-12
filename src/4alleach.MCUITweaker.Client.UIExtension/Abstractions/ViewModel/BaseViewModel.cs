@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.ViewModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using System.Windows;
 
 namespace _4alleach.MCRecipeEditor.Client.UIExtension.ViewModel.Abstractions;
@@ -22,17 +23,19 @@ public abstract partial class BaseViewModel : ObservableObject, IBaseViewModel
 
     public abstract void Initialize();
 
-    public virtual void SetParentViewModel<TViewModel>(TViewModel? parent) where TViewModel : class, IBaseViewModel 
+    public abstract TFrameworkElement? FindElement<TFrameworkElement>(string name)
+        where TFrameworkElement : FrameworkElement;
+
+    public virtual void SetParent<TParentElement>(TParentElement? parent)
+        where TParentElement : FrameworkElement
     {
-    
+        throw new NotImplementedException();
     }
 
     public virtual void SetArguments(params object[]? args) 
     { 
-    
+        throw new NotImplementedException();
     }
-
-    public abstract TFrameworkElement FindElement<TFrameworkElement>(string name) where TFrameworkElement : FrameworkElement;
 
     public void UpdateVisibility(bool state)
     {

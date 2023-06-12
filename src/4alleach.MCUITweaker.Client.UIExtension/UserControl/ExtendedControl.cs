@@ -1,8 +1,9 @@
-﻿using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions;
+﻿using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.Logic;
+using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.ViewModel;
 using _4alleach.MCRecipeEditor.Client.UIExtension.Logic;
 using _4alleach.MCRecipeEditor.Client.UIExtension.UserControl.Abstractions;
-using _4alleach.MCRecipeEditor.Client.UIExtension.ViewModel.Abstractions;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace _4alleach.MCRecipeEditor.Client.UIExtension.UserControl;
 
@@ -12,13 +13,17 @@ public class ExtendedControl : System.Windows.Controls.UserControl, IExtendedCon
 
     public new string Name { get; }
 
-    public IExtendedPicker<IControlViewModel> Picker { get; }
+    public FrameworkElement Value => this;
+
+    public UIElementCollection Children => this.Children;
+
+    public IElementProvider<IExtendedControl, IControlViewModel> Provider { get; }
 
     public ExtendedControl(string name) : base()
     {
         Loaded += ControlLoaded;
 
-        Picker = new ExtendedPicker<IControlViewModel>(this);
+        Provider = new ElementProvider<IExtendedControl, IControlViewModel>(this);
 
         VID = Guid.NewGuid();
         Name = name;
@@ -28,7 +33,7 @@ public class ExtendedControl : System.Windows.Controls.UserControl, IExtendedCon
     {
         if (sender is IExtendedControl control)
         {
-            var context = control.Picker.GetViewModel();
+            var context = control.Provider.ViewModel;
 
             if (context is IControlViewModel viewModel && 
                 viewModel.IsInitialized == false)

@@ -5,37 +5,21 @@ public sealed class IdAttribute : Attribute
 {
     public static readonly IdAttribute Default = new ();
 
-    #region Constructors
+    public int Id => Value;
 
-    public IdAttribute() : this(-1)
-    {
-    }
+    private int Value { get; set; }
+
+    public IdAttribute() : this(-1) { }
 
     public IdAttribute(int Id)
     {
-        IdValue = Id;
+        Value = Id;
     }
-
-    #endregion
-
-    #region Properties
-
-    public int Id => IdValue;
-
-    private int IdValue { get; set; }
-
-    #endregion
-
-    #region Overrides of Attribute
 
     public override bool IsDefaultAttribute()
     {
         return Equals(Default);
     }
-
-    #endregion
-
-    #region Overrides of Object
 
     public override bool Equals(object? obj)
     {
@@ -52,6 +36,4 @@ public sealed class IdAttribute : Attribute
     {
         return Id.GetHashCode();
     }
-
-    #endregion
 }

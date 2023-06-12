@@ -1,8 +1,9 @@
-﻿using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions;
+﻿using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.Logic;
+using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.ViewModel;
 using _4alleach.MCRecipeEditor.Client.UIExtension.Logic;
-using _4alleach.MCRecipeEditor.Client.UIExtension.ViewModel.Abstractions;
 using _4alleach.MCRecipeEditor.Client.UIExtension.Window.Abstractions;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace _4alleach.MCRecipeEditor.Client.UIExtension.Window;
@@ -13,12 +14,16 @@ public class ExtendedWindow : System.Windows.Window, IExtendedWindow
 
     public new string Name { get; }
 
-    public IExtendedPicker<IWindowViewModel> Picker { get; }
+    public FrameworkElement Value => this;
+
+    public IElementProvider<IExtendedWindow, IWindowViewModel> Provider { get; }
+
+    public UIElementCollection Children => throw new NotImplementedException();
 
     protected ExtendedWindow(string name) : base()
     {
         Loaded += WindowLoaded;
-        Picker = new ExtendedPicker<IWindowViewModel>(this);
+        Provider = new ElementProvider<IExtendedWindow, IWindowViewModel>(this);
 
         VID = Guid.NewGuid();
         Name = name;
@@ -28,7 +33,7 @@ public class ExtendedWindow : System.Windows.Window, IExtendedWindow
     {
         if (sender is ExtendedWindow control)
         {
-            if (control.Picker.GetViewModel() is IWindowViewModel viewModel)
+            if (control.Provider.ViewModel is IWindowViewModel viewModel)
             {
                 viewModel.SetWindow(this);
                 viewModel.Initialize();
@@ -39,7 +44,7 @@ public class ExtendedWindow : System.Windows.Window, IExtendedWindow
 
     protected void KeyPressed(object sender, KeyEventArgs e)
     {
-        Picker.GetViewModel()?.KeyPress(e.Key);
+        Provider.ViewModel?.KeyPress(e.Key);
     }
 
     protected void DragWindow(object sender, MouseButtonEventArgs e)

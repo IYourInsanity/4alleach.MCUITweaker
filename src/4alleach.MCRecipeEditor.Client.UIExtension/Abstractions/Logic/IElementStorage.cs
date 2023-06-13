@@ -6,7 +6,7 @@ public interface IElementStorage<TElement, TViewModel>
     where TElement : class, IBaseElement<TElement, TViewModel>
     where TViewModel : class, IBaseViewModel
 {
-    void Register<TRegisterElement>(TElement? parent)
+    void Register<TRegisterElement>(TElement? parent = null)
         where TRegisterElement : TElement;
 
     void Unregister<TRegisterElement>() 

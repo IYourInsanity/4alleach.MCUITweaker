@@ -1,7 +1,9 @@
 ﻿using _4alleach.MCRecipeEditor.Client.BusinessModels;
 using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions;
 using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.Logic;
+using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.Logic.Modules;
 using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.ViewModel;
+using _4alleach.MCRecipeEditor.Client.UIExtension.Logic.Modules;
 using _4alleach.MCRecipeEditor.Client.Views.Controls;
 using _4alleach.MCRecipeEditor.Services.Abstractions;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -24,6 +26,8 @@ public sealed partial class MainWindowViewModel : WindowViewModel, IExtendedFram
 
     public override void Initialize()
     {
+        provider.RegisterProviderModule<IModalWindowProvider, ModalWindowProvider>();
+
         provider.Register<PreviewControl>();
         provider.Register<MenuControl>();
 

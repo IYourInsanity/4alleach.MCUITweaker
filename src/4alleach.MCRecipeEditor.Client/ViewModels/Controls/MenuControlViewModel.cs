@@ -9,7 +9,6 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
-using _4alleach.MCRecipeEditor.Client.ViewModels.Windows;
 using _4alleach.MCRecipeEditor.Services.Abstractions;
 
 namespace _4alleach.MCRecipeEditor.Client.ViewModels.Controls;
@@ -100,8 +99,7 @@ public sealed partial class MenuControlViewModel : ControlViewModel
     {
         base.Initialize();
 
-        var generatorService = root?.Provider?.GetViewModel<MainWindowViewModel>()?
-                                              .GetService<IBusinessModelConstructService>();
+        var generatorService = root?.Provider?.GetService<IBusinessModelConstructService>();
 
         if (generatorService == null)
         {

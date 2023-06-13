@@ -1,31 +1,11 @@
-﻿using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.ViewModel;
-using System.Windows;
+﻿using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.Logic.Element;
+using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.ViewModel;
 
 namespace _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.Logic;
 
-public interface IElementProvider<TElement, TViewModel> : IElementController<TElement, TViewModel>
+public interface IElementProvider<TElement, TViewModel> : IElementController<TElement, TViewModel>, IHostProvider, IViewModelProvider<TViewModel>
     where TElement : class, IBaseElement<TElement, TViewModel>
     where TViewModel : class, IBaseViewModel
 {
-    FrameworkElement Host { get; }
 
-    IElementContainer? Container { get; internal set; }
-
-    Type HostType { get; }
-
-    TViewModel? ViewModel { get; }
-
-    TExtendedViewModel? GetViewModel<TExtendedViewModel>()
-        where TExtendedViewModel : TViewModel;
-
-    void SetParent<TParentElement>(TParentElement? parent)
-        where TParentElement : FrameworkElement;
-
-    void SetArguments(params object[]? args);
-
-    TFrameworkElement? GetParentElement<TFrameworkElement>() 
-        where TFrameworkElement : FrameworkElement;
-
-    TFrameworkElement? FindElement<TFrameworkElement>(string name) 
-        where TFrameworkElement : FrameworkElement;
 }

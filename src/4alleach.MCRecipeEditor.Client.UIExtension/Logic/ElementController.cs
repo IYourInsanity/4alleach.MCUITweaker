@@ -1,6 +1,9 @@
 ﻿using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions;
 using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.Logic;
+using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.Logic.Modules;
 using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.ViewModel;
+using _4alleach.MCRecipeEditor.Client.UIExtension.Window;
+using System.Windows;
 
 namespace _4alleach.MCRecipeEditor.Client.UIExtension.Logic;
 
@@ -10,17 +13,20 @@ internal sealed class ElementController<TElement, TViewModel> : IElementControll
 {
     private readonly TElement host;
 
-    private readonly IElementStorage<TElement, TViewModel> storage;
+    private readonly IElementStorage<TElement, TViewModel> elementStorage;
+
+    private readonly Dictionary<Type, IProviderModule<TElement, TViewModel>> moduleStorage;
 
     private IElementContainer? container;
 
-    private TElement? visibleControl;
+    private TElement? visibleElement;
 
     internal ElementController(TElement host)
     {
         this.host = host;
 
-        storage = new ElementStorage<TElement, TViewModel>();
+        elementStorage = new ElementStorage<TElement, TViewModel>();
+        moduleStorage = new Dictionary<Type, IProviderModule<TElement, TViewModel>>();
     }
 
     public void Initialize()
@@ -31,39 +37,50 @@ internal sealed class ElementController<TElement, TViewModel> : IElementControll
     public void Show<TExtendedElement>(params object[]? args) 
         where TExtendedElement : TElement
     {
-        var control = storage.Get<TExtendedElement>();
+        var element = elementStorage.Get<TExtendedElement>();
 
-        if(control == null)
+        if(element == null)
         {
             //TODO Implement exception
             return;
         }
 
-        var controlHost = control.Provider.Host;
+        var elementHost = element.Provider.Host;
 
-        control.Provider.SetArguments(args);
+        element.Provider.SetArguments(args);
 
-        if (container?.Contains(controlHost) == true)
+        if (container?.Contains(elementHost) == true)
         {
             return;
         }
 
-        container?.TryAdd(controlHost);
+        container?.TryAdd(elementHost);
 
-        if (visibleControl != null && 
-            visibleControl.GetType() != control.GetType())
+        if (visibleElement != null &&
+            visibleElement.GetType() != element.GetType())
         {
-            var currentControlHost = visibleControl?.Provider.Host;
+            var currentControlHost = visibleElement?.Provider.Host;
             container?.TryRemove(currentControlHost);
         }
 
-        visibleControl = control;
+        visibleElement = element;
+    }
+
+    public TModalResult? ShowModal<TModalElement, TModalResult>(params object[]? args)
+        where TModalElement : ExtendedModalWindow, TElement
+    {
+        var modalElement = Activator.CreateInstance<TModalElement>();
+
+        modalElement.Owner = Application.Current.MainWindow;
+        modalElement.ShowDialog();
+
+        return default;
     }
 
     public void Hide<TExtendedElement>() 
         where TExtendedElement : TElement
     {
-        var control = storage.Get<TExtendedElement>();
+        var control = elementStorage.Get<TExtendedElement>();
 
         if (control == null)
         {
@@ -75,32 +92,55 @@ internal sealed class ElementController<TElement, TViewModel> : IElementControll
 
         container?.TryRemove(controlHost);
 
-        visibleControl = null;
+        visibleElement = null;
     }
 
     public void HideLast()
     {
-        if(visibleControl == null)
+        if(visibleElement == null)
         {
             return;
         }
 
-        container?.TryRemove(visibleControl.Provider.Host);
+        container?.TryRemove(visibleElement.Provider.Host);
 
-        visibleControl = null;
+        visibleElement = null;
     }
 
     public void Register<TExtendedElement>(TElement? parent)
         where TExtendedElement : TElement
     {
-        container ??= host.Provider.Container;
-
-        storage.Register<TExtendedElement>(parent);
+        elementStorage.Register<TExtendedElement>(parent);
     }
 
     public void Unregister<TExtendedElement>() 
         where TExtendedElement : TElement
     {
-        storage.Unregister<TExtendedElement>();
+        elementStorage.Unregister<TExtendedElement>();
+    }
+
+    public void RegisterProviderModule<TProviderModuleInterface, TProviderModuleImplementation>(params object[]? args) 
+        where TProviderModuleInterface : IProviderModule<TElement, TViewModel>
+        where TProviderModuleImplementation : class, IProviderModule<TElement, TViewModel>
+    {
+        var control = Activator.CreateInstance<TProviderModuleImplementation>();
+        var type = typeof(TProviderModuleInterface);
+
+        control.Initialize(host.Provider, args);
+
+        moduleStorage.Add(type, control);
+    }
+
+    public TProviderModule? GetProviderModule<TProviderModule>() 
+        where TProviderModule : IProviderModule<TElement, TViewModel>
+    {
+        var type = typeof(TProviderModule);
+
+        if (moduleStorage.TryGetValue(type, out var module))
+        {
+            return (TProviderModule?)module;
+        }
+
+        throw new NotImplementedException();
     }
 }

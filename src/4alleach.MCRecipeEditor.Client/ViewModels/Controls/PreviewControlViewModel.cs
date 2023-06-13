@@ -9,6 +9,9 @@ using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using _4alleach.MCRecipeEditor.Client.ViewModels.Windows;
 using _4alleach.MCRecipeEditor.Services.Abstractions;
+using _4alleach.MCRecipeEditor.Client.Extensions;
+using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.Logic.Modules;
+using _4alleach.MCRecipeEditor.Client.UIExtension.CustomControls.Modals;
 
 namespace _4alleach.MCRecipeEditor.Client.ViewModels.Controls;
 
@@ -33,8 +36,7 @@ public sealed partial class PreviewControlViewModel : ControlViewModel
     {
         base.Initialize();
 
-        var generatorService = root?.Provider.GetViewModel<MainWindowViewModel>()?
-                                             .GetService<IBusinessModelConstructService>();
+        var generatorService = root?.Provider.GetService<IBusinessModelConstructService>();
 
         if(generatorService == null)
         {
@@ -56,15 +58,17 @@ public sealed partial class PreviewControlViewModel : ControlViewModel
     {
         businessModel?.NewProject();
 
-        root?.Provider?.Show<MenuControl>();
+        root?.Provider.Show<MenuControl>();
     }
 
     [RelayCommand]
     private void LoadProject()
     {
-        businessModel?.LoadProject();
+        //businessModel?.LoadProject();
 
-        root?.Provider?.Show<MenuControl>();
+        //root?.Provider?.Show<MenuControl>();
+
+        root?.Provider.ShowModal<TestModalWindow, TestModalResult>("Test");
     }
 }
 

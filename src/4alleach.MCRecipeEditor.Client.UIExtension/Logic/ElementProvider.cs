@@ -1,5 +1,6 @@
 ﻿using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions;
 using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.Logic;
+using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.Logic.Modules;
 using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.ViewModel;
 using System.Windows;
 
@@ -55,7 +56,7 @@ internal sealed class ElementProvider<TElement, TViewModel> : IElementProvider<T
         ViewModel?.SetArguments(args);
     }
 
-    public TFrameworkElement? GetParentElement<TFrameworkElement>() 
+    public TFrameworkElement? GetParent<TFrameworkElement>() 
         where TFrameworkElement : FrameworkElement
     {
         var parent = host.Parent;
@@ -120,6 +121,19 @@ internal sealed class ElementProvider<TElement, TViewModel> : IElementProvider<T
         where TExtendedElement : TElement
     {
         controller.Unregister<TExtendedElement>();
+    }
+
+    public void RegisterProviderModule<TProviderModuleInterface, TProviderModuleImplementation>(params object[]? args)
+        where TProviderModuleInterface : IProviderModule<TElement, TViewModel>
+        where TProviderModuleImplementation : class, IProviderModule<TElement, TViewModel>
+    {
+        controller.RegisterProviderModule<TProviderModuleInterface, TProviderModuleImplementation>(args);
+    }
+
+    public TProviderModule? GetProviderModule<TProviderModule>() 
+        where TProviderModule : IProviderModule<TElement, TViewModel>
+    {
+        return controller.GetProviderModule<TProviderModule>();
     }
 
     #endregion

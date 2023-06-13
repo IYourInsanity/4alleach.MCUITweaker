@@ -38,7 +38,7 @@ public abstract partial class ControlViewModel : BaseViewModel, IExtendedFramewo
             throw new NotImplementedException();
         }
 
-        root = control.Provider.GetParentElement<ExtendedWindow>();
+        root = control.Provider.GetParent<ExtendedWindow>();
 
         if (root == null)
         {

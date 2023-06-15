@@ -1,59 +1,35 @@
 ﻿using _4alleach.MCRecipeEditor.Services.Abstractions;
-using System.Collections.Concurrent;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace _4alleach.MCRecipeEditor.Services;
 
 public sealed class ServiceHub : IServiceHub
 {
-    private readonly ConcurrentDictionary<Type, IService> storage;
-
     public static readonly IServiceHub Instance;
+
+    private IServiceProvider? _serviceProvider; 
 
     static ServiceHub()
     {
         var serviceHub = new ServiceHub();
 
-        serviceHub.Register<IBusinessModelConstructService, BusinessModelConstructService>();
-        serviceHub.Register<IProjectControllerService, ProjectControllerService>();
+        var serviceCollection = new ServiceCollection()
+            .AddSingleton<IServiceHub>(serviceHub)
+            .AddSingleton<IBusinessModelConstructService, BusinessModelConstructService>()
+            .AddSingleton<IProjectControllerService, ProjectControllerService>();
 
-        serviceHub.Initialize();
+        serviceHub.Initialize(serviceCollection);
 
         Instance = serviceHub;
     }
 
-    private ServiceHub()
+    private void Initialize(IServiceCollection collection)
     {
-        storage = new ConcurrentDictionary<Type, IService>();
+        _serviceProvider = collection.BuildServiceProvider();
     }
 
-    private void Initialize()
+    public TService? Get<TService>() where TService : class, IService
     {
-        foreach (var service in storage.Values)
-        {
-            service.Initialize();
-        }
+        return _serviceProvider?.GetRequiredService<TService>();
     }
-
-    private void Register<TService, TServiceImplementation>() 
-        where TService : IService
-        where TServiceImplementation : class, IService
-    {
-        var type = typeof(TServiceImplementation);
-        var implementation = Activator.CreateInstance(type, this) as TServiceImplementation;
-
-        storage.TryAdd(typeof(TService), implementation!);  
-    }
-
-    public TService? Get<TService>()
-        where TService : class, IService
-    {
-        if(storage.TryGetValue(typeof(TService), out var service))
-        {
-            return service as TService;
-        }
-
-        return default;
-    }
-
-
 }

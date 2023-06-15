@@ -15,15 +15,22 @@ internal static class ElementProviderExtension
         return provider?.GetViewModel<MainWindowViewModel>()?.GetService<TService>();
     }
 
-    internal static TModalResult? ShowModal<TModalElement, TModalResult>(this IElementProvider<IExtendedFrameworkElement, IExtendedFrameworkElementViewModel> provider, params object[]? args)
+    internal static Task<TModalResult> ShowModal<TModalElement, TModalResult>(this IElementProvider<IExtendedFrameworkElement, IExtendedFrameworkElementViewModel> provider, params object[]? args)
         where TModalElement : ExtendedModalWindow, new()
-        where TModalResult : class
+        where TModalResult : IModalResult
     {
         if(provider.ViewModel is MainWindowViewModel)
         {
-            return provider.GetProviderModule<IModalWindowProvider>()?.ShowModal<TModalElement, TModalResult>(args);
+            var result = provider.GetProviderModule<IModalWindowProvider>()?.ShowModal<TModalElement, TModalResult>(args);
+
+            if(result == null)
+            {
+                throw new NotImplementedException();
+            }
+
+            return result;
         }
 
-        return default;
+        throw new NotImplementedException();
     }
 }

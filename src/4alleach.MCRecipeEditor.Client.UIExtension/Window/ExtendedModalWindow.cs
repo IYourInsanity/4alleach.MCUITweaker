@@ -19,4 +19,11 @@ public abstract class ExtendedModalWindow : System.Windows.Window, IExtendedFram
         VID = Guid.NewGuid();
         Provider = new ElementProvider<IExtendedFrameworkElement, IExtendedFrameworkElementViewModel>(this);
     }
+
+    public abstract Task<IModalResult> AwaitResult();
+}
+
+public interface IModalResult
+{
+
 }

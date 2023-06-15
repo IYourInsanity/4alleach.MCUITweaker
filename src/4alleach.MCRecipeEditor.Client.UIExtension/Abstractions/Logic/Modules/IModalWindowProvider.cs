@@ -4,7 +4,7 @@ using _4alleach.MCRecipeEditor.Client.UIExtension.Window;
 namespace _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.Logic.Modules;
 public interface IModalWindowProvider : IProviderModule<IExtendedFrameworkElement, IExtendedFrameworkElementViewModel>
 {
-    TModalResult? ShowModal<TModalElement, TModalResult>(params object[]? args)
+    Task<TModalResult> ShowModal<TModalElement, TModalResult>(params object[]? args)
         where TModalElement : ExtendedModalWindow, new()
-        where TModalResult : class;
+        where TModalResult : IModalResult;
 }

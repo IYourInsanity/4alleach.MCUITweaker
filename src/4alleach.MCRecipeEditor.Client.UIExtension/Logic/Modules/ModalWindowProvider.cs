@@ -21,9 +21,9 @@ public sealed class ModalWindowProvider : IModalWindowProvider
         this.provider = provider;
     }
 
-    public TModalResult? ShowModal<TModalElement, TModalResult>(params object[]? args)
+    public Task<TModalResult> ShowModal<TModalElement, TModalResult>(params object[]? args)
         where TModalElement : ExtendedModalWindow, new()
-        where TModalResult : class
+        where TModalResult : IModalResult
     {
         var type = typeof(TModalElement);
 
@@ -39,13 +39,19 @@ public sealed class ModalWindowProvider : IModalWindowProvider
         return ShowModalInternal<TModalResult>(modalWindow, args);
     }
 
-    private static TModalResult? ShowModalInternal<TModalResult>(ExtendedModalWindow modalWindow, params object[]? args)
-        where TModalResult : class
+    private async static Task<TModalResult> ShowModalInternal<TModalResult>(ExtendedModalWindow modalWindow, params object[]? args)
+        where TModalResult : IModalResult
     {
         modalWindow.Provider.SetArguments(args);
+        modalWindow.Show();
 
-        modalWindow.ShowDialog();
+        var result = await modalWindow.AwaitResult();
+        
+        if(result is TModalResult castedResult)
+        {
+            return castedResult;
+        }
 
-        return modalWindow.DialogResult as TModalResult;
+        throw new NotImplementedException();
     }
 }

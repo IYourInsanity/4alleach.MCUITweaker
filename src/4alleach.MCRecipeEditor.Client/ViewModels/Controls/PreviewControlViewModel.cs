@@ -62,13 +62,13 @@ public sealed partial class PreviewControlViewModel : ControlViewModel
     }
 
     [RelayCommand]
-    private void LoadProject()
+    private async Task LoadProject()
     {
         //businessModel?.LoadProject();
 
         //root?.Provider?.Show<MenuControl>();
 
-        root?.Provider.ShowModal<TestModalWindow, TestModalResult>("Test");
+        var result = await root!.Provider.ShowModal<TestModalWindow, TestModalResult>("Test");
     }
 }
 

@@ -1,10 +1,10 @@
 ﻿namespace _4alleach.MCRecipeEditor.Services.Abstractions;
 
-public abstract class DefaultBusinessModel
+public abstract class BaseBusinessModel
 {
     protected IServiceHub serviceHub;
 
-    protected DefaultBusinessModel(IServiceHub serviceHub)
+    protected BaseBusinessModel(IServiceHub serviceHub)
     {
         this.serviceHub = serviceHub;
     }

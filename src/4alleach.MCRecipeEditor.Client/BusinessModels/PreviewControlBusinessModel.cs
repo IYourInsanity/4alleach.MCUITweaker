@@ -2,7 +2,7 @@
 
 namespace _4alleach.MCRecipeEditor.Client.BusinessModels;
 
-internal sealed class PreviewControlBusinessModel : DefaultBusinessModel
+internal sealed class PreviewControlBusinessModel : BaseBusinessModel
 {
     public PreviewControlBusinessModel(IServiceHub serviceHub) : base(serviceHub)
     {

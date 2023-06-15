@@ -3,7 +3,7 @@ using _4alleach.MCRecipeEditor.Services.Abstractions;
 
 namespace _4alleach.MCRecipeEditor.Client.BusinessModels;
 
-internal sealed class MenuControlBusinessModel : DefaultBusinessModel
+internal sealed class MenuControlBusinessModel : BaseBusinessModel
 {
     private const string NEW_PROJECT = "New Project";
     private const string NEW_RECIPE = "New Recipe";

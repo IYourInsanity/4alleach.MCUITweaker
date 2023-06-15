@@ -4,7 +4,7 @@ using _4alleach.MCRecipeEditor.Services.Abstractions;
 
 namespace _4alleach.MCRecipeEditor.Client.BusinessModels;
 
-internal sealed class MainWindowBusinessModel : DefaultBusinessModel
+internal sealed class MainWindowBusinessModel : BaseBusinessModel
 {
     internal MainWindowBusinessModel() : base(ServiceHub.Instance)
     {

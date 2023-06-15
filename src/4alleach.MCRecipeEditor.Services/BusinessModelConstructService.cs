@@ -5,14 +5,14 @@ namespace _4alleach.MCRecipeEditor.Services;
 internal sealed class BusinessModelConstructService : IBusinessModelConstructService
 {
     private readonly Dictionary<string, Type> types;
-    private readonly Dictionary<Type, DefaultBusinessModel> stash;
+    private readonly Dictionary<Type, BaseBusinessModel> stash;
 
     private readonly IServiceHub serviceHub;
 
     public BusinessModelConstructService(IServiceHub serviceHub)
     {
         types = new Dictionary<string, Type>();
-        stash = new Dictionary<Type, DefaultBusinessModel>();
+        stash = new Dictionary<Type, BaseBusinessModel>();
 
         this.serviceHub = serviceHub;
     }
@@ -23,13 +23,13 @@ internal sealed class BusinessModelConstructService : IBusinessModelConstructSer
     }
 
     public void Register<TBusinessModel>(string name) 
-        where TBusinessModel : DefaultBusinessModel
+        where TBusinessModel : BaseBusinessModel
     {
         types.Add(name, typeof(TBusinessModel));
     }
 
     public TBusinessModel? GetModel<TBusinessModel>() 
-        where TBusinessModel : DefaultBusinessModel
+        where TBusinessModel : BaseBusinessModel
     {
         if (stash.TryGetValue(typeof(TBusinessModel), out var model))
         {
@@ -43,11 +43,11 @@ internal sealed class BusinessModelConstructService : IBusinessModelConstructSer
     {
         if(types.TryGetValue(name, out var type))
         {
-            var model = Activator.CreateInstance(type, serviceHub) as DefaultBusinessModel;
+            var model = Activator.CreateInstance(type, serviceHub);
 
-            if(model != null)
+            if(model is BaseBusinessModel bbModel)
             {
-                stash.Add(type, model);
+                stash.Add(type, bbModel);
             }
         }
     }

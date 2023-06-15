@@ -3,10 +3,10 @@
 public interface IBusinessModelConstructService : IService
 {
     void Register<TBusinessModel>(string name)
-        where TBusinessModel : DefaultBusinessModel;
+        where TBusinessModel : BaseBusinessModel;
 
     TBusinessModel? GetModel<TBusinessModel>()
-        where TBusinessModel : DefaultBusinessModel;
+        where TBusinessModel : BaseBusinessModel;
 
     void GenerateBusinessModelByName(string name);
 }

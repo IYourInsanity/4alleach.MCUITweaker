@@ -79,8 +79,10 @@
             </Grid>
 
             <StackPanel Grid.Row="2"
-                        Background="{StaticResource Dark1Brush}">
+                        Background="{Binding AppStateColor}">
 
+                <TextBlock Text="{Binding AppStateDescription}"/>
+                
             </StackPanel>
 
         </Grid>

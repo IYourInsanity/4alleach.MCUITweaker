@@ -38,22 +38,23 @@
     <SolidColorBrush x:Key="Dark5Brush" Color="{StaticResource Dark5}" />
     <SolidColorBrush x:Key="Dark6Brush" Color="{StaticResource Dark6}" />
 
-    <Color x:Key="InitStateColor">#FFDEEB72</Color>
+    <!--<Color x:Key="InitStateColor">#FFDEEB72</Color>
     <Color x:Key="ErrorStateColor">#FFF38B76</Color>
     <Color x:Key="ReadyStateColor">#FF8ED28A</Color>
 
     <SolidColorBrush x:Key="InitStateBrush" Color="{StaticResource InitStateColor}"/>
     <SolidColorBrush x:Key="ErrorStateBrush" Color="{StaticResource ErrorStateColor}"/>
-    <SolidColorBrush x:Key="ReadyStateBrush" Color="{StaticResource ReadyStateColor}"/>
+    <SolidColorBrush x:Key="ReadyStateBrush" Color="{StaticResource ReadyStateColor}"/>-->
 
-    <Color x:Key="FineAppStateColor">#FF3C88FA</Color>
-    <Color x:Key="WarningAppStateColor">#FFDDCC5A</Color>
-    <Color x:Key="ErrorAppStateColor">#FFF04648</Color>
-    <Color x:Key="BusyAppStateColor">#FFF07D46</Color>
+    <Color x:Key="ExecuteStateColor">#FF3C88FA</Color>
+    <Color x:Key="WarningStateColor">#FFDDCC5A</Color>
+    <Color x:Key="ErrorStateColor">#FFF04648</Color>
+    <Color x:Key="ReadyStateColor">#FF8ED28A</Color>
 
-    <SolidColorBrush x:Key="FineAppStateBrush" Color="{StaticResource FineAppStateColor}"/>
-    <SolidColorBrush x:Key="WarningAppStateBrush" Color="{StaticResource WarningAppStateColor}"/>
-    <SolidColorBrush x:Key="ErrorAppStateBrush" Color="{StaticResource ErrorAppStateColor}"/>
-    <SolidColorBrush x:Key="BusyAppStateBrush" Color="{StaticResource BusyAppStateColor}"/>
+    <SolidColorBrush x:Key="IdleStateColorBrush" Color="{StaticResource Dark1}"/>
+    <SolidColorBrush x:Key="ExecuteStateColorBrush" Color="{StaticResource ExecuteStateColor}"/>
+    <SolidColorBrush x:Key="WarningStateColorBrush" Color="{StaticResource WarningStateColor}"/>
+    <SolidColorBrush x:Key="ErrorStateColorBrush" Color="{StaticResource ErrorStateColor}"/>
+    <SolidColorBrush x:Key="ReadyStateColorBrush" Color="{StaticResource ReadyStateColor}"/>
 
 </ResourceDictionary>

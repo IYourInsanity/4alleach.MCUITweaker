@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Windows.Media;
+using _4alleach.MCRecipeEditor.Common.Extensions;
 
 namespace _4alleach.MCRecipeEditor.Client;
 
@@ -12,5 +13,24 @@ internal struct Constants
     internal struct File
     {
         internal static string ProjectFilter => "MCRecipeEditor Project (*.mcu)|*.mcu";
+    }
+
+    internal struct Colors
+    {
+        internal static SolidColorBrush Idle => FindColorBrush(nameof(Idle));
+        internal static SolidColorBrush Execute => FindColorBrush(nameof(Execute));
+        internal static SolidColorBrush Warning => FindColorBrush(nameof(Warning));
+        internal static SolidColorBrush Error => FindColorBrush(nameof(Error));
+        internal static SolidColorBrush Ready => FindColorBrush(nameof(Ready));
+        internal static SolidColorBrush Rainbow => FindColorBrush(nameof(Rainbow));
+
+        private static SolidColorBrush FindColorBrush(string name)
+        {
+            const string COLOR_BRUSH_BASE = "{0}StateColorBrush";
+
+            var color = COLOR_BRUSH_BASE.Format(name);
+
+            return (SolidColorBrush)App.Current.FindResource(color);
+        }
     }
 }

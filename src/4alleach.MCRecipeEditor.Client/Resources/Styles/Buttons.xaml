@@ -149,7 +149,7 @@
                     <BeginStoryboard>
                         <Storyboard>
                             <ColorAnimation Storyboard.TargetProperty="(Control.Background).(SolidColorBrush.Color)"
-                                            To="{StaticResource ErrorAppStateColor}"
+                                            To="{StaticResource ErrorStateColor}"
                                             Duration="0:0:0.2">
 
                             </ColorAnimation>

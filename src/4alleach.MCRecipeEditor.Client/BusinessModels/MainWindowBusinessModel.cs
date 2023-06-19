@@ -1,4 +1,5 @@
 ﻿using _4alleach.MCRecipeEditor.Client.Views.Controls;
+using _4alleach.MCRecipeEditor.Database.Entities;
 using _4alleach.MCRecipeEditor.Services;
 using _4alleach.MCRecipeEditor.Services.Abstractions;
 

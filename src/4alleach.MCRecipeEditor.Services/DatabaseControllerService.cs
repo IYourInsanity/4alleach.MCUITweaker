@@ -2,7 +2,6 @@
 using _4alleach.MCRecipeEditor.Database.Abstractions;
 using _4alleach.MCRecipeEditor.Database.Entities.Abstractions;
 using _4alleach.MCRecipeEditor.Services.Abstractions;
-using System.Data.SQLite;
 
 namespace _4alleach.MCRecipeEditor.Services;
 internal sealed class DatabaseControllerService : IDatabaseControllerService
@@ -40,26 +39,6 @@ internal sealed class DatabaseControllerService : IDatabaseControllerService
     public Task<int> Delete<TEntity>(IEnumerable<TEntity> entities) where TEntity : Asset
     {
         return context!.Delete(entities);
-    }
-
-    public Task ExecuteAdapter(string script, Action<SQLiteDataAdapter> action)
-    {
-        return context!.ExecuteAdapter(script, action);
-    }
-
-    public Task ExecuteNonQueryAsync(string script)
-    {
-        return context!.ExecuteNonQueryAsync(script);
-    }
-
-    public Task ExecuteNonQueryAsync(string script, Action<SQLiteCommand> action)
-    {
-        return context!.ExecuteNonQueryAsync(script, action);
-    }
-
-    public Task ExecuteReader<TResult>(string script, Func<SQLiteDataReader, TResult> func)
-    {
-        return context!.ExecuteReader(script, func);
     }
 
     public Task<int> Insert<TEntity>(TEntity entity) where TEntity : Asset

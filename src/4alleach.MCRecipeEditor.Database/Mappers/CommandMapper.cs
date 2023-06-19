@@ -11,8 +11,9 @@ internal static class CommandMapper
     private const string ID = "Id";
     private const string SEPARATOR = ", ";
 
-    private const string APPEND_COLUMN = "\"{0}\"";
-    private const string APPEND_PROPERTY = "\"{0}\" = @{1}";
+    private const string APPEND_COLUMN = "[{0}]";
+    private const string APPEND_PROPERTY = "@{0}";
+    private const string APPEND_PROPERTY_WHERE = "[{0}] = @{1}";
 
     internal static string GenerateUpdateCommand<TEntity>()
         where TEntity : Asset
@@ -32,7 +33,7 @@ internal static class CommandMapper
 
             if (property.Equals(ID))
             {
-                where.AppendFormat(APPEND_PROPERTY, property, property);
+                where.AppendFormat(APPEND_PROPERTY_WHERE, property, property);
                 continue;
             }
 
@@ -42,7 +43,7 @@ internal static class CommandMapper
 
         var setString = set.ToString().TrimEnd(SEPARATOR.ToCharArray());
 
-        return $"UPDATE {tableName} SET {setString}{where}"; 
+        return $"UPDATE {tableName} SET {setString}{where};"; 
     }
 
     internal static string GenerateDeleteCommand<TEntity>()
@@ -53,7 +54,7 @@ internal static class CommandMapper
         var where = new StringBuilder();
 
         where.Append(" WHERE ");
-        where.AppendFormat(APPEND_PROPERTY, ID, ID);
+        where.AppendFormat(APPEND_PROPERTY_WHERE, ID, ID);
 
         return $"DELETE FROM {tableName}{where};";
     }
@@ -105,7 +106,7 @@ internal static class CommandMapper
 
         var columnsString = columns.ToString().TrimEnd(SEPARATOR.ToCharArray());
 
-        return $"SELECT {columnsString} FROM {tableName}";
+        return $"SELECT {columnsString} FROM {tableName};";
     }
 
     internal static string GenerateSelectTopCommand<TEntity>()
@@ -167,7 +168,7 @@ internal static class CommandMapper
     {
         if (value == null)
         {
-            return "\"\"";
+            return "null";
         }
 
         if(value is Guid ||

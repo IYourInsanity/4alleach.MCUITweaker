@@ -7,6 +7,7 @@ using _4alleach.MCRecipeEditor.Database.Entities.Abstractions;
 using _4alleach.MCRecipeEditor.Database.Mappers;
 using System.Data;
 using System.Data.SQLite;
+using System.Text;
 
 namespace _4alleach.MCRecipeEditor.Database;
 
@@ -36,7 +37,7 @@ internal class DatabaseContext : IDatabaseContext
         connectionString = new SQLiteConnectionStringBuilder()
         {
             DataSource = AssetPath,
-            DefaultTimeout = 5,
+            DefaultTimeout = 30,
             Pooling = true,
             BinaryGUID = false,
             DateTimeKind = DateTimeKind.Utc,
@@ -62,6 +63,10 @@ internal class DatabaseContext : IDatabaseContext
         }
 
         commandRegistry.Register<Item>();
+        commandRegistry.Register<ItemType>();
+        commandRegistry.Register<ItemPostfix>();
+        commandRegistry.Register<ItemPrefix>();
+        commandRegistry.Register<ModType>();
     }
 
     public async Task<bool> TestConnection()
@@ -106,8 +111,12 @@ internal class DatabaseContext : IDatabaseContext
         var name = typeof(TEntity).Name;
         var entities = default(IEnumerable<TEntity>);
 
-        await ExecuteAdapter(script, adapter =>
+        await ExecuteAdapter(script, (connection, adapter) =>
         {
+            adapter.SelectCommand = CreateCommand(script, connection);
+
+            _ = new SQLiteCommandBuilder(adapter);
+
             using (var table = new DataTable(name))
             {
                 adapter.Fill(table);
@@ -127,17 +136,11 @@ internal class DatabaseContext : IDatabaseContext
     {
         var result = 0;
         var name = typeof(TEntity).Name;
-        var script = commandRegistry.ClaimSelectAllCommand<TEntity>();
+        var script = commandRegistry.ClaimInsertCommand<TEntity>().Compile(entity);
 
-        await ExecuteAdapter(script, adapter =>
+        await ExecuteNonQueryAsync(script, command =>
         {
-            using (var table = new DataTable(name))
-            {
-                adapter.FillSchema(table, SchemaType.Source);
-
-                var tt = entity.Map(table);
-                result = adapter.Update(tt);
-            }
+            result = command.ExecuteNonQuery();
         });
 
         return result;
@@ -146,21 +149,23 @@ internal class DatabaseContext : IDatabaseContext
     public async Task<int> Insert<TEntity>(IEnumerable<TEntity> entities)
         where TEntity : Asset
     {
-        var result = 0;
-        var name = typeof(TEntity).Name;
-        var script = commandRegistry.ClaimSelectAllCommand<TEntity>();
-
         //TODO Implement BulkCopy
 
-        await ExecuteAdapter(script, adapter =>
-        {
-            using (var table = new DataTable(name))
-            {
-                adapter.FillSchema(table, SchemaType.Source);
+        var result = 0;
 
-                var tt = entities.Map(table);
-                result = adapter.Update(tt);
-            }
+        var strScriptBuild = new StringBuilder();
+        var claimedCommand = commandRegistry.ClaimInsertCommand<TEntity>();
+
+        foreach (var entity in entities)
+        {
+            var script = claimedCommand.Compile(entity);
+
+            strScriptBuild.AppendLine(script);
+        }
+
+        await ExecuteNonQueryAsync(strScriptBuild.ToString(), command =>
+        {
+            result = command.ExecuteNonQuery();
         });
 
         return result;
@@ -168,19 +173,58 @@ internal class DatabaseContext : IDatabaseContext
 
     #endregion
 
-    public Task<int> Update<TEntity>(TEntity entity) where TEntity : Asset
+    #region UPDATE
+
+    public async Task<int> Update<TEntity>(TEntity entity)
+        where TEntity : Asset
     {
-        throw new NotImplementedException();
+        var result = 0;
+        var script = commandRegistry.ClaimUpdateCommand<TEntity>().Compile(entity);
+
+        await ExecuteNonQueryAsync(script, command =>
+        {
+            result = command.ExecuteNonQuery();
+        });
+
+        return result;
     }
 
-    public Task<int> Update<TEntity>(IEnumerable<TEntity> entities) where TEntity : Asset
+    public async Task<int> Update<TEntity>(IEnumerable<TEntity> entities)
+        where TEntity : Asset
     {
-        throw new NotImplementedException();
+        var result = 0;
+
+        var strScriptBuild = new StringBuilder();
+        var claimedCommand = commandRegistry.ClaimUpdateCommand<TEntity>();
+
+        foreach (var entity in entities)
+        {
+            var script = claimedCommand.Compile(entity);
+
+            strScriptBuild.AppendLine(script);
+        }
+
+        await ExecuteNonQueryAsync(strScriptBuild.ToString(), command =>
+        {
+            result = command.ExecuteNonQuery();
+        });
+
+        return result;
     }
 
-    public Task<int> Delete<TEntity>(TEntity entity) where TEntity : Asset
+    #endregion
+
+    public async Task<int> Delete<TEntity>(TEntity entity) where TEntity : Asset
     {
-        throw new NotImplementedException();
+        var result = 0;
+        var script = commandRegistry.ClaimDeleteCommand<TEntity>().Compile(entity);
+
+        await ExecuteNonQueryAsync(script, command =>
+        {
+            result = command.ExecuteNonQuery();
+        });
+
+        return result;
     }
 
     public Task<int> Delete<TEntity>(IEnumerable<TEntity> entities) where TEntity : Asset
@@ -190,7 +234,7 @@ internal class DatabaseContext : IDatabaseContext
 
     #region DEFAULT
 
-    public Task ExecuteNonQueryAsync(string script)
+    private Task ExecuteNonQueryAsync(string script)
     {
         return MakeSessionAsync(connection =>
         {
@@ -201,7 +245,7 @@ internal class DatabaseContext : IDatabaseContext
         });
     }
 
-    public Task ExecuteNonQueryAsync(string script, Action<SQLiteCommand> action)
+    private Task ExecuteNonQueryAsync(string script, Action<SQLiteCommand> action)
     {
         return MakeSessionAsync(connection =>
         {
@@ -209,7 +253,7 @@ internal class DatabaseContext : IDatabaseContext
         });
     }
 
-    public Task ExecuteReader<TResult>(string script, Func<SQLiteDataReader, TResult> func)
+    private Task ExecuteReader<TResult>(string script, Func<SQLiteDataReader, TResult> func)
     {
         return MakeSessionAsync(connection =>
         {
@@ -226,7 +270,7 @@ internal class DatabaseContext : IDatabaseContext
         });
     }
 
-    public Task ExecuteAdapter(string script, Action<SQLiteDataAdapter> action)
+    private Task ExecuteAdapter(string script, Action<SQLiteConnection, SQLiteDataAdapter> action)
     {
         return MakeSessionAsync(connection =>
         {
@@ -234,9 +278,7 @@ internal class DatabaseContext : IDatabaseContext
             {
                 using (var adapter = new SQLiteDataAdapter(command))
                 {
-                    _ = new SQLiteCommandBuilder(adapter);
-
-                    action(adapter);
+                    action(connection, adapter);
                 }
             });
         });

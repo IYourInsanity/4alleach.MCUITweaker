@@ -35,12 +35,4 @@ public interface IDatabaseContext
 
     Task<int> Delete<TEntity>(IEnumerable<TEntity> entities)
         where TEntity : Asset;
-
-    public Task ExecuteNonQueryAsync(string script);
-
-    public Task ExecuteNonQueryAsync(string script, Action<SQLiteCommand> action);
-
-    public Task ExecuteReader<TResult>(string script, Func<SQLiteDataReader, TResult> func);
-
-    public Task ExecuteAdapter(string script, Action<SQLiteDataAdapter> action);
 }

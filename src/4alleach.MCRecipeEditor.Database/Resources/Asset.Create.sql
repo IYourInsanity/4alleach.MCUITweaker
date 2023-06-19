@@ -1,40 +1,40 @@
 CREATE TABLE ItemType (
-	Id			        uniqueidentifier NOT NULL,
-	[Value]   	        nvarchar(50),
+	[Id]			      uniqueidentifier NOT NULL,
+	[Value]   	          nvarchar(50),
 
 	CONSTRAINT Pk_ItemType PRIMARY KEY ( Id )
 );
 
 CREATE TABLE ModType (
-	Id			        uniqueidentifier NOT NULL,
-    FullName            nvarchar(100),
-	ShortName  	        nvarchar(50),
+	[Id]			      uniqueidentifier NOT NULL,
+    [FullName]            nvarchar(100),
+	[ShortName]  	      nvarchar(50),
 
 	CONSTRAINT Pk_ModType PRIMARY KEY ( Id )
 );
 
 CREATE TABLE ItemPrefix (
-	Id			        uniqueidentifier NOT NULL,
-    [Value]   	        nvarchar(50),
+	[Id]			      uniqueidentifier NOT NULL,
+    [Value]   	          nvarchar(50),
 
 	CONSTRAINT Pk_ItemPrefix PRIMARY KEY ( Id )
 );
 
 CREATE TABLE ItemPostfix (
-	Id			        uniqueidentifier NOT NULL,
-    [Value]   	        nvarchar(50),
+	[Id]			      uniqueidentifier NOT NULL,
+    [Value]   	          nvarchar(50),
 
 	CONSTRAINT Pk_ItemPostfix PRIMARY KEY ( Id )
 );
 
 CREATE TABLE Item (
-	Id			        uniqueidentifier NOT NULL,
-    [Name]              nvarchar(100),
-    [Description]       nvarchar(500),
-    ItemTypeId   	    uniqueidentifier,
-    ModTypeId           uniqueidentifier,
-    ItemPrefixId        uniqueidentifier,
-    ItemPostfixId       uniqueidentifier,
+	[Id]			      uniqueidentifier NOT NULL,
+    [Name]                nvarchar(100),
+    [Description]         nvarchar(500),
+    [ItemTypeId]   	      uniqueidentifier NULL,
+    [ModTypeId]           uniqueidentifier NULL,
+    [ItemPrefixId]        uniqueidentifier NULL,
+    [ItemPostfixId]       uniqueidentifier NULL,
 
 	CONSTRAINT Pk_Item PRIMARY KEY ( Id ),
     FOREIGN KEY ( ItemTypeId ) REFERENCES ItemType( Id ),

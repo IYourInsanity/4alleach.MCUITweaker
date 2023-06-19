@@ -83,7 +83,8 @@ internal static class DataMapper
             prop.SetValue(entity, stringValue, null);
         }
 
-        if (prop.PropertyType == typeof(Guid))
+        if (prop.PropertyType == typeof(Guid) ||
+            prop.PropertyType == typeof(Guid?))
         {
             prop.SetValue(entity, value, null);
         }

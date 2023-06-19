@@ -16,7 +16,8 @@ public sealed class ServiceHub : IServiceHub
         var serviceCollection = new ServiceCollection()
             .AddSingleton<IServiceHub>(serviceHub)
             .AddSingleton<IBusinessModelConstructService, BusinessModelConstructService>()
-            .AddSingleton<IProjectControllerService, ProjectControllerService>();
+            .AddSingleton<IProjectControllerService, ProjectControllerService>()
+            .AddSingleton<IDatabaseControllerService, DatabaseControllerService>();
 
         serviceHub.Initialize(serviceCollection);
 
@@ -30,6 +31,10 @@ public sealed class ServiceHub : IServiceHub
 
     public TService? Get<TService>() where TService : class, IService
     {
-        return _serviceProvider?.GetRequiredService<TService>();
+        var service = _serviceProvider?.GetService<TService>();
+
+        service?.Initialize();
+
+        return service;
     }
 }

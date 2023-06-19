@@ -4,6 +4,8 @@ namespace _4alleach.MCRecipeEditor.Services.Abstractions;
 
 public interface IProjectControllerService : IService
 {
+
+
     void CreateProject(string name);
     void SaveProject();
     void LoadProject();

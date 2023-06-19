@@ -14,14 +14,12 @@ internal static class ElementProviderExtension
     internal static TService? GetService<TService>(this IElementProvider<IExtendedFrameworkElement, IExtendedFrameworkElementViewModel> provider)
         where TService : class, IService
     {
-        return provider?.GetViewModel<MainWindowViewModel>()?.GetService<TService>();
+        return provider?.GetRootProvider()?.GetViewModel<MainWindowViewModel>()?.GetService<TService>();
     }
 
     internal static void UpdateAppState(this IElementProvider<IExtendedFrameworkElement, IExtendedFrameworkElementViewModel> provider, ApplicationState state, string description = "")
     {
-        var correctProvider = provider.ViewModel as MainWindowViewModel == null ? provider.GetParent<ExtendedWindow>()?.Provider : provider;
-
-        correctProvider?.GetProviderModule<IApplicationStateProvider>()?.Update(state, description);
+        provider?.GetRootProvider()?.GetProviderModule<IApplicationStateProvider>()?.Update(state, description);
     }
 
     internal static Task<TModalResult> ShowModal<TModalElement, TModalResult>(this IElementProvider<IExtendedFrameworkElement, IExtendedFrameworkElementViewModel> provider, params object[]? args)
@@ -41,5 +39,10 @@ internal static class ElementProviderExtension
         }
 
         throw new NotImplementedException();
+    }
+
+    internal static IElementProvider<IExtendedFrameworkElement, IExtendedFrameworkElementViewModel>? GetRootProvider(this IElementProvider<IExtendedFrameworkElement, IExtendedFrameworkElementViewModel> provider)
+    {
+        return provider.ViewModel is MainWindowViewModel ? provider : provider.GetParent<ExtendedWindow>()?.Provider;
     }
 }

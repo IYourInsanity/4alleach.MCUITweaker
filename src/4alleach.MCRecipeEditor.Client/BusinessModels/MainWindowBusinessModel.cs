@@ -11,12 +11,14 @@ internal sealed class MainWindowBusinessModel : BaseBusinessModel
 
     }
 
-    internal void Initialize()
+    internal async void Initialize()
     {
         var bmConstructService = serviceHub.Get<IBusinessModelConstructService>();
 
         bmConstructService?.Register<PreviewControlBusinessModel>(nameof(PreviewControl));
         bmConstructService?.Register<MenuControlBusinessModel>(nameof(MenuControl));
+
+        var databaseService = serviceHub.Get<IDatabaseControllerService>();
     }
 
     internal TService? GetService<TService>() where TService : class, IService

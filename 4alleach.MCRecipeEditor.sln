@@ -26,7 +26,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4alleach.MCRecipeEditor.Mod
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4alleach.MCRecipeEditor.Services", "src\4alleach.MCRecipeEditor.Services\4alleach.MCRecipeEditor.Services.csproj", "{80871950-BF9D-4063-AAB1-438A3CF99422}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4alleach.MCRecipeEditor.Common", "4alleach.MCRecipeEditor.Common\4alleach.MCRecipeEditor.Common.csproj", "{54F340B4-411A-49D9-B107-6104A54D101C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4alleach.MCRecipeEditor.Database", "src\4alleach.MCRecipeEditor.Database\4alleach.MCRecipeEditor.Database.csproj", "{736E1400-21C2-4F6C-9A4D-79C187ACFD99}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4alleach.MCRecipeEditor.Common", "src\4alleach.MCRecipeEditor.Common\4alleach.MCRecipeEditor.Common.csproj", "{7ECCF38B-76C9-47EC-92BE-09000772BD27}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{8274CF3F-469F-4354-BEF6-383A67651932}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4alleach.MCRecipeEditor.Database.Entities", "src\4alleach.MCRecipeEditor.Database.Entities\4alleach.MCRecipeEditor.Database.Entities.csproj", "{F91D6290-9D89-44D9-8697-CE440E0BA67D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,16 +56,26 @@ Global
 		{80871950-BF9D-4063-AAB1-438A3CF99422}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80871950-BF9D-4063-AAB1-438A3CF99422}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80871950-BF9D-4063-AAB1-438A3CF99422}.Release|Any CPU.Build.0 = Release|Any CPU
-		{54F340B4-411A-49D9-B107-6104A54D101C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{54F340B4-411A-49D9-B107-6104A54D101C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{54F340B4-411A-49D9-B107-6104A54D101C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{54F340B4-411A-49D9-B107-6104A54D101C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{736E1400-21C2-4F6C-9A4D-79C187ACFD99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{736E1400-21C2-4F6C-9A4D-79C187ACFD99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{736E1400-21C2-4F6C-9A4D-79C187ACFD99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{736E1400-21C2-4F6C-9A4D-79C187ACFD99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7ECCF38B-76C9-47EC-92BE-09000772BD27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7ECCF38B-76C9-47EC-92BE-09000772BD27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7ECCF38B-76C9-47EC-92BE-09000772BD27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7ECCF38B-76C9-47EC-92BE-09000772BD27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F91D6290-9D89-44D9-8697-CE440E0BA67D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F91D6290-9D89-44D9-8697-CE440E0BA67D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F91D6290-9D89-44D9-8697-CE440E0BA67D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F91D6290-9D89-44D9-8697-CE440E0BA67D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{EE645CB9-CF49-4AFE-82C9-60814BDF3A8D} = {F2E4C02B-9145-40B0-8E28-3A54536A6D66}
+		{736E1400-21C2-4F6C-9A4D-79C187ACFD99} = {8274CF3F-469F-4354-BEF6-383A67651932}
+		{F91D6290-9D89-44D9-8697-CE440E0BA67D} = {8274CF3F-469F-4354-BEF6-383A67651932}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C7E08A10-ECFB-48BD-841B-74E925343077}

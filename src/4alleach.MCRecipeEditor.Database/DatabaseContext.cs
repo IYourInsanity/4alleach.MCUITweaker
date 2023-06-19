@@ -227,9 +227,26 @@ internal class DatabaseContext : IDatabaseContext
         return result;
     }
 
-    public Task<int> Delete<TEntity>(IEnumerable<TEntity> entities) where TEntity : Asset
+    public async Task<int> Delete<TEntity>(IEnumerable<TEntity> entities) where TEntity : Asset
     {
-        throw new NotImplementedException();
+        var result = 0;
+
+        var strScriptBuild = new StringBuilder();
+        var claimedCommand = commandRegistry.ClaimDeleteCommand<TEntity>();
+
+        foreach (var entity in entities)
+        {
+            var script = claimedCommand.Compile(entity);
+
+            strScriptBuild.AppendLine(script);
+        }
+
+        await ExecuteNonQueryAsync(strScriptBuild.ToString(), command =>
+        {
+            result = command.ExecuteNonQuery();
+        });
+
+        return result;
     }
 
     #region DEFAULT

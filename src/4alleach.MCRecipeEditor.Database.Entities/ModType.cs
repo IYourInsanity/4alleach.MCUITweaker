@@ -5,7 +5,11 @@ using System.Data;
 namespace _4alleach.MCRecipeEditor.Database.Entities;
 public class ModType : Asset
 {
-    [DataName(nameof(Value))]
+    [DataName(nameof(FullName))]
     [DbType(DbType.String)]
-    public string? Value { get; set; }
+    public string? FullName { get; set; }
+
+    [DataName(nameof(ShortName))]
+    [DbType(DbType.String)]
+    public string? ShortName { get; set; }
 }

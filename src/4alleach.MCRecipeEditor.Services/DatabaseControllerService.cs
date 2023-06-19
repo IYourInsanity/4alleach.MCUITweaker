@@ -1,6 +1,8 @@
 ﻿using _4alleach.MCRecipeEditor.Database;
 using _4alleach.MCRecipeEditor.Database.Abstractions;
-using _4alleach.MCRecipeEditor.Database.Entities.Abstractions;
+using _4alleach.MCRecipeEditor.Mapper;
+using _4alleach.MCRecipeEditor.Mapper.Abstractions;
+using _4alleach.MCRecipeEditor.Models.Abstractions.Database;
 using _4alleach.MCRecipeEditor.Services.Abstractions;
 
 namespace _4alleach.MCRecipeEditor.Services;
@@ -9,6 +11,8 @@ internal sealed class DatabaseControllerService : IDatabaseControllerService
     private readonly IServiceHub serviceHub;
 
     private IDatabaseContext? context;
+
+    private IMapperRepository? mapper;
 
     public DatabaseControllerService(IServiceHub serviceHub)
     {
@@ -19,6 +23,8 @@ internal sealed class DatabaseControllerService : IDatabaseControllerService
     {
         context = Entry.CreateContext();
         context.Initialize();
+
+        mapper = new MapperRepository(context);
     }
 
     public Task<bool> TestConnection()
@@ -31,48 +37,57 @@ internal sealed class DatabaseControllerService : IDatabaseControllerService
         return context.TestConnection();
     }
 
-    public Task<int> Delete<TEntity>(TEntity entity) where TEntity : Asset
+    public Task<int> Delete<TModel>(TModel model) 
+        where TModel : Asset
     {
-        return context!.Delete(entity);
+        return mapper!.GetMapper<TModel>()!.Delete<TModel>(model);
     }
 
-    public Task<int> Delete<TEntity>(IEnumerable<TEntity> entities) where TEntity : Asset
+    public Task<int> Delete<TModel>(IEnumerable<TModel> models) 
+        where TModel : Asset
     {
-        return context!.Delete(entities);
+        return mapper!.GetMapper<TModel>()!.Delete<TModel>(models);
     }
 
-    public Task<int> Insert<TEntity>(TEntity entity) where TEntity : Asset
+    public Task<int> Insert<TModel>(TModel model) 
+        where TModel : Asset
     {
-        return context!.Insert(entity);
+        return mapper!.GetMapper<TModel>()!.Insert<TModel>(model);
     }
 
-    public Task<int> Insert<TEntity>(IEnumerable<TEntity> entities) where TEntity : Asset
+    public Task<int> Insert<TModel>(IEnumerable<TModel> models) 
+        where TModel : Asset
     {
-        return context!.Insert(entities);
+        return mapper!.GetMapper<TModel>()!.Insert<TModel>(models);
     }
 
-    public Task<IEnumerable<TEntity>?> SelectAll<TEntity>() where TEntity : Asset
+    public Task<IEnumerable<TModel>?> SelectAll<TModel>() 
+        where TModel : Asset
     {
-        return context!.SelectAll<TEntity>();
+        return mapper!.GetMapper<TModel>()!.SelectAll<TModel>();
     }
 
-    public Task<IEnumerable<TEntity>?> SelectCustom<TEntity>(string script) where TEntity : Asset
+    public Task<IEnumerable<TModel>?> SelectCustom<TModel>(string script) 
+        where TModel : Asset
     {
-        return context!.SelectCustom<TEntity>(script);
+        return mapper!.GetMapper<TModel>()!.SelectCustom<TModel>(script);
     }
 
-    public Task<IEnumerable<TEntity>?> SelectTop<TEntity>(int count) where TEntity : Asset
+    public Task<IEnumerable<TModel>?> SelectTop<TModel>(int count) 
+        where TModel : Asset
     {
-        return context!.SelectTop<TEntity>(count);
+        return mapper!.GetMapper<TModel>()!.SelectTop<TModel>(count);
     }
 
-    public Task<int> Update<TEntity>(TEntity entity) where TEntity : Asset
+    public Task<int> Update<TModel>(TModel model) 
+        where TModel : Asset
     {
-        return context!.Update<TEntity>(entity);
+        return mapper!.GetMapper<TModel>()!.Update<TModel>(model);
     }
 
-    public Task<int> Update<TEntity>(IEnumerable<TEntity> entities) where TEntity : Asset
+    public Task<int> Update<TModel>(IEnumerable<TModel> models) 
+        where TModel : Asset
     {
-        return context!.Update<TEntity>(entities);
+        return mapper!.GetMapper<TModel>()!.Update<TModel>(models);
     }
 }

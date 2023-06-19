@@ -1,7 +1,8 @@
 ﻿using _4alleach.MCRecipeEditor.Client.Views.Controls;
-using _4alleach.MCRecipeEditor.Database.Entities;
+using _4alleach.MCRecipeEditor.Models.Database;
 using _4alleach.MCRecipeEditor.Services;
 using _4alleach.MCRecipeEditor.Services.Abstractions;
+using System.Diagnostics;
 
 namespace _4alleach.MCRecipeEditor.Client.BusinessModels;
 
@@ -20,6 +21,23 @@ internal sealed class MainWindowBusinessModel : BaseBusinessModel
         bmConstructService?.Register<MenuControlBusinessModel>(nameof(MenuControl));
 
         var databaseService = serviceHub.Get<IDatabaseControllerService>();
+
+        var stopwatch = new Stopwatch();
+
+        stopwatch.Start();
+
+        var insertResult = await databaseService!.Insert<Item>(new Item()
+        {
+            Id = Guid.NewGuid(),
+            Name = "Test",
+            Description = "Best test"
+        });
+
+        var items = await databaseService!.SelectAll<Item>();
+
+        var delResult = await databaseService!.Delete(items!);
+
+        stopwatch.Stop();
     }
 
     internal TService? GetService<TService>() where TService : class, IService

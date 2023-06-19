@@ -2,18 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <RootNamespace>_4alleach.MCRecipeEditor.Services</RootNamespace>
+    <RootNamespace>_4alleach.MCRecipeEditor.Mapper</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\4alleach.MCRecipeEditor.Database.Entities\4alleach.MCRecipeEditor.Database.Entities.csproj" />
     <ProjectReference Include="..\4alleach.MCRecipeEditor.Database\4alleach.MCRecipeEditor.Database.csproj" />
-    <ProjectReference Include="..\4alleach.MCRecipeEditor.Mapper\4alleach.MCRecipeEditor.Mapper.csproj" />
     <ProjectReference Include="..\4alleach.MCRecipeEditor.Models\4alleach.MCRecipeEditor.Models.csproj" />
   </ItemGroup>
 

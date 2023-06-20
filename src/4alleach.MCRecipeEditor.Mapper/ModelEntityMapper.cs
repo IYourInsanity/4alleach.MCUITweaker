@@ -22,10 +22,10 @@ internal sealed class ModelEntityMapper<TModel, TEntity> : IModelEntityMapper
     public async Task<IEnumerable<TInternalModel>?> SelectAll<TInternalModel>(CancellationToken token) 
         where TInternalModel : ModelAsset
     {
-        return (await SelectAllInternal(token)) as IEnumerable<TInternalModel>;
+        return (await SelectAllInternal(context, token)) as IEnumerable<TInternalModel>;
     }
 
-    private async Task<IEnumerable<TModel>?> SelectAllInternal(CancellationToken token)
+    private static async Task<IEnumerable<TModel>?> SelectAllInternal(IDatabaseContext context, CancellationToken token)
     {
         return (await context.SelectAll<TEntity>(token))!.ToModel<TModel, TEntity>();
     }
@@ -33,10 +33,10 @@ internal sealed class ModelEntityMapper<TModel, TEntity> : IModelEntityMapper
     public async Task<IEnumerable<TInternalModel>?> SelectCustom<TInternalModel>(string script, CancellationToken token) 
         where TInternalModel : ModelAsset
     {
-        return (await SelectCustomInternal(script, token)) as IEnumerable<TInternalModel>;
+        return (await SelectCustomInternal(context, script, token)) as IEnumerable<TInternalModel>;
     }
 
-    private async Task<IEnumerable<TModel>?> SelectCustomInternal(string script, CancellationToken token)
+    private static async Task<IEnumerable<TModel>?> SelectCustomInternal(IDatabaseContext context, string script, CancellationToken token)
     {
         return (await context.SelectCustom<TEntity>(script, token))!.ToModel<TModel, TEntity>();
     }
@@ -44,10 +44,10 @@ internal sealed class ModelEntityMapper<TModel, TEntity> : IModelEntityMapper
     public async Task<IEnumerable<TInternalModel>?> SelectTop<TInternalModel>(int count, CancellationToken token) 
         where TInternalModel : ModelAsset
     {
-        return (await SelectTopInternal(count, token)) as IEnumerable<TInternalModel>;
+        return (await SelectTopInternal(context, count, token)) as IEnumerable<TInternalModel>;
     }
 
-    public async Task<IEnumerable<TModel>?> SelectTopInternal(int count, CancellationToken token) 
+    public static async Task<IEnumerable<TModel>?> SelectTopInternal(IDatabaseContext context, int count, CancellationToken token) 
     {
         return (await context.SelectTop<TEntity>(count, token))!.ToModel<TModel, TEntity>();
     }

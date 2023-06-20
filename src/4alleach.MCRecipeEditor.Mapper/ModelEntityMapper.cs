@@ -19,92 +19,92 @@ internal sealed class ModelEntityMapper<TModel, TEntity> : IModelEntityMapper
 
     #region SELECT
 
-    public async Task<IEnumerable<TInternalModel>?> SelectAll<TInternalModel>() 
+    public async Task<IEnumerable<TInternalModel>?> SelectAll<TInternalModel>(CancellationToken token) 
         where TInternalModel : ModelAsset
     {
-        return (await SelectAllInternal()) as IEnumerable<TInternalModel>;
+        return (await SelectAllInternal(token)) as IEnumerable<TInternalModel>;
     }
 
-    private async Task<IEnumerable<TModel>?> SelectAllInternal()
+    private async Task<IEnumerable<TModel>?> SelectAllInternal(CancellationToken token)
     {
-        return (await context.SelectAll<TEntity>())!.ToModel<TModel, TEntity>();
+        return (await context.SelectAll<TEntity>(token))!.ToModel<TModel, TEntity>();
     }
 
-    public async Task<IEnumerable<TInternalModel>?> SelectCustom<TInternalModel>(string script) 
+    public async Task<IEnumerable<TInternalModel>?> SelectCustom<TInternalModel>(string script, CancellationToken token) 
         where TInternalModel : ModelAsset
     {
-        return (await SelectCustomInternal(script)) as IEnumerable<TInternalModel>;
+        return (await SelectCustomInternal(script, token)) as IEnumerable<TInternalModel>;
     }
 
-    private async Task<IEnumerable<TModel>?> SelectCustomInternal(string script)
+    private async Task<IEnumerable<TModel>?> SelectCustomInternal(string script, CancellationToken token)
     {
-        return (await context.SelectCustom<TEntity>(script))!.ToModel<TModel, TEntity>();
+        return (await context.SelectCustom<TEntity>(script, token))!.ToModel<TModel, TEntity>();
     }
 
-    public async Task<IEnumerable<TInternalModel>?> SelectTop<TInternalModel>(int count) 
+    public async Task<IEnumerable<TInternalModel>?> SelectTop<TInternalModel>(int count, CancellationToken token) 
         where TInternalModel : ModelAsset
     {
-        return (await SelectTopInternal(count)) as IEnumerable<TInternalModel>;
+        return (await SelectTopInternal(count, token)) as IEnumerable<TInternalModel>;
     }
 
-    public async Task<IEnumerable<TModel>?> SelectTopInternal(int count) 
+    public async Task<IEnumerable<TModel>?> SelectTopInternal(int count, CancellationToken token) 
     {
-        return (await context.SelectTop<TEntity>(count))!.ToModel<TModel, TEntity>();
+        return (await context.SelectTop<TEntity>(count, token))!.ToModel<TModel, TEntity>();
     }
 
     #endregion
 
     #region INSERT
 
-    public Task<int> Insert<TInternalModel>(TInternalModel model) 
+    public Task<int> Insert<TInternalModel>(TInternalModel model, CancellationToken token) 
         where TInternalModel : ModelAsset
     {
         var entity = model.ToEntity<TEntity, TInternalModel>()!;
 
-        return context.Insert(entity);
+        return context.Insert(entity, token);
     }
 
-    public Task<int> Insert<TInternalModel>(IEnumerable<TInternalModel> models) where TInternalModel : ModelAsset
+    public Task<int> Insert<TInternalModel>(IEnumerable<TInternalModel> models, CancellationToken token) where TInternalModel : ModelAsset
     {
         var entities = models.ToEntity<TEntity, TInternalModel>()!;
 
-        return context.Insert(entities);
+        return context.Insert(entities, token);
     }
 
     #endregion
 
     #region DELETE
 
-    public Task<int> Delete<TInternalModel>(TInternalModel model) where TInternalModel : ModelAsset
+    public Task<int> Delete<TInternalModel>(TInternalModel model, CancellationToken token) where TInternalModel : ModelAsset
     {
         var entity = model.ToEntity<TEntity, TInternalModel>()!;
 
-        return context.Delete(entity);
+        return context.Delete(entity, token);
     }
 
-    public Task<int> Delete<TInternalModel>(IEnumerable<TInternalModel> models) where TInternalModel : ModelAsset
+    public Task<int> Delete<TInternalModel>(IEnumerable<TInternalModel> models, CancellationToken token) where TInternalModel : ModelAsset
     {
         var entities = models.ToEntity<TEntity, TInternalModel>()!;
 
-        return context.Delete(entities);
+        return context.Delete(entities, token);
     }
 
     #endregion
 
     #region UPDATE
 
-    public Task<int> Update<TInternalModel>(TInternalModel model) where TInternalModel : ModelAsset
+    public Task<int> Update<TInternalModel>(TInternalModel model, CancellationToken token) where TInternalModel : ModelAsset
     {
         var entity = model.ToEntity<TEntity, TInternalModel>()!;
 
-        return context.Update(entity);
+        return context.Update(entity, token);
     }
 
-    public Task<int> Update<TInternalModel>(IEnumerable<TInternalModel> models) where TInternalModel : ModelAsset
+    public Task<int> Update<TInternalModel>(IEnumerable<TInternalModel> models, CancellationToken token) where TInternalModel : ModelAsset
     {
         var entities = models.ToEntity<TEntity, TInternalModel>()!;
 
-        return context.Update(entities);
+        return context.Update(entities, token);
     }
 
     #endregion

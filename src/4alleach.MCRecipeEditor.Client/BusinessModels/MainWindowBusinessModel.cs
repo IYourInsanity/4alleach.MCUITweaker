@@ -31,11 +31,11 @@ internal sealed class MainWindowBusinessModel : BaseBusinessModel
             Id = Guid.NewGuid(),
             Name = "Test",
             Description = "Best test"
-        });
+        }, CancellationToken.None);
 
-        var items = await databaseService!.SelectAll<Item>();
+        var items = await databaseService!.SelectAll<Item>(CancellationToken.None);
 
-        var delResult = await databaseService!.Delete(items!);
+        var delResult = await databaseService!.Delete(items!, CancellationToken.None);
 
         stopwatch.Stop();
     }

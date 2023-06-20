@@ -7,6 +7,8 @@ using System.Collections.Concurrent;
 namespace _4alleach.MCRecipeEditor.Mapper;
 public sealed class MapperRepository : IMapperRepository
 {
+
+    //TODO Think about SortedList
     private readonly ConcurrentDictionary<Type, IModelEntityMapper> storage;
 
     public MapperRepository(IDatabaseContext context)

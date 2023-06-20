@@ -54,8 +54,8 @@ internal class DatabaseContext : IDatabaseContext
                 FolderHelper.Create(FolderPath);
             }
 
-            await ExecuteNonQueryAsync(DBCreateScripts.Asset);
-            await ExecuteNonQueryAsync(DBCreateScripts.AssetTestItem);
+            await ExecuteNonQueryAsync(DBCreateScripts.Asset, CancellationToken.None);
+            await ExecuteNonQueryAsync(DBCreateScripts.AssetTestItem, CancellationToken.None);
         }
         else if (await TestConnection() == false)
         {
@@ -76,36 +76,36 @@ internal class DatabaseContext : IDatabaseContext
         await MakeSessionAsync(connection =>
         {
             result = true;
-        });
+        }, CancellationToken.None);
 
         return result;
     }
 
     #region SELECT
 
-    public Task<IEnumerable<TEntity>?> SelectAll<TEntity>()
+    public Task<IEnumerable<TEntity>?> SelectAll<TEntity>(CancellationToken token)
         where TEntity : Asset
     {
         var script = commandRegistry.ClaimSelectAllCommand<TEntity>();
 
-        return SelectInternal<TEntity>(script);
+        return SelectInternal<TEntity>(script, token);
     }
 
-    public Task<IEnumerable<TEntity>?> SelectTop<TEntity>(int count)
+    public Task<IEnumerable<TEntity>?> SelectTop<TEntity>(int count, CancellationToken token)
         where TEntity : Asset
     {
         var script = commandRegistry.ClaimSelectTopCommand<TEntity>().Format(count);
 
-        return SelectInternal<TEntity>(script);
+        return SelectInternal<TEntity>(script, token);
     }
 
-    public Task<IEnumerable<TEntity>?> SelectCustom<TEntity>(string script)
+    public Task<IEnumerable<TEntity>?> SelectCustom<TEntity>(string script, CancellationToken token)
         where TEntity : Asset
     {
-        return SelectInternal<TEntity>(script);
+        return SelectInternal<TEntity>(script, token);
     }
 
-    private async Task<IEnumerable<TEntity>?> SelectInternal<TEntity>(string script)
+    private async Task<IEnumerable<TEntity>?> SelectInternal<TEntity>(string script, CancellationToken token)
         where TEntity : Asset
     {
         var name = typeof(TEntity).Name;
@@ -122,7 +122,7 @@ internal class DatabaseContext : IDatabaseContext
                 adapter.Fill(table);
                 entities = table.Map<TEntity>();
             }
-        });
+        }, token);
 
         return entities;
     }
@@ -131,7 +131,7 @@ internal class DatabaseContext : IDatabaseContext
 
     #region INSERT
 
-    public async Task<int> Insert<TEntity>(TEntity entity)
+    public async Task<int> Insert<TEntity>(TEntity entity, CancellationToken token)
         where TEntity : Asset
     {
         var result = 0;
@@ -141,12 +141,12 @@ internal class DatabaseContext : IDatabaseContext
         await ExecuteNonQueryAsync(script, command =>
         {
             result = command.ExecuteNonQuery();
-        });
+        }, token);
 
         return result;
     }
 
-    public async Task<int> Insert<TEntity>(IEnumerable<TEntity> entities)
+    public async Task<int> Insert<TEntity>(IEnumerable<TEntity> entities, CancellationToken token)
         where TEntity : Asset
     {
         //TODO Implement BulkCopy
@@ -166,7 +166,7 @@ internal class DatabaseContext : IDatabaseContext
         await ExecuteNonQueryAsync(strScriptBuild.ToString(), command =>
         {
             result = command.ExecuteNonQuery();
-        });
+        }, token);
 
         return result;
     }
@@ -175,7 +175,7 @@ internal class DatabaseContext : IDatabaseContext
 
     #region UPDATE
 
-    public async Task<int> Update<TEntity>(TEntity entity)
+    public async Task<int> Update<TEntity>(TEntity entity, CancellationToken token)
         where TEntity : Asset
     {
         var result = 0;
@@ -184,12 +184,12 @@ internal class DatabaseContext : IDatabaseContext
         await ExecuteNonQueryAsync(script, command =>
         {
             result = command.ExecuteNonQuery();
-        });
+        }, token);
 
         return result;
     }
 
-    public async Task<int> Update<TEntity>(IEnumerable<TEntity> entities)
+    public async Task<int> Update<TEntity>(IEnumerable<TEntity> entities, CancellationToken token)
         where TEntity : Asset
     {
         var result = 0;
@@ -207,14 +207,14 @@ internal class DatabaseContext : IDatabaseContext
         await ExecuteNonQueryAsync(strScriptBuild.ToString(), command =>
         {
             result = command.ExecuteNonQuery();
-        });
+        }, token);
 
         return result;
     }
 
     #endregion
 
-    public async Task<int> Delete<TEntity>(TEntity entity) where TEntity : Asset
+    public async Task<int> Delete<TEntity>(TEntity entity, CancellationToken token) where TEntity : Asset
     {
         var result = 0;
         var script = commandRegistry.ClaimDeleteCommand<TEntity>().Compile(entity);
@@ -222,12 +222,12 @@ internal class DatabaseContext : IDatabaseContext
         await ExecuteNonQueryAsync(script, command =>
         {
             result = command.ExecuteNonQuery();
-        });
+        }, token);
 
         return result;
     }
 
-    public async Task<int> Delete<TEntity>(IEnumerable<TEntity> entities) where TEntity : Asset
+    public async Task<int> Delete<TEntity>(IEnumerable<TEntity> entities, CancellationToken token) where TEntity : Asset
     {
         var result = 0;
 
@@ -244,14 +244,14 @@ internal class DatabaseContext : IDatabaseContext
         await ExecuteNonQueryAsync(strScriptBuild.ToString(), command =>
         {
             result = command.ExecuteNonQuery();
-        });
+        }, token);
 
         return result;
     }
 
     #region DEFAULT
 
-    private Task ExecuteNonQueryAsync(string script)
+    private Task ExecuteNonQueryAsync(string script, CancellationToken token)
     {
         return MakeSessionAsync(connection =>
         {
@@ -259,18 +259,18 @@ internal class DatabaseContext : IDatabaseContext
             {
                 command.ExecuteNonQuery();
             });
-        });
+        }, token);
     }
 
-    private Task ExecuteNonQueryAsync(string script, Action<SQLiteCommand> action)
+    private Task ExecuteNonQueryAsync(string script, Action<SQLiteCommand> action, CancellationToken token)
     {
         return MakeSessionAsync(connection =>
         {
             MakeCommand(script, connection, action);
-        });
+        }, token);
     }
 
-    private Task ExecuteReader<TResult>(string script, Func<SQLiteDataReader, TResult> func)
+    private Task ExecuteReader<TResult>(string script, Func<SQLiteDataReader, TResult> func, CancellationToken token)
     {
         return MakeSessionAsync(connection =>
         {
@@ -284,10 +284,10 @@ internal class DatabaseContext : IDatabaseContext
                     }
                 }
             });
-        });
+        }, token);
     }
 
-    private Task ExecuteAdapter(string script, Action<SQLiteConnection, SQLiteDataAdapter> action)
+    private Task ExecuteAdapter(string script, Action<SQLiteConnection, SQLiteDataAdapter> action, CancellationToken token)
     {
         return MakeSessionAsync(connection =>
         {
@@ -298,18 +298,18 @@ internal class DatabaseContext : IDatabaseContext
                     action(connection, adapter);
                 }
             });
-        });
+        }, token);
     }
 
     #endregion
 
-    private async Task MakeSessionAsync(Action<SQLiteConnection> action)
+    private async Task MakeSessionAsync(Action<SQLiteConnection> action, CancellationToken token)
     {
         using (var connection = CreateConnection(connectionString))
         {
             try
             {
-                await connection.OpenAsync();
+                await connection.OpenAsync(token);
                 action(connection);
             }
             catch (Exception)
@@ -346,7 +346,7 @@ internal class DatabaseContext : IDatabaseContext
     {
         try
         {
-            return new SQLiteConnection(connectionString);
+            return new SQLiteConnection(connectionString, true);
         }
         catch (Exception)
         {

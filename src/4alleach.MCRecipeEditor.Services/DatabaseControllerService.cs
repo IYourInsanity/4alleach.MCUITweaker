@@ -37,57 +37,57 @@ internal sealed class DatabaseControllerService : IDatabaseControllerService
         return context.TestConnection();
     }
 
-    public Task<int> Delete<TModel>(TModel model) 
+    public Task<int> Delete<TModel>(TModel model, CancellationToken token) 
         where TModel : Asset
     {
-        return mapper!.GetMapper<TModel>()!.Delete<TModel>(model);
+        return mapper!.GetMapper<TModel>()!.Delete(model, token);
     }
 
-    public Task<int> Delete<TModel>(IEnumerable<TModel> models) 
+    public Task<int> Delete<TModel>(IEnumerable<TModel> models, CancellationToken token) 
         where TModel : Asset
     {
-        return mapper!.GetMapper<TModel>()!.Delete<TModel>(models);
+        return mapper!.GetMapper<TModel>()!.Delete(models, token);
     }
 
-    public Task<int> Insert<TModel>(TModel model) 
+    public Task<int> Insert<TModel>(TModel model, CancellationToken token) 
         where TModel : Asset
     {
-        return mapper!.GetMapper<TModel>()!.Insert<TModel>(model);
+        return mapper!.GetMapper<TModel>()!.Insert(model, token);
     }
 
-    public Task<int> Insert<TModel>(IEnumerable<TModel> models) 
+    public Task<int> Insert<TModel>(IEnumerable<TModel> models, CancellationToken token) 
         where TModel : Asset
     {
-        return mapper!.GetMapper<TModel>()!.Insert<TModel>(models);
+        return mapper!.GetMapper<TModel>()!.Insert(models, token);
     }
 
-    public Task<IEnumerable<TModel>?> SelectAll<TModel>() 
+    public Task<IEnumerable<TModel>?> SelectAll<TModel>(CancellationToken token) 
         where TModel : Asset
     {
-        return mapper!.GetMapper<TModel>()!.SelectAll<TModel>();
+        return mapper!.GetMapper<TModel>()!.SelectAll<TModel>(token);
     }
 
-    public Task<IEnumerable<TModel>?> SelectCustom<TModel>(string script) 
+    public Task<IEnumerable<TModel>?> SelectCustom<TModel>(string script, CancellationToken token) 
         where TModel : Asset
     {
-        return mapper!.GetMapper<TModel>()!.SelectCustom<TModel>(script);
+        return mapper!.GetMapper<TModel>()!.SelectCustom<TModel>(script, token);
     }
 
-    public Task<IEnumerable<TModel>?> SelectTop<TModel>(int count) 
+    public Task<IEnumerable<TModel>?> SelectTop<TModel>(int count, CancellationToken token) 
         where TModel : Asset
     {
-        return mapper!.GetMapper<TModel>()!.SelectTop<TModel>(count);
+        return mapper!.GetMapper<TModel>()!.SelectTop<TModel>(count, token);
     }
 
-    public Task<int> Update<TModel>(TModel model) 
+    public Task<int> Update<TModel>(TModel model, CancellationToken token) 
         where TModel : Asset
     {
-        return mapper!.GetMapper<TModel>()!.Update<TModel>(model);
+        return mapper!.GetMapper<TModel>()!.Update(model, token);
     }
 
-    public Task<int> Update<TModel>(IEnumerable<TModel> models) 
+    public Task<int> Update<TModel>(IEnumerable<TModel> models, CancellationToken token) 
         where TModel : Asset
     {
-        return mapper!.GetMapper<TModel>()!.Update<TModel>(models);
+        return mapper!.GetMapper<TModel>()!.Update(models, token);
     }
 }

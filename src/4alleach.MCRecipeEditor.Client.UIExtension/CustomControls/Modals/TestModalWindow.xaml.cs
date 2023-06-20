@@ -16,7 +16,7 @@ public sealed partial class TestModalWindow : ExtendedModalWindow
     {
         InitializeComponent();
 
-        completionSource = new TaskCompletionSource<IModalResult>();
+        completionSource = new TaskCompletionSource<IModalResult>(TaskCreationOptions.RunContinuationsAsynchronously);
 
         DataContext = new TestModalViewModel(Container, completionSource, Provider);
     }

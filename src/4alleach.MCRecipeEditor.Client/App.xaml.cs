@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using _4alleach.MCRecipeEditor.Client.Helpers;
+using System.Windows;
 
 namespace _4alleach.MCRecipeEditor;
 
@@ -7,6 +8,17 @@ namespace _4alleach.MCRecipeEditor;
 /// </summary>
 public partial class App : Application
 {
+    protected override void OnStartup(StartupEventArgs e)
+    {
+        base.OnStartup(e);
 
+
+        RunApplication();
+    }
+
+    private void RunApplication()
+    {
+        ThreadPoolConfigurationHelper.ConfigureThreadPool();
+    }
 }
 

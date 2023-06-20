@@ -49,13 +49,10 @@ internal class DatabaseContext : IDatabaseContext
 
         if (FileHelper.IsExist(AssetPath) == false)
         {
-            if(FolderHelper.IsExist(FolderPath) == false)
-            {
-                FolderHelper.Create(FolderPath);
-            }
+            FolderHelper.CreateIfNotExist(FolderPath);
 
-            await ExecuteNonQueryAsync(DBCreateScripts.Asset, CancellationToken.None);
-            await ExecuteNonQueryAsync(DBCreateScripts.AssetTestItem, CancellationToken.None);
+            await ExecuteNonQueryAsync(DBCreateScripts.Asset, CancellationToken.None).ConfigureAwait(false);
+            await ExecuteNonQueryAsync(DBCreateScripts.AssetData, CancellationToken.None).ConfigureAwait(false);
         }
         else if (await TestConnection() == false)
         {

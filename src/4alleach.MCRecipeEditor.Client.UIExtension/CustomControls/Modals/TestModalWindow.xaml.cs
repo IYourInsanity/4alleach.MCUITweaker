@@ -17,7 +17,6 @@ public sealed partial class TestModalWindow : ExtendedModalWindow
         InitializeComponent();
 
         completionSource = new TaskCompletionSource<IModalResult>(TaskCreationOptions.RunContinuationsAsynchronously);
-
         DataContext = new TestModalViewModel(Container, completionSource, Provider);
     }
 
@@ -28,7 +27,7 @@ public sealed partial class TestModalWindow : ExtendedModalWindow
 
     protected override void OnActivated(EventArgs e)
     {
-        completionSource = new TaskCompletionSource<IModalResult>();
+        completionSource = new TaskCompletionSource<IModalResult>(TaskCreationOptions.RunContinuationsAsynchronously);
 
         base.OnActivated(e);
     }

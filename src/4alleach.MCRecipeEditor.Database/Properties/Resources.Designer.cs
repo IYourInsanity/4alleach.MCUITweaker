@@ -61,19 +61,28 @@ namespace _4alleach.MCRecipeEditor.Database.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CREATE TABLE Item (
-        ///	Id			        uniqueidentifier NOT NULL,
-        ///    [Name]              nvarchar(100),
-        ///    [Description]       nvarchar(500),
-        ///    ItemTypeId   	    uniqueidentifier,
-        ///    ModTypeId           uniqueidentifier,
-        ///    ItemPrefixId        uniqueidentifier,
-        ///    ItemPostfixId       uniqueidentifier,
+        ///   Looks up a localized string similar to CREATE TABLE ItemType (
+        ///	[Id]			      uniqueidentifier NOT NULL,
+        ///	[Value]   	          nvarchar(50),
         ///
-        ///	CONSTRAINT Pk_Item PRIMARY KEY ( Id ),
-        ///    FOREIGN KEY ( ItemTypeId ) REFERENCES ItemType( Id ),
-        ///    FOREIGN KEY ( ModTypeId ) REFERENCES ModType( Id ),
-        ///    FOREIGN KEY ( ItemPrefixId ) REFEREN [rest of string was truncated]&quot;;.
+        ///	CONSTRAINT Pk_ItemType PRIMARY KEY ( Id )
+        ///);
+        ///
+        ///CREATE TABLE ModType (
+        ///	[Id]			      uniqueidentifier NOT NULL,
+        ///    [FullName]            nvarchar(100),
+        ///	[ShortName]  	      nvarchar(50),
+        ///
+        ///	CONSTRAINT Pk_ModType PRIMARY KEY ( Id )
+        ///);
+        ///
+        ///CREATE TABLE ItemPrefix (
+        ///	[Id]			      uniqueidentifier NOT NULL,
+        ///    [Value]   	          nvarchar(50),
+        ///
+        ///	CONSTRAINT Pk_ItemPrefix PRIMARY KEY ( Id )
+        ///);
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Asset_Create {
             get {
@@ -82,49 +91,21 @@ namespace _4alleach.MCRecipeEditor.Database.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to INSERT INTO ItemPrefix (
-        ///	Id,
-        ///    [Value]
-        ///) 
-        ///VALUES (
-        ///	&apos;B5A0EB64-CB9F-47F8-B237-439C30ED170B&apos;,
-        ///	&apos;Minecraft&apos;
-        ///);
+        ///   Looks up a localized string similar to INSERT INTO ItemType ( [Id], [Value] ) 
+        ///VALUES ( &apos;8d9f9455-4c58-4c54-afd2-5c64ba1ea6aa&apos;, &apos;Fluid&apos; ),
+        ///       ( &apos;276a7692-9213-4cfb-8d0b-e39dc60996d4&apos;, &apos;Block&apos; ),
+        ///       ( &apos;0154b8eb-bc89-4967-ab7a-5ed9956fdbaa&apos;, &apos;Entity&apos; );
         ///
-        ///INSERT INTO ItemPostfix (
-        ///	Id,
-        ///    [Value]
-        ///) 
-        ///VALUES (
-        ///	&apos;EECDD304-2FB3-46B5-AE04-5A429640BD5D&apos;,
-        ///	&apos;12&apos;
-        ///);
+        ///INSERT INTO ModType ( [Id], [FullName], [ShortName] ) 
+        ///VALUES ( &apos;17c59ca7-f168-4929-929e-f06745abe58d&apos;, &apos;Minecraft&apos;, &apos;minecraft&apos; );
         ///
-        ///INSERT INTO ModType (
-        ///	Id,
-        ///    FullName,
-        ///    ShortName
-        ///) 
-        ///VALUES (
-        ///	&apos;17C59CA7-F168-4929-929E-F06745ABE58D&apos;,
-        ///	&apos;Minecraft&apos;,
-        ///    &apos;minecraft&apos;
-        ///);
         ///
-        ///INSERT INTO ItemType (
-        ///	Id,
-        ///    [Value]
-        ///) 
-        ///VALUES (
-        ///	&apos;8D9F9455-4C58-4C54-AFD2-5C64BA1EA6AA&apos;,
-        ///	&apos;Fluid&apos;
-        ///);
-        ///
-        ///INSERT I [rest of string was truncated]&quot;;.
+        ///INSERT INTO Item ( [Id], [Name], [Description], [ItemTypeId], [ModTypeId] ) 
+        ///VALUES ( &apos;de17ef40-6d85-4c12-9d5d-4251bf991de7&apos;, &apos;Air&apos;, &apos;Fill the voi [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string Asset_Test_Item {
+        internal static string Asset_Create_DefaultData {
             get {
-                return ResourceManager.GetString("Asset_Test_Item", resourceCulture);
+                return ResourceManager.GetString("Asset_Create_DefaultData", resourceCulture);
             }
         }
     }

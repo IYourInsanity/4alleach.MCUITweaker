@@ -6,6 +6,14 @@ public static class FolderHelper
     {
         Directory.CreateDirectory(path);
     }
+    
+    public static void CreateIfNotExist(string path)
+    {
+        if(IsExist(path) == false)
+        {
+            Create(path);
+        }
+    }
 
     public static bool IsExist(string path)
     {

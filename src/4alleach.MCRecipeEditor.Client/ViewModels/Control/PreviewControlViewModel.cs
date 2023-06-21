@@ -7,13 +7,11 @@ using _4alleach.MCRecipeEditor.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
-using _4alleach.MCRecipeEditor.Client.ViewModels.Windows;
 using _4alleach.MCRecipeEditor.Services.Abstractions;
 using _4alleach.MCRecipeEditor.Client.Extensions;
-using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.Logic.Modules;
 using _4alleach.MCRecipeEditor.Client.UIExtension.CustomControls.Modals;
 
-namespace _4alleach.MCRecipeEditor.Client.ViewModels.Controls;
+namespace _4alleach.MCRecipeEditor.Client.ViewModels.Control;
 
 public sealed partial class PreviewControlViewModel : ControlViewModel
 {

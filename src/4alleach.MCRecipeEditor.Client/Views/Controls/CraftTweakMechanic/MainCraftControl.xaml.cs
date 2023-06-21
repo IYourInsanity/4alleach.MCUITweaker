@@ -1,7 +1,7 @@
 ﻿using _4alleach.MCRecipeEditor.Client.UIExtension.UserControl;
-using _4alleach.MCRecipeEditor.Client.ViewModels.Controls.CraftTweakMechanics;
+using _4alleach.MCRecipeEditor.Client.ViewModels.Control.CraftTweakMechanic;
 
-namespace _4alleach.MCRecipeEditor.Client.Views.Controls.CraftTweakMechanics;
+namespace _4alleach.MCRecipeEditor.Client.Views.Controls.CraftTweakMechanic;
 
 public partial class MainCraftControl : ExtendedControl
 {

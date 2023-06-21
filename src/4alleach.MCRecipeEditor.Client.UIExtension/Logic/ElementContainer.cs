@@ -6,7 +6,7 @@ namespace _4alleach.MCRecipeEditor.Client.UIExtension.Logic;
 
 internal sealed class ElementContainer : IElementContainer
 {
-    private Panel container;
+    private readonly Panel container;
 
     internal ElementContainer(Panel container)
     {

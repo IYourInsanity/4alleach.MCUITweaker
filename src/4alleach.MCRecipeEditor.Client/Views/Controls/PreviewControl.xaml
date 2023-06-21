@@ -4,14 +4,15 @@
                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
                             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
                             xmlns:local="clr-namespace:_4alleach.MCRecipeEditor.Client.Views.Controls"
-                            xmlns:viewmodel="clr-namespace:_4alleach.MCRecipeEditor.Client.ViewModels.Controls"
+                            xmlns:viewmodel="clr-namespace:_4alleach.MCRecipeEditor.Client.ViewModels.Control"
                             xmlns:extControl="clr-namespace:_4alleach.MCRecipeEditor.Client.UIExtension.UserControl;assembly=4alleach.MCRecipeEditor.Client.UIExtension" 
                             mc:Ignorable="d"
                             d:DataContext="{d:DesignInstance Type=viewmodel:PreviewControlViewModel}">
     
     <Grid Visibility="{Binding Path=IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
           HorizontalAlignment="Stretch"
-          VerticalAlignment="Stretch">
+          VerticalAlignment="Stretch"
+          Background="Transparent">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

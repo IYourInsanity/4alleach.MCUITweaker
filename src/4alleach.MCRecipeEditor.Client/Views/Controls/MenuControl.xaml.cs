@@ -1,5 +1,5 @@
 ﻿using _4alleach.MCRecipeEditor.Client.UIExtension.UserControl;
-using _4alleach.MCRecipeEditor.Client.ViewModels.Controls;
+using _4alleach.MCRecipeEditor.Client.ViewModels.Control;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;

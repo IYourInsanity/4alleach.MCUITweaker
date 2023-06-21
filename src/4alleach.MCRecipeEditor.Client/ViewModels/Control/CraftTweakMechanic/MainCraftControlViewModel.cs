@@ -2,14 +2,14 @@
 using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions;
 using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.ViewModel;
 using _4alleach.MCRecipeEditor.Client.UIExtension.Extensions;
-using _4alleach.MCRecipeEditor.Client.Views.Controls.CraftTweakMechanics.Recipes;
+using _4alleach.MCRecipeEditor.Client.Views.Controls.CraftTweakMechanic.Recipe;
 using _4alleach.MCRecipeEditor.Models.CraftTweak.Enumerable;
 using _4alleach.MCRecipeEditor.Models.Services.Project;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
 
-namespace _4alleach.MCRecipeEditor.Client.ViewModels.Controls.CraftTweakMechanics;
+namespace _4alleach.MCRecipeEditor.Client.ViewModels.Control.CraftTweakMechanic;
 
 internal sealed partial class MainCraftControlViewModel : ControlViewModel
 {

@@ -19,12 +19,9 @@ public abstract partial class BaseViewModel : ObservableObject, IBaseViewModel
 
     protected IElementProvider<IExtendedFrameworkElement, IExtendedFrameworkElementViewModel> provider;
 
-    protected BaseViewModel(IElementProvider<IExtendedFrameworkElement, IExtendedFrameworkElementViewModel> provider)
+    protected BaseViewModel(IElementProvider<IExtendedFrameworkElement, IExtendedFrameworkElementViewModel> provider) : base()
     {
         this.provider = provider;
-
-        Id = Guid.NewGuid();
-        IsVisible = false;
     }
 
     public abstract void Initialize();

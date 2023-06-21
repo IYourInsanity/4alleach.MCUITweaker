@@ -18,8 +18,8 @@ public class ExtendedControl : System.Windows.Controls.UserControl, IExtendedFra
 
     public ExtendedControl(string name) : base()
     {
-        Loaded += ControlLoaded;
         Provider = new ElementProvider<IExtendedFrameworkElement, IExtendedFrameworkElementViewModel>(this);
+        Loaded += ControlLoaded;
 
         VID = Guid.NewGuid();
         Name = name;

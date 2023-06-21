@@ -3,7 +3,7 @@
                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                          xmlns:viewmodel="clr-namespace:_4alleach.MCRecipeEditor.Client.ViewModels.Windows"
+                          xmlns:viewmodel="clr-namespace:_4alleach.MCRecipeEditor.Client.ViewModels.Window"
                           xmlns:extWindow="clr-namespace:_4alleach.MCRecipeEditor.Client.UIExtension.Window;assembly=4alleach.MCRecipeEditor.Client.UIExtension"
                           xmlns:extControls="clr-namespace:_4alleach.MCRecipeEditor.Client.Views.Controls"
                           xmlns:customControls="clr-namespace:_4alleach.MCRecipeEditor.Client.UIExtension.CustomControls;assembly=4alleach.MCRecipeEditor.Client.UIExtension"
@@ -72,7 +72,8 @@
             </Grid>
 
             <Grid x:Name="Container"
-                  Grid.Row="1">
+                  Grid.Row="1"
+                  MouseRightButtonDown="Container_MouseRightButtonDown">
 
 
 

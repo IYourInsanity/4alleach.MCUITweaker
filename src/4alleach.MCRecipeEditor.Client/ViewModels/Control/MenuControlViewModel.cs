@@ -3,7 +3,7 @@ using _4alleach.MCRecipeEditor.Client.Extensions;
 using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.Logic;
 using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions;
 using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.ViewModel;
-using _4alleach.MCRecipeEditor.Client.Views.Controls.CraftTweakMechanics;
+using _4alleach.MCRecipeEditor.Client.Views.Controls.CraftTweakMechanic;
 using _4alleach.MCRecipeEditor.Models.Services.Project;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -11,7 +11,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using _4alleach.MCRecipeEditor.Services.Abstractions;
 
-namespace _4alleach.MCRecipeEditor.Client.ViewModels.Controls;
+namespace _4alleach.MCRecipeEditor.Client.ViewModels.Control;
 public sealed partial class MenuControlViewModel : ControlViewModel
 {
     private MenuControlBusinessModel? businessModel;

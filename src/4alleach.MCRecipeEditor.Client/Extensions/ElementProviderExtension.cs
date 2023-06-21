@@ -4,7 +4,7 @@ using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.Logic;
 using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.Logic.Modules;
 using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.ViewModel;
 using _4alleach.MCRecipeEditor.Client.UIExtension.Window;
-using _4alleach.MCRecipeEditor.Client.ViewModels.Windows;
+using _4alleach.MCRecipeEditor.Client.ViewModels.Window;
 using _4alleach.MCRecipeEditor.Models.Services;
 using _4alleach.MCRecipeEditor.Services.Abstractions;
 

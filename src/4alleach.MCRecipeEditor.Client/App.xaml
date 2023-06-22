@@ -7,11 +7,12 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/Styles/Colors.xaml"/>
-                <ResourceDictionary Source="Resources/Styles/Buttons.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/Color.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/Button.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/ComboBox.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/ListBox.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/ScrollViewer.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/Separator.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <conv:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>

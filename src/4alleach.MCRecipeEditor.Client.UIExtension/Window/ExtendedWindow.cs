@@ -48,12 +48,9 @@ public class ExtendedWindow : System.Windows.Window, IExtendedFrameworkElement
 
     protected void DragWindow(object sender, MouseButtonEventArgs e)
     {
-        if(e.LeftButton == MouseButtonState.Pressed)
-        {
-            DragMove();
-        }
+        DragMove();
 
-        if(e.ClickCount > 1)
+        if (e.ClickCount > 1)
         {
             ResizeWindow(sender, e);
         }

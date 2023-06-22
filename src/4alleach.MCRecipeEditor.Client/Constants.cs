@@ -1,4 +1,5 @@
-﻿using System.Windows.Media;
+﻿using System.Windows;
+using System.Windows.Media;
 using _4alleach.MCRecipeEditor.Common.Extensions;
 
 namespace _4alleach.MCRecipeEditor.Client;
@@ -32,5 +33,11 @@ internal struct Constants
 
             return (SolidColorBrush)App.Current.FindResource(color);
         }
+    }
+
+    internal struct Styles
+    {
+        internal static Style StandardContextMenuButtonStyle => (Style)App.Current.FindResource(nameof(StandardContextMenuButtonStyle));
+        internal static Style ExtendedSeparatorStyle => (Style)App.Current.FindResource(nameof(ExtendedSeparatorStyle));
     }
 }

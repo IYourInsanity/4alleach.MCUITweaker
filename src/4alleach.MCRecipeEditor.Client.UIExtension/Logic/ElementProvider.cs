@@ -2,11 +2,13 @@
 using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.Logic;
 using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.Logic.Modules;
 using _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.ViewModel;
+using _4alleach.MCRecipeEditor.Client.UIExtension.Helpers;
+using _4alleach.MCRecipeEditor.Client.UIExtension.Window;
 using System.Windows;
 
 namespace _4alleach.MCRecipeEditor.Client.UIExtension.Logic;
 
-internal sealed class ElementProvider<TElement, TViewModel> : IElementProvider<TElement, TViewModel> 
+internal sealed class ElementProvider<TElement, TViewModel> : IElementProvider<TElement, TViewModel>
     where TElement : class, IBaseElement<TElement, TViewModel>
     where TViewModel : class, IBaseViewModel
 {
@@ -34,7 +36,7 @@ internal sealed class ElementProvider<TElement, TViewModel> : IElementProvider<T
         controller.Initialize();
     }
 
-    public TFrameworkElement? FindElement<TFrameworkElement>(string name) 
+    public TFrameworkElement? FindElement<TFrameworkElement>(string name)
         where TFrameworkElement : FrameworkElement
     {
         if (host == null)
@@ -43,6 +45,19 @@ internal sealed class ElementProvider<TElement, TViewModel> : IElementProvider<T
         }
 
         return host.FindName(name) as TFrameworkElement;
+    }
+
+    public TFrameworkElement? FindElement<TFrameworkElement>(Func<DependencyObject, bool> funcCondition)
+        where TFrameworkElement : FrameworkElement
+    {
+        var root = GetParent<ExtendedWindow>();
+
+        if (root == null)
+        {
+            return null;
+        }
+
+        return UIHelper.TryFindChild(root, funcCondition) as TFrameworkElement;
     }
 
     public void SetParent<TParentElement>(TParentElement? parent)
@@ -56,9 +71,14 @@ internal sealed class ElementProvider<TElement, TViewModel> : IElementProvider<T
         ViewModel?.SetArguments(args);
     }
 
-    public TFrameworkElement? GetParent<TFrameworkElement>() 
+    public TFrameworkElement? GetParent<TFrameworkElement>()
         where TFrameworkElement : FrameworkElement
     {
+        if(host is TFrameworkElement realHost)
+        {
+            return realHost;
+        }
+
         var parent = host.Parent;
 
         while (parent != null)

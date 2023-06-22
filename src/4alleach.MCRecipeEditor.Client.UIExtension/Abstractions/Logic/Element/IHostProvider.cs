@@ -20,4 +20,7 @@ public interface IHostProvider
 
     TFrameworkElement? FindElement<TFrameworkElement>(string name)
         where TFrameworkElement : FrameworkElement;
+
+    TFrameworkElement? FindElement<TFrameworkElement>(Func<DependencyObject, bool> funcCondition)
+        where TFrameworkElement : FrameworkElement;
 }

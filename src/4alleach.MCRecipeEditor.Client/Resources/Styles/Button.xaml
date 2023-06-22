@@ -60,6 +60,76 @@
         </Setter>
     </Style>
 
+    <Style x:Key="StandardContextMenuButtonStyle" TargetType="Button">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid x:Name="GRID_ROOT"
+                          Height="{TemplateBinding Height}" 
+                          Width="{TemplateBinding Width}"
+                          Background="{StaticResource Dark1Brush}">
+                        <Label x:Name="LABEL_ROOT"
+                               Content="{TemplateBinding Content}"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               FontSize="12"
+                               FontFamily="{TemplateBinding FontFamily}"
+                               Foreground="{StaticResource Dark6Brush}">
+                        </Label>
+
+                        <Grid.Triggers>
+                            <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                                <EventTrigger.Actions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetProperty="(Grid.Background).(SolidColorBrush.Color)"
+                                                            Storyboard.TargetName="GRID_ROOT"
+                                                            To="{StaticResource Dark3}"
+                                                            Duration="0:0:0.2">
+
+                                            </ColorAnimation>
+                                            <ColorAnimation Storyboard.TargetProperty="(Label.Foreground).(SolidColorBrush.Color)"
+                                                            Storyboard.TargetName="LABEL_ROOT"
+                                                            To="{StaticResource White}"
+                                                            Duration="0:0:0.2">
+
+                                            </ColorAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger.Actions>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                                <EventTrigger.Actions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetProperty="(Grid.Background).(SolidColorBrush.Color)"
+                                                            Storyboard.TargetName="GRID_ROOT"
+                                                            To="{StaticResource Dark1}"
+                                                            Duration="0:0:0.2">
+
+                                            </ColorAnimation>
+                                            <ColorAnimation Storyboard.TargetProperty="(Label.Foreground).(SolidColorBrush.Color)"
+                                                            Storyboard.TargetName="LABEL_ROOT"
+                                                            To="{StaticResource Dark6}"
+                                                            Duration="0:0:0.2">
+
+                                            </ColorAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger.Actions>
+                            </EventTrigger>
+                        </Grid.Triggers>
+
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+
+    </Style>
+
     <Style x:Key="DefaultButtonStyle" TargetType="Button">
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Height" Value="32"/>

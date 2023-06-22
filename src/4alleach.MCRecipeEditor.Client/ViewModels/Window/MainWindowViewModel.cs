@@ -50,7 +50,10 @@ public sealed partial class MainWindowViewModel : WindowViewModel, IExtendedFram
 
         provider.GetProviderModule<IApplicationStateProvider>()!.OnApplicationStateChanged += OnApplicationStateChanged;
 
-        provider.GetProviderModule<IContextMenuProvider>()!.Register<MainWindowViewModel, StandardContextMenu>("Container", InitializeMainWindowContextMenu);
+        var contextMenuProvider = provider.GetProviderModule<IContextMenuProvider>()!;
+
+        contextMenuProvider.Register<StandardContextMenu>("TopContextMenu", InitializeTopContextMenu);
+        contextMenuProvider.Register<StandardContextMenu>("BottomContextMenu", InitializeBottomContextMenu);
 
         provider.Register<PreviewControl>();
         provider.Register<MenuControl>();
@@ -84,16 +87,21 @@ public sealed partial class MainWindowViewModel : WindowViewModel, IExtendedFram
         _ = await provider.ShowModal<TestModalWindow, TestModalResult>("Test");
     }
 
-    #endregion
-
-    private void InitializeMainWindowContextMenu(IContextMenuElement contextMenu)
+    private void InitializeTopContextMenu(IContextMenuElement contextMenu)
     {
-        var btn = new Button() { Content = "Test Context Menu 1", Command = TestContextActionCommand };
-        var btn2 = new Button() { Content = "Test Context Menu 2", Command = TestContextActionCommand };
-        var btn3 = new Button() { Content = "Test Context Menu 3", Command = TestContextActionCommand };
+        var standardContextMenuButtonStyle = Constants.Styles.StandardContextMenuButtonStyle;
+        var extendedSeparatorStyle = Constants.Styles.ExtendedSeparatorStyle;
 
-        contextMenu.Add(btn);
-        contextMenu.Add(btn2);
-        contextMenu.Add(btn3);
+        contextMenu.Add<Button>("Test Context Menu 1", TestContextActionCommand, standardContextMenuButtonStyle);
+        contextMenu.Add<Separator>(extendedSeparatorStyle);
+        contextMenu.Add<Button>("Test Context Menu 2", TestContextActionCommand, standardContextMenuButtonStyle);
+        contextMenu.Add<Button>("Test Context Menu 3", TestContextActionCommand, standardContextMenuButtonStyle);
     }
+
+    private void InitializeBottomContextMenu(IContextMenuElement contextMenu)
+    {
+        contextMenu.Add<Button>("Test Context Bottom Menu", TestContextActionCommand, Constants.Styles.StandardContextMenuButtonStyle);
+    }
+
+    #endregion
 }

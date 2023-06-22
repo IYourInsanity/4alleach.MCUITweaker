@@ -42,29 +42,48 @@ public class ContextMenuControl : System.Windows.Controls.UserControl, IContextM
 
     public void Show(MouseButtonEventArgs e)
     {
-        if(parent == null)
+        if (parent == null)
         {
             throw new NotImplementedException();
         }
 
         parentContainer?.TryAdd(this);
+
         ViewModel.Setup(e.GetPosition(parent), parent.RenderSize);
-    }
-
-    protected virtual void CanvasMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-    {
-        Hide();
-    }
-
-    public void Add<TContextItemContent>(TContextItemContent content) 
-        where TContextItemContent : FrameworkElement
-    {
-        ViewModel?.Add(content);
     }
 
     public void Remove<TContextItemContent>(TContextItemContent content) 
         where TContextItemContent : FrameworkElement
     {
         ViewModel?.Remove(content);
+    }
+
+    public void Add<TContextItemContent>(string content, ICommand command, Style? style = null) 
+        where TContextItemContent : FrameworkElement
+    {
+        var instance = Activator.CreateInstance<TContextItemContent>();
+
+        instance.SetValue(ContentProperty, content);
+        instance.SetValue(Button.CommandProperty, command);
+
+        if(style != null)
+        {
+            instance.SetValue(StyleProperty, style);
+        }
+
+        ViewModel?.Add(instance);
+    }
+
+    public void Add<TContextItemContent>(Style? style = null) 
+        where TContextItemContent : FrameworkElement
+    {
+        var instance = Activator.CreateInstance<TContextItemContent>();
+
+        if (style != null)
+        {
+            instance.SetValue(StyleProperty, style);
+        }
+
+        ViewModel?.Add(instance);
     }
 }

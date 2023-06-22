@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.ContextMenu.ViewModel;
 public abstract partial class ContextMenuViewModel : ObservableObject, IContextMenuViewModel
@@ -73,6 +74,11 @@ public abstract partial class ContextMenuViewModel : ObservableObject, IContextM
     private void SetupElement<TContextItemContent>(TContextItemContent content)
         where TContextItemContent : FrameworkElement
     {
+        if(content is Separator)
+        {
+            return;
+        }
+
         content.Height = ItemHeight;
         content.Width = ItemWidth;
     }

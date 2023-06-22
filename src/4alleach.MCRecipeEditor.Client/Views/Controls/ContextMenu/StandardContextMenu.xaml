@@ -9,29 +9,29 @@
                                mc:Ignorable="d" 
                                d:DesignHeight="50" 
                                d:DesignWidth="50"
-                               d:DataContext="{d:DesignInstance Type=viewmodel:StandardContextMenuViewModel}">
-    <Canvas Width="Auto"
-            Height="Auto"
-            Background="#4C467359"
-            MouseLeftButtonDown="CanvasMouseLeftButtonDown">
+                               d:DataContext="{d:DesignInstance Type=viewmodel:StandardContextMenuViewModel}"
+                               Background="{StaticResource Dark1Brush}"
+                               BorderBrush="{StaticResource Dark2Brush}"
+                               BorderThickness="1"
+                               Canvas.Left="{Binding PositionX}"
+                               Canvas.Top="{Binding PositionY}">
+    <extControl:ContextMenuControl.Effect>
+        <DropShadowEffect BlurRadius="1" Opacity="0.5" ShadowDepth="2"/>
+    </extControl:ContextMenuControl.Effect>
+    <ItemsControl Width="Auto"
+                  Height="Auto"
+                  Margin="4"
+                  ItemsSource="{Binding ItemCollection}"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 
-        <ItemsControl Width="Auto"
-                      Height="Auto"
-                      ItemsSource="{Binding ItemCollection}"
-                      Canvas.Left="{Binding PositionX}"
-                      Canvas.Top="{Binding PositionY}"
-                      ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ItemsControl.Template>
+            <ControlTemplate>
+                <StackPanel Orientation="Vertical"
+                            IsItemsHost="True">
 
-            <ItemsControl.Template>
-                <ControlTemplate>
-                    <StackPanel Orientation="Vertical"
-                                IsItemsHost="True">
+                </StackPanel>
+            </ControlTemplate>
+        </ItemsControl.Template>
 
-                    </StackPanel>
-                </ControlTemplate>
-            </ItemsControl.Template>
-
-        </ItemsControl>
-
-    </Canvas>
+    </ItemsControl>
 </extControl:ContextMenuControl>

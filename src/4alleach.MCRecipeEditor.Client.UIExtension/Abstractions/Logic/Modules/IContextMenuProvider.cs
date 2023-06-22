@@ -5,11 +5,11 @@ using System.Windows.Input;
 namespace _4alleach.MCRecipeEditor.Client.UIExtension.Abstractions.Logic.Modules;
 public interface IContextMenuProvider : IProviderModule<IExtendedFrameworkElement, IExtendedFrameworkElementViewModel>
 {
-    void Register<TCreator, TContextMenu>(string containerName, Action<TContextMenu> registerCallback)
-        where TCreator : IExtendedFrameworkElementViewModel
+    void Register<TContextMenu>(string key, Action<TContextMenu> registerCallback)
         where TContextMenu : IContextMenuElement;
 
-    void Show<TCreator>(MouseButtonEventArgs e)
-        where TCreator : IExtendedFrameworkElementViewModel;
+    void Show(string key, MouseButtonEventArgs e);
+
+    void Hide();
 
 }

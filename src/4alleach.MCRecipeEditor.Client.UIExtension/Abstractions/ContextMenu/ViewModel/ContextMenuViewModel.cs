@@ -68,7 +68,7 @@ public abstract partial class ContextMenuViewModel : ObservableObject, IContextM
 
     private void CalculateItemsHeight()
     {
-        ItemsHeight = ItemHeight * ItemCollection.Count;
+        ItemsHeight = ItemHeight * ItemCollection.Count + 16;
     }
 
     private void SetupElement<TContextItemContent>(TContextItemContent content)

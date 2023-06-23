@@ -11,7 +11,7 @@
                                d:DesignWidth="50"
                                d:DataContext="{d:DesignInstance Type=viewmodel:StandardContextMenuViewModel}"
                                Background="{StaticResource Dark1Brush}"
-                               BorderBrush="{StaticResource Dark2Brush}"
+                               BorderBrush="{StaticResource Dark3Brush}"
                                BorderThickness="1"
                                Canvas.Left="{Binding PositionX}"
                                Canvas.Top="{Binding PositionY}">

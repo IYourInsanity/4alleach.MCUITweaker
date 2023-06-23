@@ -52,8 +52,8 @@ public sealed partial class MainWindowViewModel : WindowViewModel, IExtendedFram
 
         var contextMenuProvider = provider.GetProviderModule<IContextMenuProvider>()!;
 
-        contextMenuProvider.Register<StandardContextMenu>("TopContextMenu", InitializeTopContextMenu);
-        contextMenuProvider.Register<StandardContextMenu>("BottomContextMenu", InitializeBottomContextMenu);
+        contextMenuProvider.Register<StandardContextMenu>(Constants.AppResources.TopContextMenu, InitializeTopContextMenu);
+        contextMenuProvider.Register<StandardContextMenu>(Constants.AppResources.BottomContextMenu, InitializeBottomContextMenu);
 
         provider.Register<PreviewControl>();
         provider.Register<MenuControl>();
@@ -82,9 +82,10 @@ public sealed partial class MainWindowViewModel : WindowViewModel, IExtendedFram
     #region Context Menu
 
     [RelayCommand]
-    private async void TestContextAction()
+    private void TestContextAction()
     {
-        _ = await provider.ShowModal<TestModalWindow, TestModalResult>("Test");
+        provider.ShowModal<TestModalWindow, TestModalResult>("Test");
+        provider.GetProviderModule<IContextMenuProvider>()?.Hide();
     }
 
     private void InitializeTopContextMenu(IContextMenuElement contextMenu)

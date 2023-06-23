@@ -4,6 +4,7 @@
                           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                           xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
                           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                          xmlns:resources="clr-namespace:_4alleach.MCRecipeEditor.Client.Properties"
                           xmlns:viewmodel="clr-namespace:_4alleach.MCRecipeEditor.Client.ViewModels.Window"
                           xmlns:extWindow="clr-namespace:_4alleach.MCRecipeEditor.Client.UIExtension.Window;assembly=4alleach.MCRecipeEditor.Client.UIExtension"
                           xmlns:extControls="clr-namespace:_4alleach.MCRecipeEditor.Client.Views.Controls"
@@ -36,7 +37,7 @@
                 <Grid Grid.Row="0"
                       Background="{StaticResource Dark1Brush}"
                       MouseLeftButtonDown="DragWindow"
-                      attachedProperties:ContextMenuHelper.Identifier="TopContextMenu">
+                      attachedProperties:ContextMenuHelper.Identifier="{x:Static resources:Resources.TopContextMenu}">
 
                     <i:Interaction.Behaviors>
                         <behaviours:ContextMenuBehavior/>
@@ -90,7 +91,7 @@
                 </Grid>
 
                 <StackPanel Grid.Row="2"
-                            attachedProperties:ContextMenuHelper.Identifier="BottomContextMenu"
+                            attachedProperties:ContextMenuHelper.Identifier="{x:Static resources:Resources.BottomContextMenu}"
                             Background="{Binding AppStateColor}">
 
                     <i:Interaction.Behaviors>

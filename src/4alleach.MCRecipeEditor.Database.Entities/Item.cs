@@ -1,37 +1,25 @@
-﻿using _4alleach.MCRecipeEditor.Database.Entities.Abstractions;
-using _4alleach.MCRecipeEditor.Database.Entities.Attributes;
-using System.Data;
-
+﻿using _4alleach.MCRecipeEditor.Database.Configurations;
+using _4alleach.MCRecipeEditor.Database.Entities.Abstractions;
+using Microsoft.EntityFrameworkCore;
 
 namespace _4alleach.MCRecipeEditor.Database.Entities;
 
-public sealed class Item : Asset
+[EntityTypeConfiguration(typeof(ItemConfiguration))]
+public class Item : Asset
 {
-    [DataName(nameof(Name))]
-    [DbType(DbType.String)]
     public string? Name { get; set; }
 
-    [DataName(nameof(Description))]
-    [DbType(DbType.String)]
     public string? Description { get; set; }
 
-    [ForeignKey]
-    [DataName(nameof(ItemTypeId))]
-    [DbType(DbType.Guid)]
     public Guid? ItemTypeId { get; set; }
+    public ItemType? ItemType { get; set; }
 
-    [ForeignKey]
-    [DataName(nameof(ModTypeId))]
-    [DbType(DbType.Guid)]
     public Guid? ModTypeId { get; set; }
+    public ModType? ModType { get; set; }
 
-    [ForeignKey]
-    [DataName(nameof(ItemPrefixId))]
-    [DbType(DbType.Guid)]
     public Guid? ItemPrefixId { get; set; }
+    public ItemPrefix? ItemPrefix { get; set; }
 
-    [ForeignKey]
-    [DataName(nameof(ItemPostfixId))]
-    [DbType(DbType.Guid)]
     public Guid? ItemPostfixId { get; set; }
+    public ItemPostfix? ItemPostfix { get; set; }
 }

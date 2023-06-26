@@ -2,5 +2,19 @@
 
 public interface IMapperRepository
 {
-    IModelEntityMapper GetMapper<TModel>();
+    IDbProvider CreateProvider();
+
+    void Initialize();
+
+    object Map<TSource>(TSource model)
+        where TSource : class;
+
+    TDestination Map<TDestination>(object source)
+        where TDestination : class;
+
+    IEnumerable<TDestination> Map<TDestination>(IEnumerable<object> source)
+        where TDestination : class;
+
+    Type Map<TSource>()
+        where TSource : class;
 }

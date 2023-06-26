@@ -2,9 +2,9 @@
 
 namespace _4alleach.MCRecipeEditor.Database;
 
-public sealed class Entry
+public static class Entry
 {
-    public static IDatabaseContext CreateContext()
+    public static IDbContext CreateContext()
     {
         return new DatabaseContext();
     }

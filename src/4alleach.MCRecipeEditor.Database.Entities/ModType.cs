@@ -1,15 +1,15 @@
 ﻿using _4alleach.MCRecipeEditor.Database.Entities.Abstractions;
-using _4alleach.MCRecipeEditor.Database.Entities.Attributes;
-using System.Data;
+using _4alleach.MCRecipeEditor.Database.Entities.Configurations;
+using Microsoft.EntityFrameworkCore;
 
 namespace _4alleach.MCRecipeEditor.Database.Entities;
+
+[EntityTypeConfiguration(typeof(ModTypeConfiguration))]
 public class ModType : Asset
 {
-    [DataName(nameof(FullName))]
-    [DbType(DbType.String)]
     public string? FullName { get; set; }
 
-    [DataName(nameof(ShortName))]
-    [DbType(DbType.String)]
     public string? ShortName { get; set; }
+
+    public List<Item> Items { get; set; } = new();
 }

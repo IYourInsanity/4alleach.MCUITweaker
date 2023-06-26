@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\4alleach.MCRecipeEditor.Database.Entities\4alleach.MCRecipeEditor.Database.Entities.csproj" />
     <ProjectReference Include="..\4alleach.MCRecipeEditor.Database\4alleach.MCRecipeEditor.Database.csproj" />
     <ProjectReference Include="..\4alleach.MCRecipeEditor.Models\4alleach.MCRecipeEditor.Models.csproj" />

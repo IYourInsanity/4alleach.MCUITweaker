@@ -8,27 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.118" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.8" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\4alleach.MCRecipeEditor.Common\4alleach.MCRecipeEditor.Common.csproj" />
     <ProjectReference Include="..\4alleach.MCRecipeEditor.Database.Entities\4alleach.MCRecipeEditor.Database.Entities.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Properties\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

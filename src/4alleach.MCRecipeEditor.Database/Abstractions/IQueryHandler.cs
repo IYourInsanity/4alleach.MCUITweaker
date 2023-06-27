@@ -2,7 +2,7 @@
 
 namespace _4alleach.MCRecipeEditor.Database.Abstractions;
 
-public interface IBaseQueryHandler
+public interface IQueryHandler
 {
     #region Select
 
@@ -49,7 +49,7 @@ public interface IBaseQueryHandler
     #endregion
 }
 
-public interface IQueryHandler<TEntity> : IBaseQueryHandler
+public interface IQueryHandler<TEntity> : IQueryHandler
     where TEntity : Asset
 {
 

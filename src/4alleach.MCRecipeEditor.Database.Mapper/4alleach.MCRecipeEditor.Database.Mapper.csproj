@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <RootNamespace>_4alleach.MCRecipeEditor.Mapper</RootNamespace>
+    <RootNamespace>_4alleach.MCRecipeEditor.Database.Mapper</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\4alleach.MCRecipeEditor.Database.Entities\4alleach.MCRecipeEditor.Database.Entities.csproj" />
-    <ProjectReference Include="..\4alleach.MCRecipeEditor.Database\4alleach.MCRecipeEditor.Database.csproj" />
     <ProjectReference Include="..\4alleach.MCRecipeEditor.Models\4alleach.MCRecipeEditor.Models.csproj" />
   </ItemGroup>
 

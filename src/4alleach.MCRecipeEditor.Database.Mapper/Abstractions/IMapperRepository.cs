@@ -1,11 +1,7 @@
-﻿namespace _4alleach.MCRecipeEditor.Mapper.Abstractions;
+﻿namespace _4alleach.MCRecipeEditor.Database.Mapper.Abstractions;
 
 public interface IMapperRepository
 {
-    IDbProvider CreateProvider();
-
-    void Initialize();
-
     object Map<TSource>(TSource model)
         where TSource : class;
 

@@ -1,5 +1,5 @@
 ﻿using _4alleach.MCRecipeEditor.Client.Views.Controls;
-using _4alleach.MCRecipeEditor.Mapper.Extensions;
+using _4alleach.MCRecipeEditor.Database.Provider.Extensions;
 using _4alleach.MCRecipeEditor.Models.Database;
 using _4alleach.MCRecipeEditor.Services;
 using _4alleach.MCRecipeEditor.Services.Abstractions;
@@ -14,7 +14,7 @@ internal sealed class MainWindowBusinessModel : BaseBusinessModel
 
     }
 
-    internal void Initialize()
+    internal async void Initialize()
     {
         var bmConstructService = serviceHub.Get<IBusinessModelConstructService>();
 
@@ -30,36 +30,32 @@ internal sealed class MainWindowBusinessModel : BaseBusinessModel
 
         stopWatch.Start();
 
-        //databaseService!.CreateProvider(provider =>
-        //{
-        //    provider.Map(itemType)
-        //            .UseContext((context, type, mapped) =>
-        //            {
-        //                context.CreateHandler(type).Insert(mapped!);
-        //            });
+        var Items = default(IEnumerable<Item>);
+        var ItemTypes = default(IEnumerable<ItemType>);
+        var ModTypes = default(IEnumerable<ModType>);
 
-        //    provider.Map(item)
-        //            .UseContext((context, type, mapped) =>
-        //            {
-        //                context.CreateHandler(type).Insert(mapped!);
-        //            });
-        //});
-
-        var models = default(IEnumerable<Item>);
-
-        databaseService!.CreateProvider(provider =>
+        using (var provider = databaseService.CreateProvider())
         {
-            provider.UseHandler<Item>(handler =>
+            await provider.UseHandlerAsync<Item>((handler, token) =>
             {
-                var entities = handler.SelectAll()!;
+                Items = handler.SelectAll();
 
-                models = provider.Map<Item>(entities);
+            }, CancellationToken.None);
 
-            });
-        });
+            await provider.UseHandlerAsync<ItemType>((handler, token) =>
+            {
+                ItemTypes = handler.SelectAll();
+
+            }, CancellationToken.None);
+
+            await provider.UseHandlerAsync<ModType>((handler, token) =>
+            {
+                ModTypes = handler.SelectAll();
+
+            }, CancellationToken.None);
+        }
 
         stopWatch.Stop();
-
     }
 
     internal TService? GetService<TService>() 

@@ -1,6 +1,5 @@
-﻿using _4alleach.MCRecipeEditor.Database;
-using _4alleach.MCRecipeEditor.Database.Abstractions;
-using _4alleach.MCRecipeEditor.Mapper.Abstractions;
+﻿using _4alleach.MCRecipeEditor.Database.Provider;
+using _4alleach.MCRecipeEditor.Database.Provider.Abstractions;
 using _4alleach.MCRecipeEditor.Services.Abstractions;
 
 namespace _4alleach.MCRecipeEditor.Services;
@@ -18,11 +17,8 @@ internal sealed class DatabaseControllerService : IDatabaseControllerService
 
     }
 
-    public void CreateProvider(Action<IDbProvider> action)
+    public IDatabaseProvider CreateProvider()
     {
-        using(var provider = serviceHub.Get<IAutoMapperService>()!.CreateProvider())
-        {
-            action(provider);
-        }
+        return new DatabaseProvider();
     }
 }

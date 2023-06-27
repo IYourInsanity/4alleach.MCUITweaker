@@ -56,11 +56,11 @@ internal sealed class DatabaseContext : DbContext, IDbContext
         modelBuilder.Entity<ModType>().UseTpcMappingStrategy();
     }
 
-    public IBaseQueryHandler CreateHandler(Type sourceType)
+    public IQueryHandler CreateHandler(Type sourceType)
     {
         if(handlerStorage.TryGetValue(sourceType, out var handlerType))
         {
-            return (IBaseQueryHandler)Activator.CreateInstance(handlerType, this)!;
+            return (IQueryHandler)Activator.CreateInstance(handlerType, this)!;
         }
 
         throw new NotImplementedException();

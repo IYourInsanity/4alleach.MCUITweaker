@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>_4alleach.MCRecipeEditor.Database.Provider</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\4alleach.MCRecipeEditor.Database.Mapper\4alleach.MCRecipeEditor.Database.Mapper.csproj" />
+    <ProjectReference Include="..\4alleach.MCRecipeEditor.Database\4alleach.MCRecipeEditor.Database.csproj" />
+  </ItemGroup>
+
+</Project>

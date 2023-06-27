@@ -34,7 +34,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{82
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4alleach.MCRecipeEditor.Database.Entities", "src\4alleach.MCRecipeEditor.Database.Entities\4alleach.MCRecipeEditor.Database.Entities.csproj", "{F91D6290-9D89-44D9-8697-CE440E0BA67D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4alleach.MCRecipeEditor.Mapper", "src\4alleach.MCRecipeEditor.Mapper\4alleach.MCRecipeEditor.Mapper.csproj", "{777D3404-2FDD-4CBB-8B2D-1FEEE24E9DDE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4alleach.MCRecipeEditor.Database.Provider", "src\4alleach.MCRecipeEditor.Database.Provider\4alleach.MCRecipeEditor.Database.Provider.csproj", "{A04D447C-75EE-4CAE-9DDE-25B14ADFC4CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4alleach.MCRecipeEditor.Database.Mapper", "src\4alleach.MCRecipeEditor.Database.Mapper\4alleach.MCRecipeEditor.Database.Mapper.csproj", "{ECCD114C-35FA-4E85-9B04-645A7DE6A65F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -70,10 +72,14 @@ Global
 		{F91D6290-9D89-44D9-8697-CE440E0BA67D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F91D6290-9D89-44D9-8697-CE440E0BA67D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F91D6290-9D89-44D9-8697-CE440E0BA67D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{777D3404-2FDD-4CBB-8B2D-1FEEE24E9DDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{777D3404-2FDD-4CBB-8B2D-1FEEE24E9DDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{777D3404-2FDD-4CBB-8B2D-1FEEE24E9DDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{777D3404-2FDD-4CBB-8B2D-1FEEE24E9DDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A04D447C-75EE-4CAE-9DDE-25B14ADFC4CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A04D447C-75EE-4CAE-9DDE-25B14ADFC4CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A04D447C-75EE-4CAE-9DDE-25B14ADFC4CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A04D447C-75EE-4CAE-9DDE-25B14ADFC4CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECCD114C-35FA-4E85-9B04-645A7DE6A65F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECCD114C-35FA-4E85-9B04-645A7DE6A65F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECCD114C-35FA-4E85-9B04-645A7DE6A65F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECCD114C-35FA-4E85-9B04-645A7DE6A65F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,6 +88,8 @@ Global
 		{EE645CB9-CF49-4AFE-82C9-60814BDF3A8D} = {F2E4C02B-9145-40B0-8E28-3A54536A6D66}
 		{736E1400-21C2-4F6C-9A4D-79C187ACFD99} = {8274CF3F-469F-4354-BEF6-383A67651932}
 		{F91D6290-9D89-44D9-8697-CE440E0BA67D} = {8274CF3F-469F-4354-BEF6-383A67651932}
+		{A04D447C-75EE-4CAE-9DDE-25B14ADFC4CC} = {8274CF3F-469F-4354-BEF6-383A67651932}
+		{ECCD114C-35FA-4E85-9B04-645A7DE6A65F} = {8274CF3F-469F-4354-BEF6-383A67651932}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C7E08A10-ECFB-48BD-841B-74E925343077}

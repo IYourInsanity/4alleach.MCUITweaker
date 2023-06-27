@@ -17,8 +17,7 @@ public sealed class ServiceHub : IServiceHub
             .AddSingleton<IServiceHub>(serviceHub)
             .AddSingleton<IBusinessModelConstructService, BusinessModelConstructService>()
             .AddSingleton<IProjectControllerService, ProjectControllerService>()
-            .AddSingleton<IDatabaseControllerService, DatabaseControllerService>()
-            .AddSingleton<IAutoMapperService, AutoMapperService>();
+            .AddSingleton<IDatabaseControllerService, DatabaseControllerService>();
 
         serviceHub.Initialize(serviceCollection);
 

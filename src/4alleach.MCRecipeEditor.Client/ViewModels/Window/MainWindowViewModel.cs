@@ -12,7 +12,6 @@ using _4alleach.MCRecipeEditor.Client.UIExtension.Logic.Modules;
 using _4alleach.MCRecipeEditor.Client.Views.Controls;
 using _4alleach.MCRecipeEditor.Client.Views.Controls.ContextMenu;
 using _4alleach.MCRecipeEditor.Models.Services;
-using _4alleach.MCRecipeEditor.Services.Abstractions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Windows.Controls;
@@ -65,12 +64,6 @@ public sealed partial class MainWindowViewModel : WindowViewModel, IExtendedFram
         mwBModel.Initialize();
 
         provider.UpdateAppState(ApplicationState.Ready);
-    }
-
-    internal TService? GetService<TService>()
-        where TService : class, IService
-    {
-        return mwBModel.GetService<TService>();
     }
 
     private void OnApplicationStateChanged(SolidColorBrush color, string description)

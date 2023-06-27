@@ -28,11 +28,12 @@ internal sealed class ServiceHub : IServiceHub
         _serviceProvider = collection.BuildServiceProvider();
     }
 
-    public TService? Get<TService>() where TService : class, IService
+    public TService Get<TService>() 
+        where TService : class, IService
     {
         var service = _serviceProvider?.GetService<TService>();
 
-        service?.Initialize();
+        service!.Initialize();
 
         return service;
     }

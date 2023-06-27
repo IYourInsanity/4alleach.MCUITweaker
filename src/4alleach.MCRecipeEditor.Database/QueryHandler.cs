@@ -31,7 +31,7 @@ internal sealed class QueryHandler<TEntity> : IQueryHandler<TEntity>
     public void Insert(object entity)
     {
         var casted = Cast(entity);
-        TrackEntity(casted);
+        //TrackEntity(casted);
         Set.Add(casted);
         context.SaveChanges();
     }
@@ -39,7 +39,7 @@ internal sealed class QueryHandler<TEntity> : IQueryHandler<TEntity>
     public void Insert(IEnumerable<object> entities)
     {
         var casted = Cast(entities);
-        TrackEntities(casted);
+        //TrackEntities(casted);
         Set.AddRange(casted);
         context.SaveChanges();
     }
@@ -47,7 +47,7 @@ internal sealed class QueryHandler<TEntity> : IQueryHandler<TEntity>
     public async Task InsertAsync(object entity, CancellationToken token)
     {
         var casted = Cast(entity);
-        TrackEntity(casted);
+        //TrackEntity(casted);
         await Set.AddAsync(casted, token);
         await context.SaveChangesAsync(token);
     }
@@ -55,7 +55,7 @@ internal sealed class QueryHandler<TEntity> : IQueryHandler<TEntity>
     public async Task InsertAsync(IEnumerable<object> entities, CancellationToken token)
     {
         var casted = Cast(entities);
-        TrackEntities(casted);
+        //TrackEntities(casted);
         await Set.AddRangeAsync(casted, token);
         await context.SaveChangesAsync(token);
     }
@@ -128,6 +128,7 @@ internal sealed class QueryHandler<TEntity> : IQueryHandler<TEntity>
 
     private void TrackEntity(object entity)
     {
+        //This need because we can work with new instance of entities
         context.ChangeTracker.TrackGraph(entity, node =>
         {
             node.Entry.State = node.Entry.IsKeySet == false ?

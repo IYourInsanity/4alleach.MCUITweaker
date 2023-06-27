@@ -2,5 +2,6 @@
 
 public interface IServiceHub
 {
-    TService? Get<TService>() where TService : class, IService;
+    TService Get<TService>() 
+        where TService : class, IService;
 }

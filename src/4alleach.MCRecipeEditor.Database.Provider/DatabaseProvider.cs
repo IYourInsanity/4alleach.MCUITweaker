@@ -13,7 +13,7 @@ public sealed class DatabaseProvider : IDatabaseProvider
     public DatabaseProvider()
     {
         this.mapper = new MapperRepository();
-        this.context = Entry.CreateContext();
+        this.context = new DatabaseContext();
     }
 
     public void Dispose()

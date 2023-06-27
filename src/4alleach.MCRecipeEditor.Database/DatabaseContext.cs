@@ -1,37 +1,39 @@
 ﻿using _4alleach.MCRecipeEditor.Common.Helpers;
 using _4alleach.MCRecipeEditor.Database.Abstractions;
 using _4alleach.MCRecipeEditor.Database.Entities;
-using _4alleach.MCRecipeEditor.Database.Entities.Abstractions;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 
 namespace _4alleach.MCRecipeEditor.Database;
 
-internal sealed class DatabaseContext : DbContext, IDbContext
+public sealed class DatabaseContext : DbContext, IDbContext
 {
     private const string Extension = ".db";
     private const string Asset = "4alleach.Asset";
     private const string Folder = "Assets";
 
-    private readonly Dictionary<Type, Type> handlerStorage;
+    private readonly static Dictionary<Type, Type> HandlerStorage;
 
-    private string connectionString;
+    private readonly string connectionString;
 
     private string SourceName => $"{Asset}{Extension}";
     private string FolderPath => Path.Combine(FileHelper.RootPath, Folder);
     private string AssetPath => Path.Combine(FolderPath, SourceName);
 
-    internal DatabaseContext() : base()
+    static DatabaseContext()
     {
-        handlerStorage = new Dictionary<Type, Type>()
+        HandlerStorage = new Dictionary<Type, Type>()
         {
             { typeof(Item), typeof(QueryHandler<Item>) },
             { typeof(ItemPostfix), typeof(QueryHandler<ItemPostfix>) },
             { typeof(ItemPrefix), typeof(QueryHandler<ItemPrefix>) },
             { typeof(ItemType), typeof(QueryHandler<ItemType>) },
-            { typeof(ModType), typeof(QueryHandler<ModType>) },
+            { typeof(ModType), typeof(QueryHandler<ModType>) }
         };
+    }
 
+    public DatabaseContext() : base()
+    {
         connectionString = new SqliteConnectionStringBuilder()
         {
             DataSource = AssetPath,
@@ -40,11 +42,14 @@ internal sealed class DatabaseContext : DbContext, IDbContext
             Cache = SqliteCacheMode.Default,
             Mode = SqliteOpenMode.ReadWriteCreate
         }.ToString();
+
+        Database.EnsureCreated();
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlite(connectionString);
+        optionsBuilder.UseSqlite(connectionString)
+                      .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -58,7 +63,7 @@ internal sealed class DatabaseContext : DbContext, IDbContext
 
     public IQueryHandler CreateHandler(Type sourceType)
     {
-        if(handlerStorage.TryGetValue(sourceType, out var handlerType))
+        if(HandlerStorage.TryGetValue(sourceType, out var handlerType))
         {
             return (IQueryHandler)Activator.CreateInstance(handlerType, this)!;
         }

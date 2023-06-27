@@ -133,9 +133,6 @@ internal sealed class WrapperQueryHandler<TSource> : IWrapperQueryHandler<TSourc
 
     private IEnumerable<object> Map(IEnumerable<TSource> source)
     {
-        foreach (var item in source)
-        {
-            yield return Map(item);
-        }
+        return source.Select(Map);
     }
 }

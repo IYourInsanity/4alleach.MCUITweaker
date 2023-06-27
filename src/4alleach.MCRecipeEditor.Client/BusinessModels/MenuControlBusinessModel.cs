@@ -1,4 +1,5 @@
-﻿using _4alleach.MCRecipeEditor.Models.Services.Project;
+﻿using _4alleach.MCRecipeEditor.Client.Abstractions.BusinessModel;
+using _4alleach.MCRecipeEditor.Models.Services.Project;
 using _4alleach.MCRecipeEditor.Services.Abstractions;
 
 namespace _4alleach.MCRecipeEditor.Client.BusinessModels;
@@ -18,10 +19,7 @@ internal sealed class MenuControlBusinessModel : BaseBusinessModel
 
     internal RecipeProject? selectedRecipeProject;
 
-    public MenuControlBusinessModel(IServiceHub serviceHub) : base(serviceHub)
-    {
-
-    }
+    internal MenuControlBusinessModel() : base() { }
 
     internal void Initialize()
     {

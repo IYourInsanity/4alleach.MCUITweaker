@@ -7,7 +7,6 @@ using _4alleach.MCRecipeEditor.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
-using _4alleach.MCRecipeEditor.Services.Abstractions;
 using _4alleach.MCRecipeEditor.Client.Extensions;
 using _4alleach.MCRecipeEditor.Client.UIExtension.CustomControls.Modals;
 
@@ -15,7 +14,7 @@ namespace _4alleach.MCRecipeEditor.Client.ViewModels.Control;
 
 public sealed partial class PreviewControlViewModel : ControlViewModel
 {
-    private PreviewControlBusinessModel? businessModel;
+    private readonly PreviewControlBusinessModel businessModel;
 
     [ObservableProperty]
     private ObservableCollection<RecentProjectInfo> openRecentCollection;
@@ -28,22 +27,12 @@ public sealed partial class PreviewControlViewModel : ControlViewModel
     public PreviewControlViewModel(IElementProvider<IExtendedFrameworkElement, IExtendedFrameworkElementViewModel> provider) : base(provider)
     {
         openRecentCollection = new ObservableCollection<RecentProjectInfo>();
+        businessModel = new PreviewControlBusinessModel();
     }
 
     public override void Initialize()
     {
         base.Initialize();
-
-        var generatorService = root?.Provider.GetService<IBusinessModelConstructService>();
-
-        if(generatorService == null)
-        {
-            return;
-        }
-
-        generatorService.GenerateBusinessModelByName(ControlName);
-
-        businessModel = generatorService.GetModel<PreviewControlBusinessModel>();
 
         OpenRecentCollection.Add(new RecentProjectInfo("Test1", "Test Path"));
         OpenRecentCollection.Add(new RecentProjectInfo("Test2", "Test Path"));

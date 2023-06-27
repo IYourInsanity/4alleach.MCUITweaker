@@ -1,13 +1,11 @@
-﻿using _4alleach.MCRecipeEditor.Services.Abstractions;
+﻿using _4alleach.MCRecipeEditor.Client.Abstractions.BusinessModel;
+using _4alleach.MCRecipeEditor.Services.Abstractions;
 
 namespace _4alleach.MCRecipeEditor.Client.BusinessModels;
 
 internal sealed class PreviewControlBusinessModel : BaseBusinessModel
 {
-    public PreviewControlBusinessModel(IServiceHub serviceHub) : base(serviceHub)
-    {
-        
-    }
+    internal PreviewControlBusinessModel() : base() { }
 
     internal void NewProject()
     {

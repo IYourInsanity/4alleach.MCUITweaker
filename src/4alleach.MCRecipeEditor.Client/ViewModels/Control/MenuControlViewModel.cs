@@ -9,12 +9,11 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
-using _4alleach.MCRecipeEditor.Services.Abstractions;
 
 namespace _4alleach.MCRecipeEditor.Client.ViewModels.Control;
 public sealed partial class MenuControlViewModel : ControlViewModel
 {
-    private MenuControlBusinessModel? businessModel;
+    private readonly MenuControlBusinessModel businessModel;
 
     private ObservableCollection<FileProject> fileCollection;
     public ObservableCollection<FileProject>? FileCollection => fileCollection.Update(businessModel?.FileCollection);
@@ -93,23 +92,14 @@ public sealed partial class MenuControlViewModel : ControlViewModel
     {
         fileCollection = new ObservableCollection<FileProject>();
         recipeCollection = new ObservableCollection<RecipeProject>();
+        businessModel = new MenuControlBusinessModel();
     }
 
     public override void Initialize()
     {
         base.Initialize();
 
-        var generatorService = root?.Provider?.GetService<IBusinessModelConstructService>();
-
-        if (generatorService == null)
-        {
-            return;
-        }
-
-        generatorService.GenerateBusinessModelByName(ControlName);
-        businessModel = generatorService.GetModel<MenuControlBusinessModel>();
-
-        businessModel?.Initialize();
+        businessModel.Initialize();
 
         provider.Register<MainCraftControl>(control);
     }

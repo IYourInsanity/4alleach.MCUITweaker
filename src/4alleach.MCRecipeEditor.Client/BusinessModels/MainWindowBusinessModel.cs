@@ -1,7 +1,6 @@
-﻿using _4alleach.MCRecipeEditor.Client.Views.Controls;
+﻿using _4alleach.MCRecipeEditor.Client.Abstractions.BusinessModel;
 using _4alleach.MCRecipeEditor.Database.Provider.Extensions;
 using _4alleach.MCRecipeEditor.Models.Database;
-using _4alleach.MCRecipeEditor.Services;
 using _4alleach.MCRecipeEditor.Services.Abstractions;
 using System.Diagnostics;
 
@@ -9,18 +8,13 @@ namespace _4alleach.MCRecipeEditor.Client.BusinessModels;
 
 internal sealed class MainWindowBusinessModel : BaseBusinessModel
 {
-    internal MainWindowBusinessModel() : base(ServiceHub.Instance)
+    internal MainWindowBusinessModel() : base()
     {
 
     }
 
     internal async void Initialize()
     {
-        var bmConstructService = serviceHub.Get<IBusinessModelConstructService>();
-
-        bmConstructService?.Register<PreviewControlBusinessModel>(nameof(PreviewControl));
-        bmConstructService?.Register<MenuControlBusinessModel>(nameof(MenuControl));
-
         var databaseService = serviceHub.Get<IDatabaseControllerService>()!;
 
         var itemType = new ItemType() { Id = Guid.NewGuid(), Value = "Fluid" };

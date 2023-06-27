@@ -3,9 +3,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace _4alleach.MCRecipeEditor.Services;
 
-public sealed class ServiceHub : IServiceHub
+internal sealed class ServiceHub : IServiceHub
 {
-    public static readonly IServiceHub Instance;
+    internal static readonly IServiceHub Instance;
 
     private IServiceProvider? _serviceProvider; 
 
@@ -15,7 +15,6 @@ public sealed class ServiceHub : IServiceHub
 
         var serviceCollection = new ServiceCollection()
             .AddSingleton<IServiceHub>(serviceHub)
-            .AddSingleton<IBusinessModelConstructService, BusinessModelConstructService>()
             .AddSingleton<IProjectControllerService, ProjectControllerService>()
             .AddSingleton<IDatabaseControllerService, DatabaseControllerService>();
 

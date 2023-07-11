@@ -10,10 +10,9 @@ public partial class App : Application
 {
     protected override void OnStartup(StartupEventArgs e)
     {
-        base.OnStartup(e);
-
-
         RunApplication();
+
+        base.OnStartup(e);
     }
 
     private void RunApplication()
@@ -21,4 +20,6 @@ public partial class App : Application
         ThreadPoolConfigurationHelper.ConfigureThreadPool();
     }
 }
+
+
 

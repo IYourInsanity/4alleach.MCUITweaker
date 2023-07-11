@@ -4,5 +4,7 @@ namespace _4alleach.MCRecipeEditor.Services.Abstractions;
 
 public interface IDatabaseControllerService : IService
 {
-    IDatabaseProvider CreateProvider();
+    IDatabaseProvider RequestProvider();
+
+    void PreloadDatabase();
 }

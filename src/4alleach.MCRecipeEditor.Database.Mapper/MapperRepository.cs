@@ -78,6 +78,6 @@ public sealed class MapperRepository : IMapperRepository
     public IEnumerable<TDestination> Map<TDestination>(IEnumerable<object> source)
         where TDestination : class
     {
-        return source.Select(_ => mapper!.Map<TDestination>(_)).ToList();
+        return source.Select(_ => mapper!.Map<TDestination>(_));
     }
 }

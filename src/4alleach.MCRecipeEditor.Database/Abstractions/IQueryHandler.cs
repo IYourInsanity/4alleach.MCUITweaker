@@ -4,11 +4,18 @@ namespace _4alleach.MCRecipeEditor.Database.Abstractions;
 
 public interface IQueryHandler
 {
+
+    void Prepare();
+
     #region Select
 
     IEnumerable<object>? SelectAll();
 
     Task<IEnumerable<object>?> SelectAllAsync(CancellationToken token);
+
+    IEnumerable<object>? SelectWithCondition(Func<dynamic, bool> predicate);
+
+    Task<IEnumerable<object>?> SelectWithConditionAsync(Func<dynamic, bool> predicate, CancellationToken token);
 
     #endregion
 

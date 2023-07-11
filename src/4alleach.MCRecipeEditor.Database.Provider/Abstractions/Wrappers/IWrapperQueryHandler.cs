@@ -9,6 +9,10 @@ public interface IWrapperQueryHandler<TSource>
 
     Task<IEnumerable<TSource>> SelectAllAsync(CancellationToken token);
 
+    IEnumerable<TSource> SelectWithCondition(Func<dynamic, bool> predicate);
+
+    Task<IEnumerable<TSource>> SelectWithCondition(Func<dynamic, bool> predicate, CancellationToken token);
+
     #endregion
 
     #region Insert

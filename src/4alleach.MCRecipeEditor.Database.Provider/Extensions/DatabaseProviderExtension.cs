@@ -39,6 +39,17 @@ public static class DatabaseProviderExtension
         throw new NotImplementedException();
     }
 
+    public static void Prepare<TSource>(this IDatabaseProvider provider)
+        where TSource : class
+    {
+        if(provider is DatabaseProvider dbProvider)
+        {
+            var type = dbProvider.mapper.Map<TSource>();
+
+            dbProvider.context.CreateHandler(type).Prepare();
+        }
+    }
+
     public static void UseHandler<TSource>(this IDatabaseProvider provider, Action<IWrapperQueryHandler<TSource>> action)
         where TSource : class
     {

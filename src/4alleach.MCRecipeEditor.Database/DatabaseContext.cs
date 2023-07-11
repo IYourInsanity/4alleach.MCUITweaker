@@ -43,6 +43,7 @@ public sealed class DatabaseContext : DbContext, IDbContext
             Mode = SqliteOpenMode.ReadWriteCreate
         }.ToString();
 
+        FolderHelper.CreateIfNotExist(FolderPath);
         Database.EnsureCreated();
     }
 

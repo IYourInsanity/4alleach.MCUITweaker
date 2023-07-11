@@ -1,6 +1,8 @@
 ﻿using _4alleach.MCRecipeEditor.Database.Abstractions;
 using _4alleach.MCRecipeEditor.Database.Entities.Abstractions;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 
 namespace _4alleach.MCRecipeEditor.Database;
 
@@ -18,6 +20,12 @@ internal sealed class QueryHandler<TEntity> : IQueryHandler<TEntity>
 
     #region Implementation of IDatabaseContext<TEntity>
 
+    public void Prepare()
+    {
+        //Initialize EF Core mechanics
+        Set.FirstOrDefault();
+    }
+
     public IEnumerable<object>? SelectAll()
     {
         return Set.ToList();
@@ -26,6 +34,20 @@ internal sealed class QueryHandler<TEntity> : IQueryHandler<TEntity>
     public async Task<IEnumerable<object>?> SelectAllAsync(CancellationToken token)
     {
         return await Set.ToListAsync(token);
+    }
+
+    public IEnumerable<object>? SelectWithCondition(Func<dynamic, bool> predicate)
+    {
+        return Set.Where(predicate).ToList();
+    }
+
+    public async Task<IEnumerable<object>?> SelectWithConditionAsync(Func<dynamic, bool> predicate, CancellationToken token)
+    {
+        var result = default(IEnumerable<object>);
+
+        await Task.Run(() => { result = Set.Where(predicate).ToList(); }, token);
+
+        return result;
     }
 
     public void Insert(object entity)
@@ -40,7 +62,8 @@ internal sealed class QueryHandler<TEntity> : IQueryHandler<TEntity>
     {
         var casted = Cast(entities);
         //TrackEntities(casted);
-        Set.AddRange(casted);
+        //Set.AddRange(casted);
+        context.BulkInsert(casted);
         context.SaveChanges();
     }
 
@@ -56,7 +79,8 @@ internal sealed class QueryHandler<TEntity> : IQueryHandler<TEntity>
     {
         var casted = Cast(entities);
         //TrackEntities(casted);
-        await Set.AddRangeAsync(casted, token);
+        //await Set.AddRangeAsync(casted, token);
+        await context.BulkInsertAsync(casted, token);
         await context.SaveChangesAsync(token);
     }
 

@@ -2,6 +2,7 @@
 using _4alleach.MCRecipeEditor.Database.Provider.Abstractions;
 using _4alleach.MCRecipeEditor.Database.Provider.Abstractions.Wrappers;
 using _4alleach.MCRecipeEditor.Database.Provider.Extensions;
+using System.Linq;
 
 namespace _4alleach.MCRecipeEditor.Database.Provider.Wrappers;
 
@@ -41,6 +42,29 @@ internal sealed class WrapperQueryHandler<TSource> : IWrapperQueryHandler<TSourc
         return provider.Map<TSource>(entities);
     }
 
+    public IEnumerable<TSource> SelectWithCondition(Func<dynamic, bool> predicate)
+    {
+        var entities = handler.SelectWithCondition(predicate);
+
+        if (entities == null)
+        {
+            return Enumerable.Empty<TSource>();
+        }
+
+        return provider.Map<TSource>(entities);
+    }
+
+    public async Task<IEnumerable<TSource>> SelectWithCondition(Func<dynamic, bool> predicate, CancellationToken token)
+    {
+        var entities = await handler.SelectWithConditionAsync(predicate, token);
+
+        if (entities == null)
+        {
+            return Enumerable.Empty<TSource>();
+        }
+
+        return provider.Map<TSource>(entities);
+    }
 
     #region Insert
 

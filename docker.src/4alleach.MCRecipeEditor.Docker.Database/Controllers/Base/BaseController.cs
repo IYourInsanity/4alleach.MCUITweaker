@@ -157,7 +157,6 @@ public abstract class BaseController<TAsset> : Controller
             await handler.DeleteAsync(entity, token);
             return Ok(true);
         }
-        //TODO Rework Exception
         catch (Exception ex)
         {
             return BadRequest(ex);
@@ -181,7 +180,6 @@ public abstract class BaseController<TAsset> : Controller
             await handler.DeleteAsync(entities, token);
             return Ok(true);
         }
-        //TODO Rework Exception
         catch (Exception ex)
         {
             return BadRequest(ex);

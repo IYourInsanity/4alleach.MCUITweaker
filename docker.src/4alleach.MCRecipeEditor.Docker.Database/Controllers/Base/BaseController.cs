@@ -5,7 +5,7 @@ using System.Linq.Dynamic.Core;
 
 namespace _4alleach.MCRecipeEditor.Docker.Database.Controllers.Base;
 
-[ApiController, Route("api/[controller]")]
+[ApiController, Route("[controller]")]
 public abstract class BaseController<TAsset> : Controller
     where TAsset : Asset
 {
@@ -35,14 +35,14 @@ public abstract class BaseController<TAsset> : Controller
     }
 
     [HttpPost(nameof(PostMany))]
-    public async Task<ActionResult<IEnumerable<TAsset>>> PostMany(string data, CancellationToken token)
+    public async Task<ActionResult<IEnumerable<TAsset>>> PostMany(IEnumerable<TAsset> entities, CancellationToken token)
     {
-        var entities = JsonConvert.DeserializeObject<IEnumerable<TAsset>>(data);
+        //var entities = JsonConvert.DeserializeObject<IEnumerable<TAsset>>(data);
 
-        if (entities == null)
-        {
-            return BadRequest();
-        }
+        //if (entities == null)
+        //{
+        //    return BadRequest();
+        //}
 
         var handler = _context.CreateHandler<TAsset>();
         await handler.InsertAsync(entities, token);
@@ -65,7 +65,7 @@ public abstract class BaseController<TAsset> : Controller
             return Ok(items);
         }
 
-        return BadRequest();
+        return NotFound();
     }
 
     [HttpGet(nameof(GetWithCondition))]
@@ -83,7 +83,7 @@ public abstract class BaseController<TAsset> : Controller
             return Ok(items);
         }
 
-        return BadRequest();
+        return NotFound();
     }
 
     #endregion

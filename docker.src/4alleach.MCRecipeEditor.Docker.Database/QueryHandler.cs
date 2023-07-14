@@ -36,7 +36,7 @@ internal sealed class QueryHandler<TEntity> : IQueryHandler<TEntity>
 
     public async Task InsertAsync(IEnumerable<TEntity> entities, CancellationToken token)
     {
-        await context.BulkInsertAsync(entities, token);
+        await context.AddRangeAsync(entities, token);
         await context.SaveChangesAsync(token);
     }
 

@@ -1,5 +1,6 @@
 ﻿using _4alleach.MCRecipeEditor.Database;
 using _4alleach.MCRecipeEditor.Docker.Database.Abstractions;
+using _4alleach.MCRecipeEditor.Docker.Database.Middleware;
 using Microsoft.OpenApi.Models;
 
 namespace _4alleach.MCRecipeEditor.Docker.Database;
@@ -41,7 +42,7 @@ public class Startup
         }
 
         app.UseHttpsRedirection();
-        app.UseStaticFiles();
+        //app.UseStaticFiles(); Not needed in current project
 
         app.UseSwagger();
         app.UseSwaggerUI(c =>
@@ -49,7 +50,13 @@ public class Startup
             c.SwaggerEndpoint("/swagger/v1/swagger.json", "Todo API V1");
         });
 
+        //app.UseMiddleware<TokenMiddleware>();
+
+        //app.UseAuthentication();
+        //app.UseAuthorization();
+
         app.UseRouting();
+
         app.UseEndpoints(epBuilder =>
         {
             epBuilder.MapControllers();

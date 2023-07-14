@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <RootNamespace>_4alleach.MCRecipeEditor.Database.Provider</RootNamespace>
+    <RootNamespace>_4alleach.MCRecipeEditor.Communication.Database</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\4alleach.MCRecipeEditor.Models\4alleach.MCRecipeEditor.Models.csproj" />
+    <ProjectReference Include="..\4alleach.MCRecipeEditor.Communication.Abstractions\4alleach.MCRecipeEditor.Communication.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

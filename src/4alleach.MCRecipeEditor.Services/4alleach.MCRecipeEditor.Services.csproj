@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\4alleach.MCRecipeEditor.Communication\4alleach.MCRecipeEditor.Communication.csproj" />
     <ProjectReference Include="..\4alleach.MCRecipeEditor.Database.Provider\4alleach.MCRecipeEditor.Database.Provider.csproj" />
     <ProjectReference Include="..\4alleach.MCRecipeEditor.Models\4alleach.MCRecipeEditor.Models.csproj" />
   </ItemGroup>

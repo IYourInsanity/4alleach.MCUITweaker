@@ -1,8 +1,7 @@
 ﻿using _4alleach.MCRecipeEditor.Client.Abstractions.BusinessModel;
-using _4alleach.MCRecipeEditor.Database.Provider.Extensions;
+using _4alleach.MCRecipeEditor.Communication.Models;
 using _4alleach.MCRecipeEditor.Models.Database;
 using _4alleach.MCRecipeEditor.Services.Abstractions;
-using _4alleach.MCRecipeEditor.Common.Extensions;
 
 namespace _4alleach.MCRecipeEditor.Client.BusinessModels;
 
@@ -15,6 +14,19 @@ internal sealed class MainWindowBusinessModel : BaseBusinessModel
 
     internal async void Initialize()
     {
-        serviceHub.Get<IDatabaseControllerService>().PreloadDatabase();
+        var service = serviceHub.Get<ICommunicationService>();
+
+        using var handler = service.Use(ProviderType.Database).UseHandler<Item>();
+
+        var item = new Item()
+        {
+            Id = Guid.NewGuid(),
+            Name = "Fire",
+            Description = "Flame"
+        };
+
+        //await handler.InsertAsync(item, CancellationToken.None);
+
+        var result = await handler.SelectWithConditionAsync("Name == \"Fire\"", CancellationToken.None);
     }
 }

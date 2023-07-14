@@ -1,4 +1,6 @@
-﻿using _4alleach.MCRecipeEditor.Services.Abstractions;
+﻿using _4alleach.MCRecipeEditor.Communication;
+using _4alleach.MCRecipeEditor.Communication.Abstractions;
+using _4alleach.MCRecipeEditor.Services.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace _4alleach.MCRecipeEditor.Services;
@@ -16,7 +18,8 @@ internal sealed class ServiceHub : IServiceHub
         var serviceCollection = new ServiceCollection()
             .AddSingleton<IServiceHub>(serviceHub)
             .AddSingleton<IProjectControllerService, ProjectControllerService>()
-            .AddSingleton<IDatabaseControllerService, DatabaseControllerService>();
+            .AddSingleton<ICommunicationService, CommunicationService>()
+            .AddTransient<IHttpManager, HttpManager>();
 
         serviceHub.Initialize(serviceCollection);
 

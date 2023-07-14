@@ -2,17 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <RootNamespace>_4alleach.MCRecipeEditor.Database.Mapper</RootNamespace>
+    <RootNamespace>_4alleach.MCRecipeEditor.Communication</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="12.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\4alleach.MCRecipeEditor.Database.Entities\4alleach.MCRecipeEditor.Database.Entities.csproj" />
+    <ProjectReference Include="..\4alleach.MCRecipeEditor.Communication.Database\4alleach.MCRecipeEditor.Communication.Database.csproj" />
     <ProjectReference Include="..\4alleach.MCRecipeEditor.Models\4alleach.MCRecipeEditor.Models.csproj" />
   </ItemGroup>
 

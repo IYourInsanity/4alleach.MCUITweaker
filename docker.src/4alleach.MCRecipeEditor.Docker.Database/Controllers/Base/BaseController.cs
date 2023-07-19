@@ -1,6 +1,5 @@
 ﻿using _4alleach.MCRecipeEditor.Docker.Database.Abstractions;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using System.Linq.Dynamic.Core;
 
 namespace _4alleach.MCRecipeEditor.Docker.Database.Controllers.Base;
@@ -9,7 +8,7 @@ namespace _4alleach.MCRecipeEditor.Docker.Database.Controllers.Base;
 public abstract class BaseController<TAsset> : Controller
     where TAsset : Asset
 {
-    private readonly IAssetsContext _context;
+    protected readonly IAssetsContext _context;
 
     public BaseController(IAssetsContext context)
     {
@@ -19,15 +18,8 @@ public abstract class BaseController<TAsset> : Controller
     #region Post
 
     [HttpPost(nameof(Post))]
-    public async Task<ActionResult<TAsset>> Post(string data, CancellationToken token)
+    public async Task<ActionResult<TAsset>> Post(TAsset entity, CancellationToken token)
     {
-        var entity = JsonConvert.DeserializeObject<TAsset>(data);
-
-        if (entity == null)
-        {
-            return BadRequest();
-        }
-
         var handler = _context.CreateHandler<TAsset>();
         await handler.InsertAsync(entity, token);
 
@@ -37,13 +29,6 @@ public abstract class BaseController<TAsset> : Controller
     [HttpPost(nameof(PostMany))]
     public async Task<ActionResult<IEnumerable<TAsset>>> PostMany(IEnumerable<TAsset> entities, CancellationToken token)
     {
-        //var entities = JsonConvert.DeserializeObject<IEnumerable<TAsset>>(data);
-
-        //if (entities == null)
-        //{
-        //    return BadRequest();
-        //}
-
         var handler = _context.CreateHandler<TAsset>();
         await handler.InsertAsync(entities, token);
 
@@ -65,17 +50,14 @@ public abstract class BaseController<TAsset> : Controller
             return Ok(items);
         }
 
-        return NotFound();
+        return NoContent();
     }
 
     [HttpGet(nameof(GetWithCondition))]
     public async Task<ActionResult<IEnumerable<TAsset>>> GetWithCondition(string condition, CancellationToken token)
     {
         var handler = _context.CreateHandler<TAsset>();
-
-        var exp = DynamicExpressionParser.ParseLambda<TAsset, bool>(null, true, condition)
-                                         .Compile(true);
-
+        var exp = DynamicExpressionParser.ParseLambda<TAsset, bool>(null, true, condition);
         var items = await handler.SelectWithConditionAsync(exp, token);
 
         if (items != null)
@@ -83,7 +65,7 @@ public abstract class BaseController<TAsset> : Controller
             return Ok(items);
         }
 
-        return NotFound();
+        return NoContent();
     }
 
     #endregion
@@ -91,49 +73,19 @@ public abstract class BaseController<TAsset> : Controller
     #region Put
 
     [HttpPut(nameof(Put))]
-    public async Task<ActionResult<bool>> Put(string data, CancellationToken token)
+    public async Task<ActionResult<bool>> Put(TAsset entity, CancellationToken token)
     {
-        var entity = JsonConvert.DeserializeObject<TAsset>(data);
-
-        if (entity == null)
-        {
-            return BadRequest();
-        }
-
         var handler = _context.CreateHandler<TAsset>();
-
-        try
-        {
-            await handler.UpdateAsync(entity, token);
-            return Ok(true);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex);
-        } 
+        await handler.UpdateAsync(entity, token);
+        return Ok(true);
     }
 
     [HttpPut(nameof(PutMany))]
-    public async Task<ActionResult<bool>> PutMany(string data, CancellationToken token)
+    public async Task<ActionResult<bool>> PutMany(IEnumerable<TAsset> entities, CancellationToken token)
     {
-        var entities = JsonConvert.DeserializeObject<IEnumerable<TAsset>>(data);
-
-        if (entities == null)
-        {
-            return BadRequest();
-        }
-
         var handler = _context.CreateHandler<TAsset>();
-
-        try
-        {
-            await handler.UpdateAsync(entities, token);
-            return Ok(true);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex);
-        }
+        await handler.UpdateAsync(entities, token);
+        return Ok(true);
     }
 
     #endregion
@@ -141,49 +93,19 @@ public abstract class BaseController<TAsset> : Controller
     #region Delete
 
     [HttpDelete(nameof(Delete))]
-    public async Task<ActionResult<bool>> Delete(string data, CancellationToken token)
+    public async Task<ActionResult<bool>> Delete(TAsset entity, CancellationToken token)
     {
-        var entity = JsonConvert.DeserializeObject<TAsset>(data);
-
-        if (entity == null)
-        {
-            return BadRequest();
-        }
-
         var handler = _context.CreateHandler<TAsset>();
-
-        try
-        {
-            await handler.DeleteAsync(entity, token);
-            return Ok(true);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex);
-        }
+        await handler.DeleteAsync(entity, token);
+        return Ok(true);
     }
 
     [HttpDelete(nameof(DeleteMany))]
-    public async Task<ActionResult<bool>> DeleteMany(string data, CancellationToken token)
+    public async Task<ActionResult<bool>> DeleteMany(IEnumerable<TAsset> entities, CancellationToken token)
     {
-        var entities = JsonConvert.DeserializeObject<IEnumerable<TAsset>>(data);
-
-        if (entities == null)
-        {
-            return BadRequest();
-        }
-
         var handler = _context.CreateHandler<TAsset>();
-
-        try
-        {
-            await handler.DeleteAsync(entities, token);
-            return Ok(true);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex);
-        }
+        await handler.DeleteAsync(entities, token);
+        return Ok(true);
     }
 
     #endregion

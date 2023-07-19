@@ -1,4 +1,6 @@
-﻿namespace _4alleach.MCRecipeEditor.Docker.Database.Abstractions;
+﻿using System.Linq.Expressions;
+
+namespace _4alleach.MCRecipeEditor.Docker.Database.Abstractions;
 
 public interface IQueryHandler
 {
@@ -12,7 +14,7 @@ public interface IQueryHandler<TEntity> : IQueryHandler
 
     Task<IEnumerable<TEntity>?> SelectAllAsync(CancellationToken token);
 
-    Task<IEnumerable<TEntity>?> SelectWithConditionAsync(Func<TEntity, bool> predicate, CancellationToken token);
+    Task<IEnumerable<TEntity>?> SelectWithConditionAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken token);
 
     #endregion
 

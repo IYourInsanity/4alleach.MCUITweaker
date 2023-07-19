@@ -1,6 +1,7 @@
 ﻿using _4alleach.MCRecipeEditor.Docker.Database.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Dynamic.Core;
+using System.Linq.Expressions;
 
 namespace _4alleach.MCRecipeEditor.Docker.Database;
 
@@ -23,7 +24,7 @@ internal sealed class QueryHandler<TEntity> : IQueryHandler<TEntity>
         return await Set.ToListAsync(token);
     }
 
-    public async Task<IEnumerable<TEntity>?> SelectWithConditionAsync(Func<TEntity, bool> predicate, CancellationToken token)
+    public async Task<IEnumerable<TEntity>?> SelectWithConditionAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken token)
     {
         return await Set.Where(predicate).ToDynamicListAsync<TEntity>(token);
     }

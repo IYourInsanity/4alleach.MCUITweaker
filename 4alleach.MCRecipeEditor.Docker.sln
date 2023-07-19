@@ -5,6 +5,8 @@ VisualStudioVersion = 17.7.33711.374
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4alleach.MCRecipeEditor.Docker.Database", "docker.src\4alleach.MCRecipeEditor.Docker.Database\4alleach.MCRecipeEditor.Docker.Database.csproj", "{3252C6EA-7DCB-4724-BDA0-81C1F1CC1644}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4alleach.MCRecipeEditor.Docker.Database.SpecificationExpression", "4alleach.MCRecipeEditor.Docker.Database.SpecificationExpression\4alleach.MCRecipeEditor.Docker.Database.SpecificationExpression.csproj", "{91D29083-E787-4068-A930-792DFD3FC5A0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{3252C6EA-7DCB-4724-BDA0-81C1F1CC1644}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3252C6EA-7DCB-4724-BDA0-81C1F1CC1644}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3252C6EA-7DCB-4724-BDA0-81C1F1CC1644}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91D29083-E787-4068-A930-792DFD3FC5A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91D29083-E787-4068-A930-792DFD3FC5A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91D29083-E787-4068-A930-792DFD3FC5A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91D29083-E787-4068-A930-792DFD3FC5A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -50,6 +50,7 @@ public class Startup
             c.SwaggerEndpoint("/swagger/v1/swagger.json", "Todo API V1");
         });
 
+        app.UseMiddleware<ExceptionMiddleware>();
         //app.UseMiddleware<TokenMiddleware>();
 
         //app.UseAuthentication();

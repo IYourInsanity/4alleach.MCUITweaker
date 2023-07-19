@@ -1,6 +1,11 @@
 ﻿namespace _4alleach.MCRecipeEditor.Docker.Database.Abstractions;
 
-public interface IQueryHandler<TEntity>
+public interface IQueryHandler
+{
+
+}
+
+public interface IQueryHandler<TEntity> : IQueryHandler
     where TEntity : Asset
 {
     #region Select

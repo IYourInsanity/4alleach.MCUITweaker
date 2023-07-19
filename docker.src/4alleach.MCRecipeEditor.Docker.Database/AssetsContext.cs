@@ -1,6 +1,7 @@
 ﻿using _4alleach.MCRecipeEditor.Docker.Database;
 using _4alleach.MCRecipeEditor.Docker.Database.Abstractions;
 using _4alleach.MCRecipeEditor.Docker.Database.Entities;
+using _4alleach.MCRecipeEditor.Docker.Database.Helper;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Concurrent;
@@ -11,24 +12,14 @@ public sealed class AssetsContext : DbContext, IAssetsContext
 {
     private const string Asset = "4alleach.Asset.db";
 
-    private readonly static ConcurrentDictionary<Type, Type> HandlerStorage;
+    private static ConcurrentDictionary<Type, Func<IQueryHandler>> ContextStorage { get; }
 
-    private readonly string connectionString;
+    private static string ConnectionString { get; set; }
 
     static AssetsContext()
     {
-        HandlerStorage = new ConcurrentDictionary<Type, Type>();
-
-        HandlerStorage.TryAdd(typeof(Item), typeof(QueryHandler<Item>));
-        HandlerStorage.TryAdd(typeof(ItemPostfix), typeof(QueryHandler<ItemPostfix>));
-        HandlerStorage.TryAdd(typeof(ItemPrefix), typeof(QueryHandler<ItemPrefix>));
-        HandlerStorage.TryAdd(typeof(ItemType), typeof(QueryHandler<ItemType>));
-        HandlerStorage.TryAdd(typeof(ModType), typeof(QueryHandler<ModType>));
-    }
-
-    public AssetsContext() : base()
-    {
-        connectionString = new SqliteConnectionStringBuilder()
+        ContextStorage = new ConcurrentDictionary<Type, Func<IQueryHandler>>();
+        ConnectionString = new SqliteConnectionStringBuilder()
         {
             DataSource = Asset,
             DefaultTimeout = 30,
@@ -36,14 +27,22 @@ public sealed class AssetsContext : DbContext, IAssetsContext
             Cache = SqliteCacheMode.Default,
             Mode = SqliteOpenMode.ReadWriteCreate
         }.ToString();
+    }
 
-        //Database.EnsureDeleted();
+    public AssetsContext() : base()
+    {
+        ContextStorage.TryAdd(typeof(Item), ExpressionHelper.BuildLambdaWithConstructor<QueryHandler<Item>>(this));
+        ContextStorage.TryAdd(typeof(ItemPostfix), ExpressionHelper.BuildLambdaWithConstructor<QueryHandler<ItemPostfix>>(this));
+        ContextStorage.TryAdd(typeof(ItemPrefix), ExpressionHelper.BuildLambdaWithConstructor<QueryHandler<ItemPrefix>>(this));
+        ContextStorage.TryAdd(typeof(ItemType), ExpressionHelper.BuildLambdaWithConstructor<QueryHandler<ItemType>>(this));
+        ContextStorage.TryAdd(typeof(ModType), ExpressionHelper.BuildLambdaWithConstructor<QueryHandler<ModType>>(this));
+
         Database.EnsureCreated();
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlite(connectionString)
+        optionsBuilder.UseSqlite(ConnectionString)
                       .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
     }
 
@@ -59,9 +58,9 @@ public sealed class AssetsContext : DbContext, IAssetsContext
     public IQueryHandler<TAsset> CreateHandler<TAsset>()
         where TAsset : Asset
     {
-        if(HandlerStorage.TryGetValue(typeof(TAsset), out var handlerType))
+        if(ContextStorage.TryGetValue(typeof(TAsset), out var expression))
         {
-            return (IQueryHandler<TAsset>)Activator.CreateInstance(handlerType, this)!;
+            return (IQueryHandler<TAsset>)expression();
         }
 
         throw new NotImplementedException();

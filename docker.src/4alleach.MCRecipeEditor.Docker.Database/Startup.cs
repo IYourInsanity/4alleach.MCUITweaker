@@ -1,5 +1,6 @@
 ﻿using _4alleach.MCRecipeEditor.Docker.Database.Core;
 using _4alleach.MCRecipeEditor.Docker.Database.Core.Abstractions;
+using _4alleach.MCRecipeEditor.Docker.Database.GraphQL;
 using _4alleach.MCRecipeEditor.Docker.Database.Middleware;
 using Microsoft.OpenApi.Models;
 
@@ -16,6 +17,7 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
+        services.AddSingleton<IQueryHandlerRepository, QueryHandlerRepository>();
         services.AddDbContext<IAssetsContext, AssetsContext>();
 
         services.AddControllers();
@@ -28,6 +30,8 @@ public class Startup
         });
 
         services.AddMvc(opt => opt.EnableEndpointRouting = false);
+        services.AddGraphQLServer()
+                .AddQueryType<Queries>();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -61,6 +65,7 @@ public class Startup
         app.UseEndpoints(epBuilder =>
         {
             epBuilder.MapControllers();
+            epBuilder.MapGraphQL("/graphql");
         });
 
         app.UseMvc();

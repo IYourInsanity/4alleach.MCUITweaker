@@ -8,16 +8,32 @@ namespace _4alleach.MCRecipeEditor.Docker.Database.Core;
 internal sealed class QueryHandler<TEntity> : IQueryHandler<TEntity>
     where TEntity : Asset
 {
-    private readonly DbContext context;
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+    private DbContext context;
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
     private DbSet<TEntity> Set => context.Set<TEntity>();
 
-    public QueryHandler(DbContext context)
+    #region Implementation of IDatabaseContext<TEntity>
+
+    public TQueryHandler Build<TQueryHandler>(DbContext context)
+        where TQueryHandler : IQueryHandler
     {
+        //TODO Rework it
         this.context = context;
+
+        if(this is TQueryHandler handler)
+        {
+            return handler;
+        }
+
+        throw new NotImplementedException();
     }
 
-    #region Implementation of IDatabaseContext<TEntity>
+    public IQueryable<TEntity>? SelectAllAsQueryable()
+    {
+        return Set;
+    }
 
     public async Task<IEnumerable<TEntity>?> SelectAllAsync(CancellationToken token)
     {
@@ -65,5 +81,5 @@ internal sealed class QueryHandler<TEntity> : IQueryHandler<TEntity>
         await context.SaveChangesAsync(token);
     }
 
-    #endregion        
+    #endregion
 }

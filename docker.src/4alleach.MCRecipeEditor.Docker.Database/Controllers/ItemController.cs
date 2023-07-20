@@ -14,7 +14,7 @@ public class ItemController : BaseController<Item>
     [HttpGet(nameof(GetAllWhereNameExist))]
     public async Task<ActionResult<IEnumerable<Item>>> GetAllWhereNameExist(CancellationToken token)
     {
-        var handler = _context.CreateHandler<Item>();
+        var handler = _context.BuildHandler<Item>();
         var items = await handler.SelectWithConditionAsync(Specifications.Items.NameIsNotNull | Specifications.Items.DescriptionIsNotNull, token);
 
         if (items != null)

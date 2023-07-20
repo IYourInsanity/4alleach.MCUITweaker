@@ -1,16 +1,20 @@
-﻿using System.Linq.Expressions;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace _4alleach.MCRecipeEditor.Docker.Database.Core.Abstractions;
 
 public interface IQueryHandler
 {
-
+    TQueryHandler Build<TQueryHandler>(DbContext context)
+        where TQueryHandler : IQueryHandler;
 }
 
 public interface IQueryHandler<TEntity> : IQueryHandler
     where TEntity : Asset
 {
     #region Select
+
+    IQueryable<TEntity>? SelectAllAsQueryable();
 
     Task<IEnumerable<TEntity>?> SelectAllAsync(CancellationToken token);
 

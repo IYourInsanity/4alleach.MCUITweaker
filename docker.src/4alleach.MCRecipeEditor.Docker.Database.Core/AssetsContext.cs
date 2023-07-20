@@ -1,12 +1,11 @@
-﻿using _4alleach.MCRecipeEditor.Docker.Database;
-using _4alleach.MCRecipeEditor.Docker.Database.Abstractions;
-using _4alleach.MCRecipeEditor.Docker.Database.Entities;
-using _4alleach.MCRecipeEditor.Docker.Database.Helper;
+﻿using _4alleach.MCRecipeEditor.Docker.Database.Core.Abstractions;
+using _4alleach.MCRecipeEditor.Docker.Database.Core.Entities;
+using _4alleach.MCRecipeEditor.Docker.Database.Core.Helpers;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Concurrent;
 
-namespace _4alleach.MCRecipeEditor.Database;
+namespace _4alleach.MCRecipeEditor.Docker.Database.Core;
 
 public sealed class AssetsContext : DbContext, IAssetsContext
 {
@@ -31,11 +30,11 @@ public sealed class AssetsContext : DbContext, IAssetsContext
 
     public AssetsContext() : base()
     {
-        ContextStorage.TryAdd(typeof(Item), ExpressionHelper.BuildLambdaWithConstructor<QueryHandler<Item>>(this));
-        ContextStorage.TryAdd(typeof(ItemPostfix), ExpressionHelper.BuildLambdaWithConstructor<QueryHandler<ItemPostfix>>(this));
-        ContextStorage.TryAdd(typeof(ItemPrefix), ExpressionHelper.BuildLambdaWithConstructor<QueryHandler<ItemPrefix>>(this));
-        ContextStorage.TryAdd(typeof(ItemType), ExpressionHelper.BuildLambdaWithConstructor<QueryHandler<ItemType>>(this));
-        ContextStorage.TryAdd(typeof(ModType), ExpressionHelper.BuildLambdaWithConstructor<QueryHandler<ModType>>(this));
+        ContextStorage.TryAdd(typeof(Item), ExpressionsHelper.BuildLambdaWithConstructor<QueryHandler<Item>>(this));
+        ContextStorage.TryAdd(typeof(ItemPostfix), ExpressionsHelper.BuildLambdaWithConstructor<QueryHandler<ItemPostfix>>(this));
+        ContextStorage.TryAdd(typeof(ItemPrefix), ExpressionsHelper.BuildLambdaWithConstructor<QueryHandler<ItemPrefix>>(this));
+        ContextStorage.TryAdd(typeof(ItemType), ExpressionsHelper.BuildLambdaWithConstructor<QueryHandler<ItemType>>(this));
+        ContextStorage.TryAdd(typeof(ModType), ExpressionsHelper.BuildLambdaWithConstructor<QueryHandler<ModType>>(this));
 
         Database.EnsureCreated();
     }
@@ -58,7 +57,7 @@ public sealed class AssetsContext : DbContext, IAssetsContext
     public IQueryHandler<TAsset> CreateHandler<TAsset>()
         where TAsset : Asset
     {
-        if(ContextStorage.TryGetValue(typeof(TAsset), out var expression))
+        if (ContextStorage.TryGetValue(typeof(TAsset), out var expression))
         {
             return (IQueryHandler<TAsset>)expression();
         }

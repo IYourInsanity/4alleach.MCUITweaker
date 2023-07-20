@@ -13,12 +13,12 @@ public sealed class ParameterReplacerVisitor<TOutput> : ExpressionVisitor
         this.target = target;
     }
 
-    internal Expression<TOutput> VisitAndConvert<T>(Expression<T> root)
+    internal Expression<TOutput> VisitAndConvert<TInput>(Expression<TInput> root)
     {
         return (Expression<TOutput>)VisitLambda(root);
     }
 
-    protected override Expression VisitLambda<T>(Expression<T> node)
+    protected override Expression VisitLambda<TInput>(Expression<TInput> node)
     {
         var parameters = node.Parameters
                              .Select(p => p == source ? target : p)

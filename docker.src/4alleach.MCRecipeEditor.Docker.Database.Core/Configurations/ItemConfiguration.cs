@@ -1,8 +1,8 @@
-﻿using _4alleach.MCRecipeEditor.Docker.Database.Entities;
+﻿using _4alleach.MCRecipeEditor.Docker.Database.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace _4alleach.MCRecipeEditor.Docker.Database.Configurations;
+namespace _4alleach.MCRecipeEditor.Docker.Database.Core.Configurations;
 
 public sealed class ItemConfiguration : IEntityTypeConfiguration<Item>
 {

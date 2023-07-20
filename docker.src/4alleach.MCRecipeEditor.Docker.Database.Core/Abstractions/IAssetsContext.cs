@@ -1,4 +1,4 @@
-﻿namespace _4alleach.MCRecipeEditor.Docker.Database.Abstractions;
+﻿namespace _4alleach.MCRecipeEditor.Docker.Database.Core.Abstractions;
 
 public interface IAssetsContext : IDisposable
 {

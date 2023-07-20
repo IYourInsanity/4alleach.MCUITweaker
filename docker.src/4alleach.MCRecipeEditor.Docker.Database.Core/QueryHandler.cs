@@ -1,9 +1,9 @@
-﻿using _4alleach.MCRecipeEditor.Docker.Database.Abstractions;
+﻿using _4alleach.MCRecipeEditor.Docker.Database.Core.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
 
-namespace _4alleach.MCRecipeEditor.Docker.Database;
+namespace _4alleach.MCRecipeEditor.Docker.Database.Core;
 
 internal sealed class QueryHandler<TEntity> : IQueryHandler<TEntity>
     where TEntity : Asset

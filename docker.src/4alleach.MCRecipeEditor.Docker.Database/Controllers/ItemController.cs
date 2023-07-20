@@ -1,8 +1,7 @@
-﻿using _4alleach.MCRecipeEditor.Docker.Database.Abstractions;
-using _4alleach.MCRecipeEditor.Docker.Database.Controllers.Base;
-using _4alleach.MCRecipeEditor.Docker.Database.Entities;
+﻿using _4alleach.MCRecipeEditor.Docker.Database.Controllers.Base;
+using _4alleach.MCRecipeEditor.Docker.Database.Core.Abstractions;
+using _4alleach.MCRecipeEditor.Docker.Database.Core.Entities;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace _4alleach.MCRecipeEditor.Docker.Database.Controllers;
 
@@ -16,7 +15,7 @@ public class ItemController : BaseController<Item>
     public async Task<ActionResult<IEnumerable<Item>>> GetAllWhereNameExist(CancellationToken token)
     {
         var handler = _context.CreateHandler<Item>();
-        var items = await handler.SelectWithConditionAsync(Specifications.Items.NameIsNotNull | Specifications.Items.DescriptionIsNull, token);
+        var items = await handler.SelectWithConditionAsync(Specifications.Items.NameIsNotNull | Specifications.Items.DescriptionIsNotNull, token);
 
         if (items != null)
         {

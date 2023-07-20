@@ -1,8 +1,8 @@
-﻿using _4alleach.MCRecipeEditor.Docker.Database.Abstractions;
-using _4alleach.MCRecipeEditor.Docker.Database.Configurations;
+﻿using _4alleach.MCRecipeEditor.Docker.Database.Core.Abstractions;
+using _4alleach.MCRecipeEditor.Docker.Database.Core.Configurations;
 using Microsoft.EntityFrameworkCore;
 
-namespace _4alleach.MCRecipeEditor.Docker.Database.Entities;
+namespace _4alleach.MCRecipeEditor.Docker.Database.Core.Entities;
 
 [EntityTypeConfiguration(typeof(ItemConfiguration))]
 public class Item : Asset

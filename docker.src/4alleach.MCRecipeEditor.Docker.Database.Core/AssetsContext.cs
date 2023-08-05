@@ -8,11 +8,11 @@ public sealed class AssetsContext : DbContext, IAssetsContext
 {
     private const string ConnectionString = "Data Source=4alleach.Asset.db; Mode=ReadWriteCreate; Cache=Default; Default Timeout=30; Pooling=True";
 
-    private readonly IQueryHandlerRepository repository;
+    private readonly IRepositoryCollection _repositories;
 
-    public AssetsContext(IQueryHandlerRepository repository) : base()
+    public AssetsContext(IRepositoryCollection repositories) : base()
     {
-        this.repository = repository;
+        _repositories = repositories;
 
         Database.EnsureCreated();
     }
@@ -30,11 +30,14 @@ public sealed class AssetsContext : DbContext, IAssetsContext
         modelBuilder.Entity<ItemPrefix>().UseTpcMappingStrategy();
         modelBuilder.Entity<ItemType>().UseTpcMappingStrategy();
         modelBuilder.Entity<ModType>().UseTpcMappingStrategy();
+
+        modelBuilder.Entity<Account>().UseTpcMappingStrategy();
     }
 
-    public IQueryHandler<TAsset> BuildHandler<TAsset>()
+    public TRepository BuildRepository<TRepository, TAsset>()
+        where TRepository: IBaseRepository<TAsset>
         where TAsset : Asset
     {
-        return repository.Build<TAsset>(this);
+        return _repositories.Build<TRepository, TAsset>(this);
     }
 }

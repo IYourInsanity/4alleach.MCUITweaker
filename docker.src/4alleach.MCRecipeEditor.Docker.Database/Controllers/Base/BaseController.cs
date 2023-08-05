@@ -5,7 +5,8 @@ using System.Linq.Dynamic.Core;
 namespace _4alleach.MCRecipeEditor.Docker.Database.Controllers.Base;
 
 [ApiController, Route("[controller]")]
-public abstract class BaseController<TAsset> : Controller
+public abstract class BaseController<TRepository, TAsset> : Controller
+    where TRepository : IBaseRepository<TAsset>
     where TAsset : Asset
 {
     protected readonly IAssetsContext _context;
@@ -20,7 +21,7 @@ public abstract class BaseController<TAsset> : Controller
     [HttpPost(nameof(Post))]
     public async Task<ActionResult<TAsset>> Post(TAsset entity, CancellationToken token)
     {
-        var handler = _context.BuildHandler<TAsset>();
+        var handler = _context.BuildRepository<TRepository, TAsset>();
         await handler.InsertAsync(entity, token);
 
         return CreatedAtAction(nameof(Post), entity);
@@ -29,7 +30,7 @@ public abstract class BaseController<TAsset> : Controller
     [HttpPost(nameof(PostMany))]
     public async Task<ActionResult<IEnumerable<TAsset>>> PostMany(IEnumerable<TAsset> entities, CancellationToken token)
     {
-        var handler = _context.BuildHandler<TAsset>();
+        var handler = _context.BuildRepository<TRepository, TAsset>();
         await handler.InsertAsync(entities, token);
 
         return CreatedAtAction(nameof(PostMany), entities);
@@ -42,7 +43,7 @@ public abstract class BaseController<TAsset> : Controller
     [HttpGet(nameof(GetAll))]
     public async Task<ActionResult<IEnumerable<TAsset>>> GetAll(CancellationToken token)
     {
-        var handler = _context.BuildHandler<TAsset>();
+        var handler = _context.BuildRepository<TRepository, TAsset>();
         var items = await handler.SelectAllAsync(token);
 
         if (items != null)
@@ -56,7 +57,7 @@ public abstract class BaseController<TAsset> : Controller
     [HttpGet(nameof(GetWithCondition))]
     public async Task<ActionResult<IEnumerable<TAsset>>> GetWithCondition(string condition, CancellationToken token)
     {
-        var handler = _context.BuildHandler<TAsset>();
+        var handler = _context.BuildRepository<TRepository, TAsset>();
         var exp = DynamicExpressionParser.ParseLambda<TAsset, bool>(null, true, condition);
         var items = await handler.SelectWithConditionAsync(exp, token);
 
@@ -75,7 +76,7 @@ public abstract class BaseController<TAsset> : Controller
     [HttpPut(nameof(Put))]
     public async Task<ActionResult<bool>> Put(TAsset entity, CancellationToken token)
     {
-        var handler = _context.BuildHandler<TAsset>();
+        var handler = _context.BuildRepository<TRepository, TAsset>();
         await handler.UpdateAsync(entity, token);
         return Ok(true);
     }
@@ -83,7 +84,7 @@ public abstract class BaseController<TAsset> : Controller
     [HttpPut(nameof(PutMany))]
     public async Task<ActionResult<bool>> PutMany(IEnumerable<TAsset> entities, CancellationToken token)
     {
-        var handler = _context.BuildHandler<TAsset>();
+        var handler = _context.BuildRepository<TRepository, TAsset>();
         await handler.UpdateAsync(entities, token);
         return Ok(true);
     }
@@ -95,7 +96,7 @@ public abstract class BaseController<TAsset> : Controller
     [HttpDelete(nameof(Delete))]
     public async Task<ActionResult<bool>> Delete(TAsset entity, CancellationToken token)
     {
-        var handler = _context.BuildHandler<TAsset>();
+        var handler = _context.BuildRepository<TRepository, TAsset>();
         await handler.DeleteAsync(entity, token);
         return Ok(true);
     }
@@ -103,7 +104,7 @@ public abstract class BaseController<TAsset> : Controller
     [HttpDelete(nameof(DeleteMany))]
     public async Task<ActionResult<bool>> DeleteMany(IEnumerable<TAsset> entities, CancellationToken token)
     {
-        var handler = _context.BuildHandler<TAsset>();
+        var handler = _context.BuildRepository<TRepository, TAsset>();
         await handler.DeleteAsync(entities, token);
         return Ok(true);
     }

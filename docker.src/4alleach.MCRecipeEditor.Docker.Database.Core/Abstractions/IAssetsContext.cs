@@ -2,6 +2,7 @@
 
 public interface IAssetsContext : IDisposable
 {
-    IQueryHandler<TAsset> BuildHandler<TAsset>()
+    TRepository BuildRepository<TRepository, TAsset>()
+        where TRepository : IBaseRepository<TAsset>
         where TAsset : Asset;
 }

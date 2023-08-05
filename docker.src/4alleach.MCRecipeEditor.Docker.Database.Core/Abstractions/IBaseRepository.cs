@@ -3,18 +3,19 @@ using System.Linq.Expressions;
 
 namespace _4alleach.MCRecipeEditor.Docker.Database.Core.Abstractions;
 
-public interface IQueryHandler
+public interface IBaseRepository
 {
-    TQueryHandler Build<TQueryHandler>(DbContext context)
-        where TQueryHandler : IQueryHandler;
 }
 
-public interface IQueryHandler<TEntity> : IQueryHandler
+public interface IBaseRepository<TEntity> : IBaseRepository
     where TEntity : Asset
 {
+    TRepository Build<TRepository>(DbContext context)
+        where TRepository : IBaseRepository<TEntity>;
+
     #region Select
 
-    IQueryable<TEntity>? SelectAllAsQueryable();
+IQueryable<TEntity>? SelectAllAsQueryable();
 
     Task<IEnumerable<TEntity>?> SelectAllAsync(CancellationToken token);
 

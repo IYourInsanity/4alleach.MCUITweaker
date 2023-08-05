@@ -3,28 +3,27 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
 
-namespace _4alleach.MCRecipeEditor.Docker.Database.Core;
+namespace _4alleach.MCRecipeEditor.Docker.Database.Core.Repositories.Base;
 
-internal sealed class QueryHandler<TEntity> : IQueryHandler<TEntity>
+public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity>
     where TEntity : Asset
 {
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-    private DbContext context;
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+    private DbContext? _context;
 
-    private DbSet<TEntity> Set => context.Set<TEntity>();
+    internal DbContext Context => _context!;
+
+    private DbSet<TEntity> Set => Context.Set<TEntity>();
 
     #region Implementation of IDatabaseContext<TEntity>
 
-    public TQueryHandler Build<TQueryHandler>(DbContext context)
-        where TQueryHandler : IQueryHandler
+    public TRepository Build<TRepository>(DbContext context) 
+        where TRepository : IBaseRepository<TEntity>
     {
-        //TODO Rework it
-        this.context = context;
+        _context = context;
 
-        if(this is TQueryHandler handler)
+        if (this is TRepository repository)
         {
-            return handler;
+            return repository;
         }
 
         throw new NotImplementedException();
@@ -48,38 +47,39 @@ internal sealed class QueryHandler<TEntity> : IQueryHandler<TEntity>
     public async Task InsertAsync(TEntity entity, CancellationToken token)
     {
         await Set.AddAsync(entity, token);
-        await context.SaveChangesAsync(token);
+        await Context.SaveChangesAsync(token);
     }
 
     public async Task InsertAsync(IEnumerable<TEntity> entities, CancellationToken token)
     {
-        await context.AddRangeAsync(entities, token);
-        await context.SaveChangesAsync(token);
+        await Context.AddRangeAsync(entities, token);
+        await Context.SaveChangesAsync(token);
     }
 
     public async Task UpdateAsync(TEntity entity, CancellationToken token)
     {
         Set.Update(entity);
-        await context.SaveChangesAsync(token);
+        await Context.SaveChangesAsync(token);
     }
 
     public async Task UpdateAsync(IEnumerable<TEntity> entities, CancellationToken token)
     {
         Set.UpdateRange(entities);
-        await context.SaveChangesAsync(token);
+        await Context.SaveChangesAsync(token);
     }
 
     public async Task DeleteAsync(TEntity entity, CancellationToken token)
     {
         Set.Remove(entity);
-        await context.SaveChangesAsync(token);
+        await Context.SaveChangesAsync(token);
     }
 
     public async Task DeleteAsync(IEnumerable<TEntity> entities, CancellationToken token)
     {
         Set.RemoveRange(entities);
-        await context.SaveChangesAsync(token);
+        await Context.SaveChangesAsync(token);
     }
 
     #endregion
+
 }

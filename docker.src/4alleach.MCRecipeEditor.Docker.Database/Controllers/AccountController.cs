@@ -5,11 +5,9 @@ using _4alleach.MCRecipeEditor.Docker.Database.Core.Repositories;
 
 namespace _4alleach.MCRecipeEditor.Docker.Database.Controllers;
 
-public class ModTypeController : BaseController<ModTypeRepository, ModType>
+public class AccountController : BaseController<AccountRepository, Account>
 {
-    public ModTypeController(IAssetsContext context)
-        : base(context)
+    public AccountController(IAssetsContext context) : base(context)
     {
-
     }
 }

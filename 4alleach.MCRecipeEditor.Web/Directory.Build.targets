@@ -1,0 +1,10 @@
+<Project>
+
+<ItemGroup>
+
+    <!-- NLog dependencies -->
+    <PackageReference Update="NLog.Web.AspNetCore" Version="5.3.4" />
+    
+</ItemGroup>
+
+</Project>

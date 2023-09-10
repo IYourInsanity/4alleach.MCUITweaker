@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <PackageReference Include="NLog.Web.AspNetCore"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\4alleach.MCRecipeEditor.Common.Type\4alleach.MCRecipeEditor.Common.Type.csproj" />
+    </ItemGroup>
+
+</Project>
